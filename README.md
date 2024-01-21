@@ -21,4 +21,4 @@ We present five key notebooks reporting the code and some plots of the analyses:
 
 5.  [Step 3 benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/tree/main/scripts/5.Step3_benchmark.html>)
 
-6.  [Visualization of best networks of the benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/<https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/tree/main/scripts/6.Visualization.html>)
+6.  [Visualization of best networks of the benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/tree/main/scripts/6.Visualization.html>)
