@@ -1,0 +1,2707 @@
+phenotype	phenoscore	phenoscore_time	pheno_id
+cell death	  4.640853	22.9	Pheno1
+glycolysis	-16.129670	22.9	Pheno1
+lipogenesis	  8.535336	22.9	Pheno1
+myotube hypertrophy	 17.036457	22.9	Pheno1
+proliferation	  0.000000	22.9	Pheno1
+vldl assembly	 13.529776	22.9	Pheno1
+cell death	  4.054228	19.89	Pheno2
+glycolysis	-14.164192	19.89	Pheno2
+lipogenesis	 12.287729	19.89	Pheno2
+myotube hypertrophy	 12.808636	19.89	Pheno2
+proliferation	  0.000000	19.89	Pheno2
+vldl assembly	 24.531913	19.89	Pheno2
+apoptosis	 2.2893910	20.62	Pheno3
+autophagy	11.1486357	20.62	Pheno3
+cell cycle block	-2.2820823	20.62	Pheno3
+cell cycle exit	-0.5468718	20.62	Pheno3
+cell cycle progress 	 2.2820823	20.62	Pheno3
+cell death	 2.0281722	20.62	Pheno3
+cell growth	 8.0261745	20.62	Pheno3
+centrosome separation	20.3838671	20.62	Pheno3
+dendritic spine morphogenesis	-5.2715552	20.62	Pheno3
+fibrosis	 0.5905160	20.62	Pheno3
+glycolysis	-2.1749639	20.62	Pheno3
+lipogenesis	10.9367311	20.62	Pheno3
+m2 polarization	16.8861117	20.62	Pheno3
+metastasis	 7.7027464	20.62	Pheno3
+muscle atrophy	11.1486357	20.62	Pheno3
+myotube hypertrophy	-2.1479654	20.62	Pheno3
+proliferation	 0.2915997	20.62	Pheno3
+protein synthesis	-0.6842659	20.62	Pheno3
+skeletal muscle differentiation	 2.7065804	20.62	Pheno3
+survival	-2.0187559	20.62	Pheno3
+t cell activation	 6.1210000	20.62	Pheno3
+translational regulation	-6.4438961	20.62	Pheno3
+vldl assembly	 9.3346085	20.62	Pheno3
+apoptosis	  1.9854265	20.05	Pheno4
+autophagy	  8.0865677	20.05	Pheno4
+cell cycle block	 -2.2240779	20.05	Pheno4
+cell cycle exit	 -0.6930878	20.05	Pheno4
+cell cycle progress 	  2.2240779	20.05	Pheno4
+cell death	  1.7488639	20.05	Pheno4
+cell growth	  8.6045989	20.05	Pheno4
+centrosome separation	 18.7217644	20.05	Pheno4
+dendritic spine morphogenesis	 -8.0656830	20.05	Pheno4
+fibrosis	  0.7076014	20.05	Pheno4
+glycolysis	 -2.1849882	20.05	Pheno4
+lipogenesis	 12.4715648	20.05	Pheno4
+m2 polarization	 14.2873436	20.05	Pheno4
+metastasis	  6.9328734	20.05	Pheno4
+muscle atrophy	  8.0865677	20.05	Pheno4
+myotube hypertrophy	 -2.9165912	20.05	Pheno4
+proliferation	  0.4198617	20.05	Pheno4
+protein synthesis	 -0.8069797	20.05	Pheno4
+skeletal muscle differentiation	  2.6641348	20.05	Pheno4
+survival	 -1.8193559	20.05	Pheno4
+t cell activation	  6.2837885	20.05	Pheno4
+translational regulation	-12.0881562	20.05	Pheno4
+vldl assembly	  8.1017879	20.05	Pheno4
+adipogenesis	 -2.10172465	24.05	Pheno5
+alternative splicing regulation	 16.55481687	24.05	Pheno5
+apoptosis	  0.47715605	24.05	Pheno5
+autophagy	  0.73900346	24.05	Pheno5
+cell cycle block	 -0.52180708	24.05	Pheno5
+cell cycle exit	 -0.73630750	24.05	Pheno5
+cell cycle progress 	  0.52180708	24.05	Pheno5
+cell death	  0.05884911	24.05	Pheno5
+cell growth	  3.65316846	24.05	Pheno5
+centrosome separation	  9.97902455	24.05	Pheno5
+chromatine condensation	-27.36742598	24.05	Pheno5
+cilium assembly	-11.66939616	24.05	Pheno5
+dendritic spine morphogenesis	 -2.84739310	24.05	Pheno5
+differentiation	  1.13314946	24.05	Pheno5
+dna repair	  0.21329899	24.05	Pheno5
+epigenetic regulation	 -1.71492102	24.05	Pheno5
+epithelial-mesenchymal transition	  1.79008025	24.05	Pheno5
+fatty acid biosynthesis	  9.85511514	24.05	Pheno5
+fibrosis	  1.16551340	24.05	Pheno5
+food intake	 -5.33563748	24.05	Pheno5
+g1/s transition	  2.37220352	24.05	Pheno5
+glycogen synthesis	  2.79075546	24.05	Pheno5
+glycolysis	 -0.46045003	24.05	Pheno5
+immortality	 -6.83807144	24.05	Pheno5
+lipogenesis	  4.50383709	24.05	Pheno5
+m1 polarization	  4.51203219	24.05	Pheno5
+m2 polarization	  3.33765259	24.05	Pheno5
+mast-cell diff	 11.17194639	24.05	Pheno5
+megakaryocyte differentiation 	 11.17194639	24.05	Pheno5
+metastasis	  3.03634980	24.05	Pheno5
+microtubule polimerization	  4.30358894	24.05	Pheno5
+mitochondrial fission	 -5.74723178	24.05	Pheno5
+mitotic checkpoint	  3.58436350	24.05	Pheno5
+muscle atrophy	  0.64833522	24.05	Pheno5
+myoblast fusion	  3.21188516	24.05	Pheno5
+myotube hypertrophy	 -2.35711948	24.05	Pheno5
+neurite outgrowth	  2.17948342	24.05	Pheno5
+neurodegeneration	  2.18759061	24.05	Pheno5
+neurogenesis	 -4.79868359	24.05	Pheno5
+neuron maturation	         Inf	24.05	Pheno5
+nucleotide synthesis	  0.00000000	24.05	Pheno5
+osteoclast differentiation	 14.37179994	24.05	Pheno5
+proliferation	  0.07526687	24.05	Pheno5
+protein synthesis	 -1.88342544	24.05	Pheno5
+pyrimidine biosynthesis	 -3.69867745	24.05	Pheno5
+rrna transcription	 -9.00389735	24.05	Pheno5
+skeletal muscle differentiation	 -4.92956384	24.05	Pheno5
+spindle assembly	  4.81348442	24.05	Pheno5
+stress granules	-15.28071955	24.05	Pheno5
+survival	 -1.76412023	24.05	Pheno5
+synaptic plasticity	  0.42577135	24.05	Pheno5
+synaptic vesicle exocytosis	  4.63216247	24.05	Pheno5
+t cell activation	  1.39147563	24.05	Pheno5
+translational regulation	 -3.32144405	24.05	Pheno5
+vesicle transport	         Inf	24.05	Pheno5
+vldl assembly	  4.55166950	24.05	Pheno5
+adipogenesis	 -2.1031339	24.88	Pheno6
+alternative splicing regulation	 11.3524859	24.88	Pheno6
+apoptosis	  0.4779104	24.88	Pheno6
+autophagy	  0.6610716	24.88	Pheno6
+cell cycle block	 -0.8712036	24.88	Pheno6
+cell cycle exit	 -0.7235956	24.88	Pheno6
+cell cycle progress 	  0.8712036	24.88	Pheno6
+cell death	  0.0616685	24.88	Pheno6
+cell growth	  3.0118036	24.88	Pheno6
+centrosome separation	 10.1213961	24.88	Pheno6
+chromatine condensation	-20.1424920	24.88	Pheno6
+cilium assembly	-12.2512117	24.88	Pheno6
+dendritic spine morphogenesis	 -3.0000025	24.88	Pheno6
+differentiation	  0.9407276	24.88	Pheno6
+dna repair	  0.2161747	24.88	Pheno6
+epigenetic regulation	 -2.5266758	24.88	Pheno6
+epithelial-mesenchymal transition	  1.9206454	24.88	Pheno6
+fatty acid biosynthesis	 10.2259461	24.88	Pheno6
+fibrosis	  1.1372052	24.88	Pheno6
+food intake	 -6.1777668	24.88	Pheno6
+g1/s transition	  2.9684888	24.88	Pheno6
+glycogen synthesis	  2.5763650	24.88	Pheno6
+glycolysis	 -0.4270980	24.88	Pheno6
+immortality	 -9.8593251	24.88	Pheno6
+lipogenesis	  4.8645751	24.88	Pheno6
+m1 polarization	  3.4895958	24.88	Pheno6
+m2 polarization	  2.9967403	24.88	Pheno6
+mast-cell diff	  7.0212953	24.88	Pheno6
+megakaryocyte differentiation 	  7.0212953	24.88	Pheno6
+metastasis	  3.3435368	24.88	Pheno6
+microtubule polimerization	  4.2100169	24.88	Pheno6
+mitochondrial fission	 -4.8215138	24.88	Pheno6
+mitotic checkpoint	  3.5486808	24.88	Pheno6
+muscle atrophy	  0.6306676	24.88	Pheno6
+myoblast fusion	  3.3689131	24.88	Pheno6
+myotube hypertrophy	 -2.1215084	24.88	Pheno6
+neurite outgrowth	  2.9084413	24.88	Pheno6
+neurodegeneration	  2.2392086	24.88	Pheno6
+neurogenesis	 -5.0324690	24.88	Pheno6
+neuron maturation	        Inf	24.88	Pheno6
+nucleotide synthesis	  0.0000000	24.88	Pheno6
+osteoclast differentiation	 15.2980936	24.88	Pheno6
+proliferation	  0.2039276	24.88	Pheno6
+protein synthesis	 -1.5385183	24.88	Pheno6
+pyrimidine biosynthesis	 -5.2234751	24.88	Pheno6
+rrna transcription	 -9.6889907	24.88	Pheno6
+skeletal muscle differentiation	 -4.5538007	24.88	Pheno6
+spindle assembly	  5.9687611	24.88	Pheno6
+stress granules	-15.2980936	24.88	Pheno6
+survival	 -1.4576992	24.88	Pheno6
+synaptic plasticity	  0.5586628	24.88	Pheno6
+synaptic vesicle exocytosis	  5.8474059	24.88	Pheno6
+t cell activation	  1.0610517	24.88	Pheno6
+translational regulation	 -2.8629598	24.88	Pheno6
+vesicle transport	        Inf	24.88	Pheno6
+vldl assembly	  4.1829773	24.88	Pheno6
+apoptosis	  2.677713	22.59	Pheno7
+cell cycle block	 -2.885879	22.59	Pheno7
+cell cycle exit	 -6.654712	22.59	Pheno7
+cell cycle progress 	  2.885879	22.59	Pheno7
+cell death	  4.557832	22.59	Pheno7
+cell growth	  7.826164	22.59	Pheno7
+glycolysis	-19.770526	22.59	Pheno7
+lipogenesis	  7.826164	22.59	Pheno7
+myotube hypertrophy	 14.226340	22.59	Pheno7
+proliferation	  0.000000	22.59	Pheno7
+vldl assembly	 11.546212	22.59	Pheno7
+apoptosis	  2.422313	21.4	Pheno8
+cell cycle block	 -3.793098	21.4	Pheno8
+cell cycle exit	 -6.730495	21.4	Pheno8
+cell cycle progress 	  3.793098	21.4	Pheno8
+cell death	  3.555514	21.4	Pheno8
+cell growth	  8.277133	21.4	Pheno8
+glycolysis	-13.318923	21.4	Pheno8
+lipogenesis	  8.795234	21.4	Pheno8
+myotube hypertrophy	 12.048846	21.4	Pheno8
+proliferation	  0.000000	21.4	Pheno8
+vldl assembly	 20.247647	21.4	Pheno8
+adipogenesis	  1.6934436	23.5	Pheno9
+apoptosis	  1.6878484	23.5	Pheno9
+autophagy	  5.7554682	23.5	Pheno9
+cell cycle block	 -3.0312808	23.5	Pheno9
+cell cycle exit	 -0.7947456	23.5	Pheno9
+cell cycle progress 	  3.0312808	23.5	Pheno9
+cell death	  2.3211036	23.5	Pheno9
+cell growth	  7.1199025	23.5	Pheno9
+centrosome separation	 36.3791235	23.5	Pheno9
+dendritic spine morphogenesis	 -6.0618288	23.5	Pheno9
+fibrosis	  0.6795706	23.5	Pheno9
+g1/s transition	  6.3738805	23.5	Pheno9
+glycogen synthesis	 11.5109364	23.5	Pheno9
+glycolysis	 -2.0968536	23.5	Pheno9
+immortality	-15.0910285	23.5	Pheno9
+lipogenesis	  7.6609714	23.5	Pheno9
+m2 polarization	 19.8033620	23.5	Pheno9
+metastasis	  5.4716485	23.5	Pheno9
+mitotic checkpoint	 10.1270907	23.5	Pheno9
+muscle atrophy	  5.7554682	23.5	Pheno9
+myotube hypertrophy	 -3.1244336	23.5	Pheno9
+neurogenesis	  8.7319294	23.5	Pheno9
+proliferation	  0.9841909	23.5	Pheno9
+protein synthesis	 -1.6047928	23.5	Pheno9
+skeletal muscle differentiation	  2.7372727	23.5	Pheno9
+stress granules	-22.2049571	23.5	Pheno9
+survival	 -2.0809324	23.5	Pheno9
+synaptic plasticity	 -2.4862770	23.5	Pheno9
+t cell activation	  6.6509523	23.5	Pheno9
+translational regulation	 -6.3366649	23.5	Pheno9
+vldl assembly	  8.4478425	23.5	Pheno9
+adipogenesis	  1.5775055	20.96	Pheno10
+apoptosis	  1.8752845	20.96	Pheno10
+autophagy	 11.1024785	20.96	Pheno10
+cell cycle block	 -1.9668738	20.96	Pheno10
+cell cycle exit	 -0.5113568	20.96	Pheno10
+cell cycle progress 	  1.9668738	20.96	Pheno10
+cell death	  2.3021601	20.96	Pheno10
+cell growth	  7.2380665	20.96	Pheno10
+centrosome separation	 11.0254243	20.96	Pheno10
+dendritic spine morphogenesis	 -5.5806783	20.96	Pheno10
+fibrosis	  0.7371684	20.96	Pheno10
+g1/s transition	  5.4683474	20.96	Pheno10
+glycogen synthesis	 27.5213531	20.96	Pheno10
+glycolysis	 -1.9767484	20.96	Pheno10
+immortality	-27.5213531	20.96	Pheno10
+lipogenesis	  8.6072526	20.96	Pheno10
+m2 polarization	 16.9024239	20.96	Pheno10
+metastasis	  6.4279702	20.96	Pheno10
+mitotic checkpoint	  8.2118936	20.96	Pheno10
+muscle atrophy	 11.1024785	20.96	Pheno10
+myotube hypertrophy	 -2.5016706	20.96	Pheno10
+neurogenesis	  9.0312298	20.96	Pheno10
+proliferation	  0.8123643	20.96	Pheno10
+protein synthesis	 -1.6675043	20.96	Pheno10
+skeletal muscle differentiation	  2.7372727	20.96	Pheno10
+stress granules	-12.0927519	20.96	Pheno10
+survival	 -1.8667538	20.96	Pheno10
+synaptic plasticity	 -2.5071979	20.96	Pheno10
+t cell activation	  5.7678862	20.96	Pheno10
+translational regulation	 -4.9322975	20.96	Pheno10
+vldl assembly	 17.0694270	20.96	Pheno10
+adipogenesis	 -1.17622143	23.1	Pheno11
+alternative splicing regulation	 15.15475889	23.1	Pheno11
+apoptosis	  0.38589958	23.1	Pheno11
+autophagy	  0.20356810	23.1	Pheno11
+cell cycle block	 -0.49204344	23.1	Pheno11
+cell cycle exit	 -0.15896877	23.1	Pheno11
+cell cycle progress 	  0.49204344	23.1	Pheno11
+cell death	  0.00000000	23.1	Pheno11
+cell growth	  3.14557805	23.1	Pheno11
+centrosome separation	 14.05574547	23.1	Pheno11
+chromatine condensation	-17.18581850	23.1	Pheno11
+chromosome segregation	  2.70574098	23.1	Pheno11
+dendritic spine morphogenesis	 -1.70522434	23.1	Pheno11
+differentiation	  0.91564367	23.1	Pheno11
+dna repair	  0.43493774	23.1	Pheno11
+epigenetic regulation	 -1.65950916	23.1	Pheno11
+epithelial-mesenchymal transition	  0.57978197	23.1	Pheno11
+fatty acid biosynthesis	  7.13587240	23.1	Pheno11
+fibrosis	  1.33281169	23.1	Pheno11
+food intake	 -6.17680949	23.1	Pheno11
+g1/s transition	  4.08087899	23.1	Pheno11
+glycogen synthesis	  1.89272770	23.1	Pheno11
+glycolysis	 -0.31449046	23.1	Pheno11
+hexosamine biosynthesis	 20.53768200	23.1	Pheno11
+immortality	 -4.78146956	23.1	Pheno11
+lipogenesis	  3.57607145	23.1	Pheno11
+m1 polarization	  4.21972874	23.1	Pheno11
+m2 polarization	  3.49010467	23.1	Pheno11
+mast-cell diff	  6.67105934	23.1	Pheno11
+megakaryocyte differentiation 	  6.67105934	23.1	Pheno11
+metastasis	  3.47612797	23.1	Pheno11
+microtubule polimerization	  4.12729245	23.1	Pheno11
+mitochondrial fission	 -3.13470404	23.1	Pheno11
+mitotic checkpoint	  3.27504144	23.1	Pheno11
+mrna capping	  4.15007815	23.1	Pheno11
+muscle atrophy	 -0.28971998	23.1	Pheno11
+myoblast fusion	  1.28937101	23.1	Pheno11
+myotube hypertrophy	 -2.38769196	23.1	Pheno11
+neurite outgrowth	  2.17218448	23.1	Pheno11
+neurodegeneration	  3.25395329	23.1	Pheno11
+neurogenesis	 -3.12027254	23.1	Pheno11
+neuron maturation	         Inf	23.1	Pheno11
+nucleotide synthesis	  0.00000000	23.1	Pheno11
+osteoclast differentiation	  8.54393657	23.1	Pheno11
+proliferation	  0.02025147	23.1	Pheno11
+protein aggregates	  2.75275468	23.1	Pheno11
+protein glycosylation	 20.53768200	23.1	Pheno11
+protein synthesis	 -1.48230361	23.1	Pheno11
+pyrimidine biosynthesis	 -6.85990158	23.1	Pheno11
+rrna transcription	  1.97758506	23.1	Pheno11
+skeletal muscle differentiation	 -5.09035735	23.1	Pheno11
+spindle assembly	  3.38234643	23.1	Pheno11
+stress granules	-15.29140018	23.1	Pheno11
+survival	 -1.05973767	23.1	Pheno11
+synaptic plasticity	 -0.54383092	23.1	Pheno11
+synaptic vesicle exocytosis	  6.08817533	23.1	Pheno11
+t cell activation	  1.02672369	23.1	Pheno11
+translational regulation	 -2.27549280	23.1	Pheno11
+vesicle transport	         Inf	23.1	Pheno11
+vldl assembly	  4.36686020	23.1	Pheno11
+adipogenesis	-1.540478e+00	24.58	Pheno12
+alternative splicing regulation	 1.447787e+01	24.58	Pheno12
+apoptosis	 3.357874e-01	24.58	Pheno12
+autophagy	 1.216393e-01	24.58	Pheno12
+cell cycle block	-5.398322e-01	24.58	Pheno12
+cell cycle exit	-1.089899e-01	24.58	Pheno12
+cell cycle progress 	 5.398322e-01	24.58	Pheno12
+cell death	-2.464753e-17	24.58	Pheno12
+cell growth	 2.877049e+00	24.58	Pheno12
+centrosome separation	 1.731919e+01	24.58	Pheno12
+chromatine condensation	-1.601843e+01	24.58	Pheno12
+chromosome segregation	 2.604016e+00	24.58	Pheno12
+dendritic spine morphogenesis	-1.530254e+00	24.58	Pheno12
+differentiation	 1.040411e+00	24.58	Pheno12
+dna repair	 6.097555e-01	24.58	Pheno12
+epigenetic regulation	-1.502483e+00	24.58	Pheno12
+epithelial-mesenchymal transition	 1.030810e+00	24.58	Pheno12
+fatty acid biosynthesis	 8.036836e+00	24.58	Pheno12
+fibrosis	 1.077790e+00	24.58	Pheno12
+food intake	-5.002431e+00	24.58	Pheno12
+g1/s transition	 4.632668e+00	24.58	Pheno12
+glycogen synthesis	 2.004118e+00	24.58	Pheno12
+glycolysis	-3.257575e-01	24.58	Pheno12
+hexosamine biosynthesis	 2.057467e+01	24.58	Pheno12
+immortality	-5.029934e+00	24.58	Pheno12
+lipogenesis	 3.796617e+00	24.58	Pheno12
+m1 polarization	 3.614927e+00	24.58	Pheno12
+m2 polarization	 2.941540e+00	24.58	Pheno12
+mast-cell diff	 1.068855e+01	24.58	Pheno12
+megakaryocyte differentiation 	 1.068855e+01	24.58	Pheno12
+metastasis	 3.637280e+00	24.58	Pheno12
+microtubule polimerization	 4.019788e+00	24.58	Pheno12
+mitochondrial fission	-2.846445e+00	24.58	Pheno12
+mitotic checkpoint	 3.960178e+00	24.58	Pheno12
+mrna capping	 4.584780e+00	24.58	Pheno12
+muscle atrophy	-5.623004e-01	24.58	Pheno12
+myoblast fusion	 1.037344e+00	24.58	Pheno12
+myotube hypertrophy	-1.840519e+00	24.58	Pheno12
+neurite outgrowth	 2.382532e+00	24.58	Pheno12
+neurodegeneration	 2.978797e+00	24.58	Pheno12
+neurogenesis	-3.001666e+00	24.58	Pheno12
+neuron maturation	          Inf	24.58	Pheno12
+nucleotide synthesis	 0.000000e+00	24.58	Pheno12
+osteoclast differentiation	 8.049539e+00	24.58	Pheno12
+proliferation	 1.324642e-01	24.58	Pheno12
+protein aggregates	 3.098827e+00	24.58	Pheno12
+protein glycosylation	 2.057467e+01	24.58	Pheno12
+protein synthesis	-1.584370e+00	24.58	Pheno12
+pyrimidine biosynthesis	-6.966050e+00	24.58	Pheno12
+rrna transcription	 2.120389e+00	24.58	Pheno12
+skeletal muscle differentiation	-5.640728e+00	24.58	Pheno12
+spindle assembly	 3.274036e+00	24.58	Pheno12
+stress granules	-1.529140e+01	24.58	Pheno12
+survival	-1.604246e+00	24.58	Pheno12
+synaptic plasticity	-2.535403e-01	24.58	Pheno12
+synaptic vesicle exocytosis	 4.245175e+00	24.58	Pheno12
+t cell activation	 8.917333e-01	24.58	Pheno12
+translational regulation	-2.396434e+00	24.58	Pheno12
+vesicle transport	          Inf	24.58	Pheno12
+vldl assembly	 4.690869e+00	24.58	Pheno12
+cell death	  4.573592	20.3	Pheno13
+glycolysis	-22.399934	20.3	Pheno13
+lipogenesis	  8.835362	20.3	Pheno13
+myotube hypertrophy	 31.472743	20.3	Pheno13
+proliferation	  0.000000	20.3	Pheno13
+vldl assembly	 12.808636	20.3	Pheno13
+cell death	  4.508535	21.5	Pheno14
+glycolysis	-43.941394	21.5	Pheno14
+lipogenesis	  6.857425	21.5	Pheno14
+myotube hypertrophy	 16.129670	21.5	Pheno14
+proliferation	  0.000000	21.5	Pheno14
+vldl assembly	 13.529776	21.5	Pheno14
+apoptosis	 2.0712445	21	Pheno15
+autophagy	 8.7194723	21	Pheno15
+cell cycle block	-2.7678489	21	Pheno15
+cell cycle exit	-1.2765703	21	Pheno15
+cell cycle progress 	 2.7678489	21	Pheno15
+cell death	 2.1370635	21	Pheno15
+cell growth	 8.3156526	21	Pheno15
+centrosome separation	22.4112147	21	Pheno15
+dendritic spine morphogenesis	-6.5144582	21	Pheno15
+fibrosis	 0.6138580	21	Pheno15
+glycolysis	-2.1424006	21	Pheno15
+lipogenesis	12.7625407	21	Pheno15
+m2 polarization	16.8861117	21	Pheno15
+metastasis	 6.9499067	21	Pheno15
+muscle atrophy	 8.7194723	21	Pheno15
+myotube hypertrophy	-2.8108914	21	Pheno15
+proliferation	 0.3609601	21	Pheno15
+protein synthesis	-0.6481815	21	Pheno15
+skeletal muscle differentiation	 3.7501441	21	Pheno15
+survival	-1.9150295	21	Pheno15
+t cell activation	 6.8353573	21	Pheno15
+translational regulation	-7.7405350	21	Pheno15
+vldl assembly	15.1142380	21	Pheno15
+apoptosis	 2.1903399	20.39	Pheno16
+autophagy	 8.7054579	20.39	Pheno16
+cell cycle block	-1.9947438	20.39	Pheno16
+cell cycle exit	-0.6079845	20.39	Pheno16
+cell cycle progress 	 1.9947438	20.39	Pheno16
+cell death	 1.8574300	20.39	Pheno16
+cell growth	 8.3156526	20.39	Pheno16
+centrosome separation	17.4109159	20.39	Pheno16
+dendritic spine morphogenesis	-5.1749063	20.39	Pheno16
+fibrosis	 0.6587316	20.39	Pheno16
+glycolysis	-2.0935964	20.39	Pheno16
+lipogenesis	14.9626614	20.39	Pheno16
+m2 polarization	16.3266175	20.39	Pheno16
+metastasis	 6.4262177	20.39	Pheno16
+muscle atrophy	 8.7054579	20.39	Pheno16
+myotube hypertrophy	-2.1034134	20.39	Pheno16
+proliferation	 0.2606868	20.39	Pheno16
+protein synthesis	-0.6114185	20.39	Pheno16
+skeletal muscle differentiation	 3.0331830	20.39	Pheno16
+survival	-2.0671433	20.39	Pheno16
+t cell activation	 5.6023823	20.39	Pheno16
+translational regulation	-9.7582364	20.39	Pheno16
+vldl assembly	11.9500179	20.39	Pheno16
+adipogenesis	 -2.49229206	23.08	Pheno17
+alternative splicing regulation	 15.99924977	23.08	Pheno17
+apoptosis	  0.56690544	23.08	Pheno17
+autophagy	  0.87011398	23.08	Pheno17
+cell cycle block	 -0.66403903	23.08	Pheno17
+cell cycle exit	 -0.62571815	23.08	Pheno17
+cell cycle progress 	  0.66403903	23.08	Pheno17
+cell death	  0.06352145	23.08	Pheno17
+cell growth	  3.16370106	23.08	Pheno17
+centrosome separation	  7.24209501	23.08	Pheno17
+chromatine condensation	-24.43740282	23.08	Pheno17
+cilium assembly	-22.52135584	23.08	Pheno17
+dendritic spine morphogenesis	 -2.41903109	23.08	Pheno17
+differentiation	  1.03606308	23.08	Pheno17
+dna repair	  0.22484079	23.08	Pheno17
+epigenetic regulation	 -1.94338280	23.08	Pheno17
+epithelial-mesenchymal transition	  2.15568570	23.08	Pheno17
+fatty acid biosynthesis	  7.87367222	23.08	Pheno17
+fibrosis	  1.19375311	23.08	Pheno17
+food intake	 -5.33563748	23.08	Pheno17
+g1/s transition	  2.27517361	23.08	Pheno17
+glycogen synthesis	  2.40152498	23.08	Pheno17
+glycolysis	 -0.46086910	23.08	Pheno17
+immortality	 -7.39162965	23.08	Pheno17
+lipogenesis	  4.32455808	23.08	Pheno17
+m1 polarization	  3.95293991	23.08	Pheno17
+m2 polarization	  3.14993846	23.08	Pheno17
+mast-cell diff	  9.50961771	23.08	Pheno17
+megakaryocyte differentiation 	  9.50961771	23.08	Pheno17
+metastasis	  3.65216037	23.08	Pheno17
+microtubule polimerization	  5.18577505	23.08	Pheno17
+mitochondrial fission	 -4.52998856	23.08	Pheno17
+mitotic checkpoint	  3.17930058	23.08	Pheno17
+muscle atrophy	  0.79547267	23.08	Pheno17
+myoblast fusion	  3.43162187	23.08	Pheno17
+myotube hypertrophy	 -2.56803215	23.08	Pheno17
+neurite outgrowth	  2.50474779	23.08	Pheno17
+neurodegeneration	  1.90958693	23.08	Pheno17
+neurogenesis	 -5.48622605	23.08	Pheno17
+neuron maturation	         Inf	23.08	Pheno17
+nucleotide synthesis	  0.00000000	23.08	Pheno17
+osteoclast differentiation	 15.28071955	23.08	Pheno17
+proliferation	  0.19682193	23.08	Pheno17
+protein synthesis	 -2.15941091	23.08	Pheno17
+pyrimidine biosynthesis	 -6.32278595	23.08	Pheno17
+rrna transcription	-10.06942297	23.08	Pheno17
+skeletal muscle differentiation	 -4.94149957	23.08	Pheno17
+spindle assembly	  4.12417567	23.08	Pheno17
+stress granules	-11.67694929	23.08	Pheno17
+survival	 -1.64343811	23.08	Pheno17
+synaptic plasticity	  0.55764866	23.08	Pheno17
+synaptic vesicle exocytosis	  4.56139031	23.08	Pheno17
+t cell activation	  1.28634094	23.08	Pheno17
+translational regulation	 -3.66358864	23.08	Pheno17
+vesicle transport	         Inf	23.08	Pheno17
+vldl assembly	  4.82722163	23.08	Pheno17
+adipogenesis	 -2.42198180	22.59	Pheno18
+alternative splicing regulation	 12.92141983	22.59	Pheno18
+apoptosis	  0.55470830	22.59	Pheno18
+autophagy	  0.78867443	22.59	Pheno18
+cell cycle block	 -0.75165032	22.59	Pheno18
+cell cycle exit	 -0.78208037	22.59	Pheno18
+cell cycle progress 	  0.75165032	22.59	Pheno18
+cell death	  0.04603642	22.59	Pheno18
+cell growth	  3.18402639	22.59	Pheno18
+centrosome separation	 12.64429188	22.59	Pheno18
+chromatine condensation	-27.39224957	22.59	Pheno18
+cilium assembly	-22.53182127	22.59	Pheno18
+dendritic spine morphogenesis	 -3.04577331	22.59	Pheno18
+differentiation	  1.25488284	22.59	Pheno18
+dna repair	  0.30061221	22.59	Pheno18
+epigenetic regulation	 -1.72220326	22.59	Pheno18
+epithelial-mesenchymal transition	  1.95196729	22.59	Pheno18
+fatty acid biosynthesis	  7.26242117	22.59	Pheno18
+fibrosis	  1.22095280	22.59	Pheno18
+food intake	 -6.17776678	22.59	Pheno18
+g1/s transition	  3.10433649	22.59	Pheno18
+glycogen synthesis	  2.08863733	22.59	Pheno18
+glycolysis	 -0.41331483	22.59	Pheno18
+immortality	 -6.67522677	22.59	Pheno18
+lipogenesis	  3.88775936	22.59	Pheno18
+m1 polarization	  3.66995818	22.59	Pheno18
+m2 polarization	  3.10582495	22.59	Pheno18
+mast-cell diff	  7.80786914	22.59	Pheno18
+megakaryocyte differentiation 	  7.80786914	22.59	Pheno18
+metastasis	  3.01633901	22.59	Pheno18
+microtubule polimerization	  4.45614138	22.59	Pheno18
+mitochondrial fission	 -2.93194810	22.59	Pheno18
+mitotic checkpoint	  3.57865240	22.59	Pheno18
+muscle atrophy	  0.59895440	22.59	Pheno18
+myoblast fusion	  3.93398895	22.59	Pheno18
+myotube hypertrophy	 -2.00394948	22.59	Pheno18
+neurite outgrowth	  2.75526396	22.59	Pheno18
+neurodegeneration	  2.12591297	22.59	Pheno18
+neurogenesis	 -5.17115500	22.59	Pheno18
+neuron maturation	         Inf	22.59	Pheno18
+nucleotide synthesis	  0.00000000	22.59	Pheno18
+osteoclast differentiation	 16.34587823	22.59	Pheno18
+proliferation	  0.16543178	22.59	Pheno18
+protein synthesis	 -1.61070764	22.59	Pheno18
+pyrimidine biosynthesis	 -6.51988627	22.59	Pheno18
+rrna transcription	-14.12302007	22.59	Pheno18
+skeletal muscle differentiation	 -4.11702837	22.59	Pheno18
+spindle assembly	  5.90496946	22.59	Pheno18
+stress granules	-12.25876484	22.59	Pheno18
+survival	 -1.55031302	22.59	Pheno18
+synaptic plasticity	  0.41325791	22.59	Pheno18
+synaptic vesicle exocytosis	  4.64367346	22.59	Pheno18
+t cell activation	  0.99759645	22.59	Pheno18
+translational regulation	 -3.38029894	22.59	Pheno18
+vesicle transport	         Inf	22.59	Pheno18
+vldl assembly	  3.72164483	22.59	Pheno18
+apoptosis	  2.746310	23.79	Pheno19
+cell cycle block	 -3.279371	23.79	Pheno19
+cell cycle exit	 -6.931729	23.79	Pheno19
+cell cycle progress 	  3.279371	23.79	Pheno19
+cell death	  3.923674	23.79	Pheno19
+cell growth	  8.225980	23.79	Pheno19
+glycolysis	-17.177786	23.79	Pheno19
+lipogenesis	  8.020606	23.79	Pheno19
+myotube hypertrophy	 13.318923	23.79	Pheno19
+proliferation	  0.000000	23.79	Pheno19
+vldl assembly	 12.773874	23.79	Pheno19
+apoptosis	  3.084140	21.02	Pheno20
+cell cycle block	 -3.341304	21.02	Pheno20
+cell cycle exit	 -7.454435	21.02	Pheno20
+cell cycle progress 	  3.341304	21.02	Pheno20
+cell death	  5.072352	21.02	Pheno20
+cell growth	  9.505486	21.02	Pheno20
+glycolysis	-24.497151	21.02	Pheno20
+lipogenesis	  7.600768	21.02	Pheno20
+myotube hypertrophy	 24.497151	21.02	Pheno20
+proliferation	  0.000000	21.02	Pheno20
+vldl assembly	 15.223214	21.02	Pheno20
+adipogenesis	  1.9035525	20.76	Pheno21
+apoptosis	  1.7145297	20.76	Pheno21
+autophagy	  8.0949828	20.76	Pheno21
+cell cycle block	 -2.3476435	20.76	Pheno21
+cell cycle exit	 -0.5122207	20.76	Pheno21
+cell cycle progress 	  2.3476435	20.76	Pheno21
+cell death	  2.0437808	20.76	Pheno21
+cell growth	  7.7270698	20.76	Pheno21
+centrosome separation	 17.3466303	20.76	Pheno21
+dendritic spine morphogenesis	 -8.0887622	20.76	Pheno21
+fibrosis	  0.5945514	20.76	Pheno21
+g1/s transition	  5.0263010	20.76	Pheno21
+glycogen synthesis	 31.3569473	20.76	Pheno21
+glycolysis	 -1.7157191	20.76	Pheno21
+immortality	-20.3584997	20.76	Pheno21
+lipogenesis	  9.7356123	20.76	Pheno21
+m2 polarization	 16.2804604	20.76	Pheno21
+metastasis	  6.7565865	20.76	Pheno21
+mitotic checkpoint	 12.1341446	20.76	Pheno21
+muscle atrophy	  8.0949828	20.76	Pheno21
+myotube hypertrophy	 -2.9163209	20.76	Pheno21
+neurogenesis	  8.2271336	20.76	Pheno21
+proliferation	  0.9067685	20.76	Pheno21
+protein synthesis	 -1.5425875	20.76	Pheno21
+skeletal muscle differentiation	  2.8821697	20.76	Pheno21
+stress granules	-22.2463498	20.76	Pheno21
+survival	 -1.8364245	20.76	Pheno21
+synaptic plasticity	 -2.0844190	20.76	Pheno21
+t cell activation	  5.7948518	20.76	Pheno21
+translational regulation	 -5.2931843	20.76	Pheno21
+vldl assembly	 19.0017171	20.76	Pheno21
+adipogenesis	  1.8214517	20.45	Pheno22
+apoptosis	  1.8180342	20.45	Pheno22
+autophagy	  9.3321061	20.45	Pheno22
+cell cycle block	 -2.2619212	20.45	Pheno22
+cell cycle exit	 -0.4445728	20.45	Pheno22
+cell cycle progress 	  2.2619212	20.45	Pheno22
+cell death	  2.4535032	20.45	Pheno22
+cell growth	  7.8756708	20.45	Pheno22
+centrosome separation	 14.2702450	20.45	Pheno22
+dendritic spine morphogenesis	 -6.1877341	20.45	Pheno22
+fibrosis	  0.6408117	20.45	Pheno22
+g1/s transition	  5.3680684	20.45	Pheno22
+glycogen synthesis	 17.3466303	20.45	Pheno22
+glycolysis	 -1.2602827	20.45	Pheno22
+immortality	-17.3466303	20.45	Pheno22
+lipogenesis	  9.8102154	20.45	Pheno22
+m2 polarization	 20.7473368	20.45	Pheno22
+metastasis	  6.5872332	20.45	Pheno22
+mitotic checkpoint	 10.1633029	20.45	Pheno22
+muscle atrophy	  9.3321061	20.45	Pheno22
+myotube hypertrophy	 -2.8235645	20.45	Pheno22
+neurogenesis	  7.0934312	20.45	Pheno22
+proliferation	  0.8967853	20.45	Pheno22
+protein synthesis	 -1.4667876	20.45	Pheno22
+skeletal muscle differentiation	  2.7615173	20.45	Pheno22
+stress granules	-20.2537643	20.45	Pheno22
+survival	 -1.8749865	20.45	Pheno22
+synaptic plasticity	 -2.4367584	20.45	Pheno22
+t cell activation	  6.1807962	20.45	Pheno22
+translational regulation	 -6.0590833	20.45	Pheno22
+vldl assembly	 11.7671822	20.45	Pheno22
+adipogenesis	-9.914333e-01	22.1	Pheno23
+alternative splicing regulation	 1.942530e+01	22.1	Pheno23
+apoptosis	 3.704309e-01	22.1	Pheno23
+autophagy	 1.243547e-02	22.1	Pheno23
+cell cycle block	-8.451060e-01	22.1	Pheno23
+cell cycle exit	-2.667319e-01	22.1	Pheno23
+cell cycle progress 	 8.451060e-01	22.1	Pheno23
+cell death	-2.467162e-17	22.1	Pheno23
+cell growth	 2.948623e+00	22.1	Pheno23
+centrosome separation	 1.056563e+01	22.1	Pheno23
+chromatine condensation	-1.716844e+01	22.1	Pheno23
+chromosome segregation	 2.924095e+00	22.1	Pheno23
+dendritic spine morphogenesis	-1.723992e+00	22.1	Pheno23
+differentiation	 8.942459e-01	22.1	Pheno23
+dna repair	 5.142287e-01	22.1	Pheno23
+epigenetic regulation	-1.542612e+00	22.1	Pheno23
+epithelial-mesenchymal transition	 8.455167e-01	22.1	Pheno23
+fatty acid biosynthesis	 7.408509e+00	22.1	Pheno23
+fibrosis	 1.224981e+00	22.1	Pheno23
+food intake	-6.176809e+00	22.1	Pheno23
+g1/s transition	 4.849150e+00	22.1	Pheno23
+glycogen synthesis	 2.177942e+00	22.1	Pheno23
+glycolysis	-3.313725e-01	22.1	Pheno23
+hexosamine biosynthesis	 1.225621e+01	22.1	Pheno23
+immortality	-7.463239e+00	22.1	Pheno23
+lipogenesis	 3.629004e+00	22.1	Pheno23
+m1 polarization	 3.633690e+00	22.1	Pheno23
+m2 polarization	 3.392201e+00	22.1	Pheno23
+mast-cell diff	 7.401254e+00	22.1	Pheno23
+megakaryocyte differentiation 	 7.401254e+00	22.1	Pheno23
+metastasis	 3.243787e+00	22.1	Pheno23
+microtubule polimerization	 4.020256e+00	22.1	Pheno23
+mitochondrial fission	-2.511721e+00	22.1	Pheno23
+mitotic checkpoint	 3.380993e+00	22.1	Pheno23
+mrna capping	 5.347593e+00	22.1	Pheno23
+muscle atrophy	-4.780315e-01	22.1	Pheno23
+myoblast fusion	 1.286154e+00	22.1	Pheno23
+myotube hypertrophy	-2.094784e+00	22.1	Pheno23
+neurite outgrowth	 1.897594e+00	22.1	Pheno23
+neurodegeneration	 3.294965e+00	22.1	Pheno23
+neurogenesis	-3.391691e+00	22.1	Pheno23
+neuron maturation	          Inf	22.1	Pheno23
+nucleotide synthesis	 0.000000e+00	22.1	Pheno23
+osteoclast differentiation	 8.844936e+00	22.1	Pheno23
+proliferation	 1.138083e-01	22.1	Pheno23
+protein aggregates	 2.699261e+00	22.1	Pheno23
+protein glycosylation	 1.225621e+01	22.1	Pheno23
+protein synthesis	-1.333304e+00	22.1	Pheno23
+pyrimidine biosynthesis	-5.285704e+00	22.1	Pheno23
+rrna transcription	 2.022658e+00	22.1	Pheno23
+skeletal muscle differentiation	-5.694086e+00	22.1	Pheno23
+spindle assembly	 4.517507e+00	22.1	Pheno23
+stress granules	-1.631436e+01	22.1	Pheno23
+survival	-1.413228e+00	22.1	Pheno23
+synaptic plasticity	-1.584559e-01	22.1	Pheno23
+synaptic vesicle exocytosis	 5.314581e+00	22.1	Pheno23
+t cell activation	 9.663793e-01	22.1	Pheno23
+translational regulation	-1.933060e+00	22.1	Pheno23
+vesicle transport	          Inf	22.1	Pheno23
+vldl assembly	 4.246405e+00	22.1	Pheno23
+adipogenesis	-1.190972e+00	21.68	Pheno24
+alternative splicing regulation	 1.477135e+01	21.68	Pheno24
+apoptosis	 3.809229e-01	21.68	Pheno24
+autophagy	 1.178307e-01	21.68	Pheno24
+cell cycle block	-7.642359e-01	21.68	Pheno24
+cell cycle exit	-2.630955e-01	21.68	Pheno24
+cell cycle progress 	 7.642359e-01	21.68	Pheno24
+cell death	-1.240207e-17	21.68	Pheno24
+cell growth	 3.078772e+00	21.68	Pheno24
+centrosome separation	 1.014121e+01	21.68	Pheno24
+chromatine condensation	-1.264372e+01	21.68	Pheno24
+chromosome segregation	 3.258596e+00	21.68	Pheno24
+dendritic spine morphogenesis	-1.963447e+00	21.68	Pheno24
+differentiation	 8.463762e-01	21.68	Pheno24
+dna repair	 3.673629e-01	21.68	Pheno24
+epigenetic regulation	-1.424296e+00	21.68	Pheno24
+epithelial-mesenchymal transition	 8.834240e-01	21.68	Pheno24
+fatty acid biosynthesis	 6.067533e+00	21.68	Pheno24
+fibrosis	 1.237659e+00	21.68	Pheno24
+food intake	-6.176809e+00	21.68	Pheno24
+g1/s transition	 4.833892e+00	21.68	Pheno24
+glycogen synthesis	 1.873201e+00	21.68	Pheno24
+glycolysis	-3.361391e-01	21.68	Pheno24
+hexosamine biosynthesis	 1.633107e+01	21.68	Pheno24
+immortality	-4.703781e+00	21.68	Pheno24
+lipogenesis	 3.617766e+00	21.68	Pheno24
+m1 polarization	 4.023381e+00	21.68	Pheno24
+m2 polarization	 3.070415e+00	21.68	Pheno24
+mast-cell diff	 9.174375e+00	21.68	Pheno24
+megakaryocyte differentiation 	 9.174375e+00	21.68	Pheno24
+metastasis	 3.235034e+00	21.68	Pheno24
+microtubule polimerization	 3.742016e+00	21.68	Pheno24
+mitochondrial fission	-2.748123e+00	21.68	Pheno24
+mitotic checkpoint	 4.002474e+00	21.68	Pheno24
+mrna capping	 4.930746e+00	21.68	Pheno24
+muscle atrophy	-4.075935e-01	21.68	Pheno24
+myoblast fusion	 1.407271e+00	21.68	Pheno24
+myotube hypertrophy	-2.261567e+00	21.68	Pheno24
+neurite outgrowth	 2.274246e+00	21.68	Pheno24
+neurodegeneration	 2.943777e+00	21.68	Pheno24
+neurogenesis	-3.710791e+00	21.68	Pheno24
+neuron maturation	          Inf	21.68	Pheno24
+nucleotide synthesis	 0.000000e+00	21.68	Pheno24
+osteoclast differentiation	 6.375293e+00	21.68	Pheno24
+proliferation	 1.075085e-01	21.68	Pheno24
+protein aggregates	 2.638281e+00	21.68	Pheno24
+protein glycosylation	 1.633107e+01	21.68	Pheno24
+protein synthesis	-1.469437e+00	21.68	Pheno24
+pyrimidine biosynthesis	-6.213186e+00	21.68	Pheno24
+rrna transcription	 1.773264e+00	21.68	Pheno24
+skeletal muscle differentiation	-5.161186e+00	21.68	Pheno24
+spindle assembly	 4.752656e+00	21.68	Pheno24
+stress granules	-1.888512e+01	21.68	Pheno24
+survival	-1.325783e+00	21.68	Pheno24
+synaptic plasticity	-3.195106e-01	21.68	Pheno24
+synaptic vesicle exocytosis	 5.111307e+00	21.68	Pheno24
+t cell activation	 1.042204e+00	21.68	Pheno24
+translational regulation	-2.073327e+00	21.68	Pheno24
+vesicle transport	          Inf	21.68	Pheno24
+vldl assembly	 4.642733e+00	21.68	Pheno24
+cell death	 -4.573592	21.32	Pheno25
+glycolysis	 14.164192	21.32	Pheno25
+lipogenesis	  9.859325	21.32	Pheno25
+myotube hypertrophy	-12.808636	21.32	Pheno25
+proliferation	  0.000000	21.32	Pheno25
+vldl assembly	 22.098904	21.32	Pheno25
+cell death	 -5.364835	20.96	Pheno26
+glycolysis	 15.828640	20.96	Pheno26
+lipogenesis	  9.147025	20.96	Pheno26
+myotube hypertrophy	-15.081885	20.96	Pheno26
+proliferation	  0.000000	20.96	Pheno26
+vldl assembly	 12.808636	20.96	Pheno26
+apoptosis	 -5.4021086	21.94	Pheno27
+autophagy	 -8.1015493	21.94	Pheno27
+cell cycle block	 -1.5226544	21.94	Pheno27
+cell cycle exit	  4.0594813	21.94	Pheno27
+cell cycle progress 	 -1.5226544	21.94	Pheno27
+cell death	 -5.6930599	21.94	Pheno27
+cell growth	  7.1496852	21.94	Pheno27
+centrosome separation	 16.2030987	21.94	Pheno27
+dendritic spine morphogenesis	  7.1496852	21.94	Pheno27
+fibrosis	 -0.7746247	21.94	Pheno27
+glycolysis	 10.8395740	21.94	Pheno27
+lipogenesis	-15.6537815	21.94	Pheno27
+m2 polarization	 24.2491723	21.94	Pheno27
+metastasis	 -5.2670240	21.94	Pheno27
+muscle atrophy	 -8.1015493	21.94	Pheno27
+myotube hypertrophy	 -2.8112798	21.94	Pheno27
+proliferation	 -5.4516763	21.94	Pheno27
+protein synthesis	 -0.9469604	21.94	Pheno27
+skeletal muscle differentiation	 -3.3898006	21.94	Pheno27
+survival	 -1.8117639	21.94	Pheno27
+t cell activation	 -0.5807829	21.94	Pheno27
+translational regulation	  6.5683970	21.94	Pheno27
+vldl assembly	 -6.8134012	21.94	Pheno27
+apoptosis	 -6.3994247	21.37	Pheno28
+autophagy	 -6.7407358	21.37	Pheno28
+cell cycle block	 -1.2804268	21.37	Pheno28
+cell cycle exit	  4.0531464	21.37	Pheno28
+cell cycle progress 	 -1.2804268	21.37	Pheno28
+cell death	 -7.4378753	21.37	Pheno28
+cell growth	  6.7691030	21.37	Pheno28
+centrosome separation	 18.6425831	21.37	Pheno28
+dendritic spine morphogenesis	  6.0001298	21.37	Pheno28
+fibrosis	 -0.6463597	21.37	Pheno28
+glycolysis	  9.6379906	21.37	Pheno28
+lipogenesis	-16.0167464	21.37	Pheno28
+m2 polarization	 32.5282963	21.37	Pheno28
+metastasis	 -5.5689757	21.37	Pheno28
+muscle atrophy	 -6.7407358	21.37	Pheno28
+myotube hypertrophy	 -2.4860154	21.37	Pheno28
+proliferation	 -4.8479819	21.37	Pheno28
+protein synthesis	 -0.9281626	21.37	Pheno28
+skeletal muscle differentiation	 -2.8477374	21.37	Pheno28
+survival	 -2.1185211	21.37	Pheno28
+t cell activation	 -0.8221760	21.37	Pheno28
+translational regulation	  9.0443628	21.37	Pheno28
+vldl assembly	 -4.1605855	21.37	Pheno28
+adipogenesis	-15.6830108	23.75	Pheno29
+alternative splicing regulation	-28.1620475	23.75	Pheno29
+apoptosis	 -0.2876886	23.75	Pheno29
+autophagy	 -9.6897077	23.75	Pheno29
+cell cycle block	-30.6573564	23.75	Pheno29
+cell cycle exit	-12.8593782	23.75	Pheno29
+cell cycle progress 	-30.6573564	23.75	Pheno29
+cell death	 -1.1197192	23.75	Pheno29
+cell growth	 28.9048442	23.75	Pheno29
+centrosome separation	 25.9073017	23.75	Pheno29
+chromatine condensation	 18.5619455	23.75	Pheno29
+cilium assembly	 17.5363213	23.75	Pheno29
+dendritic spine morphogenesis	  3.8713655	23.75	Pheno29
+differentiation	-17.7207471	23.75	Pheno29
+dna repair	 -3.6275103	23.75	Pheno29
+epigenetic regulation	  2.1723669	23.75	Pheno29
+epithelial-mesenchymal transition	  3.7786224	23.75	Pheno29
+fatty acid biosynthesis	  6.4518197	23.75	Pheno29
+fibrosis	 19.0300347	23.75	Pheno29
+food intake	 17.9391770	23.75	Pheno29
+g1/s transition	-11.6693805	23.75	Pheno29
+glycogen synthesis	 -6.5115899	23.75	Pheno29
+glycolysis	  3.9710523	23.75	Pheno29
+immortality	 -9.4890960	23.75	Pheno29
+lipogenesis	 -7.3640376	23.75	Pheno29
+m1 polarization	  7.8339615	23.75	Pheno29
+m2 polarization	 22.1719469	23.75	Pheno29
+mast-cell diff	 -9.1741774	23.75	Pheno29
+megakaryocyte differentiation 	 -9.1741774	23.75	Pheno29
+metastasis	 -6.5691774	23.75	Pheno29
+microtubule polimerization	 -9.3575930	23.75	Pheno29
+mitochondrial fission	  4.5352528	23.75	Pheno29
+mitotic checkpoint	 -2.3269792	23.75	Pheno29
+muscle atrophy	 -9.5391466	23.75	Pheno29
+myoblast fusion	 -0.7733915	23.75	Pheno29
+myotube hypertrophy	-10.6109887	23.75	Pheno29
+neurite outgrowth	 -5.3678908	23.75	Pheno29
+neurodegeneration	  5.1250144	23.75	Pheno29
+neurogenesis	 -6.6276401	23.75	Pheno29
+neuron maturation	       -Inf	23.75	Pheno29
+nucleotide synthesis	  0.0000000	23.75	Pheno29
+osteoclast differentiation	 22.5213558	23.75	Pheno29
+proliferation	 -3.8017409	23.75	Pheno29
+protein synthesis	-14.7306730	23.75	Pheno29
+pyrimidine biosynthesis	-15.4884383	23.75	Pheno29
+rrna transcription	  8.1491446	23.75	Pheno29
+skeletal muscle differentiation	-25.6126253	23.75	Pheno29
+spindle assembly	-18.7538414	23.75	Pheno29
+stress granules	 22.5213558	23.75	Pheno29
+survival	 -9.7271928	23.75	Pheno29
+synaptic plasticity	 -7.8585545	23.75	Pheno29
+synaptic vesicle exocytosis	 -4.8679409	23.75	Pheno29
+t cell activation	 13.6498686	23.75	Pheno29
+translational regulation	-10.3396905	23.75	Pheno29
+vesicle transport	       -Inf	23.75	Pheno29
+vldl assembly	 -9.2317242	23.75	Pheno29
+adipogenesis	-14.0478942	22.95	Pheno30
+alternative splicing regulation	-33.1395970	22.95	Pheno30
+apoptosis	 -0.4720478	22.95	Pheno30
+autophagy	 -9.0473882	22.95	Pheno30
+cell cycle block	-26.0251573	22.95	Pheno30
+cell cycle exit	 -8.9718904	22.95	Pheno30
+cell cycle progress 	-26.0251573	22.95	Pheno30
+cell death	 -1.2310173	22.95	Pheno30
+cell growth	 27.9314003	22.95	Pheno30
+centrosome separation	  7.1556464	22.95	Pheno30
+chromatine condensation	 14.9886431	22.95	Pheno30
+cilium assembly	 13.5865992	22.95	Pheno30
+dendritic spine morphogenesis	  4.1022130	22.95	Pheno30
+differentiation	-17.7928351	22.95	Pheno30
+dna repair	 -3.7719360	22.95	Pheno30
+epigenetic regulation	  1.5516355	22.95	Pheno30
+epithelial-mesenchymal transition	  3.5525188	22.95	Pheno30
+fatty acid biosynthesis	  7.2743204	22.95	Pheno30
+fibrosis	 18.2155708	22.95	Pheno30
+food intake	  9.1181537	22.95	Pheno30
+g1/s transition	-12.8580268	22.95	Pheno30
+glycogen synthesis	 -8.4606957	22.95	Pheno30
+glycolysis	  3.4530472	22.95	Pheno30
+immortality	 -8.8636791	22.95	Pheno30
+lipogenesis	 -6.4841537	22.95	Pheno30
+m1 polarization	  8.2041234	22.95	Pheno30
+m2 polarization	 21.4071896	22.95	Pheno30
+mast-cell diff	 -9.4960449	22.95	Pheno30
+megakaryocyte differentiation 	 -9.4960449	22.95	Pheno30
+metastasis	 -7.0495676	22.95	Pheno30
+microtubule polimerization	-10.3447678	22.95	Pheno30
+mitochondrial fission	  5.6559203	22.95	Pheno30
+mitotic checkpoint	 -0.3185579	22.95	Pheno30
+muscle atrophy	 -8.8800656	22.95	Pheno30
+myoblast fusion	 -0.6258086	22.95	Pheno30
+myotube hypertrophy	 -8.0862802	22.95	Pheno30
+neurite outgrowth	 -7.7982531	22.95	Pheno30
+neurodegeneration	  4.3663071	22.95	Pheno30
+neurogenesis	 -7.2795734	22.95	Pheno30
+neuron maturation	       -Inf	22.95	Pheno30
+nucleotide synthesis	  0.0000000	22.95	Pheno30
+osteoclast differentiation	 18.8771331	22.95	Pheno30
+proliferation	 -3.1440163	22.95	Pheno30
+protein synthesis	-14.3432825	22.95	Pheno30
+pyrimidine biosynthesis	-14.8441256	22.95	Pheno30
+rrna transcription	  9.0038973	22.95	Pheno30
+skeletal muscle differentiation	-27.7975990	22.95	Pheno30
+spindle assembly	-17.7172936	22.95	Pheno30
+stress granules	 14.3888333	22.95	Pheno30
+survival	-13.9407269	22.95	Pheno30
+synaptic plasticity	 -7.0993040	22.95	Pheno30
+synaptic vesicle exocytosis	 -5.5155467	22.95	Pheno30
+t cell activation	 12.4449518	22.95	Pheno30
+translational regulation	-10.0307079	22.95	Pheno30
+vesicle transport	       -Inf	22.95	Pheno30
+vldl assembly	 -9.1999235	22.95	Pheno30
+apoptosis	 -4.921373	20.18	Pheno31
+cell cycle block	 -9.045771	20.18	Pheno31
+cell cycle exit	  1.810985	20.18	Pheno31
+cell cycle progress 	 -9.045771	20.18	Pheno31
+cell death	 -4.811495	20.18	Pheno31
+cell growth	  8.442582	20.18	Pheno31
+glycolysis	 16.094908	20.18	Pheno31
+lipogenesis	  8.225980	20.18	Pheno31
+myotube hypertrophy	-19.770526	20.18	Pheno31
+proliferation	  0.000000	20.18	Pheno31
+vldl assembly	 15.144033	20.18	Pheno31
+apoptosis	 -5.136189	20.74	Pheno32
+cell cycle block	-11.647961	20.74	Pheno32
+cell cycle exit	  2.981151	20.74	Pheno32
+cell cycle progress 	-11.647961	20.74	Pheno32
+cell death	 -5.368394	20.74	Pheno32
+cell growth	  9.877289	20.74	Pheno32
+glycolysis	 15.047123	20.74	Pheno32
+lipogenesis	 10.539849	20.74	Pheno32
+myotube hypertrophy	-10.168615	20.74	Pheno32
+proliferation	  0.000000	20.74	Pheno32
+vldl assembly	 15.969969	20.74	Pheno32
+adipogenesis	 -2.0231624	21.62	Pheno33
+apoptosis	 -5.5844479	21.62	Pheno33
+autophagy	 -8.6864796	21.62	Pheno33
+cell cycle block	 -1.9010727	21.62	Pheno33
+cell cycle exit	  6.1090925	21.62	Pheno33
+cell cycle progress 	 -1.9010727	21.62	Pheno33
+cell death	 -8.0008563	21.62	Pheno33
+cell growth	  0.8964859	21.62	Pheno33
+centrosome separation	 16.1899657	21.62	Pheno33
+dendritic spine morphogenesis	  5.7957195	21.62	Pheno33
+fibrosis	 -0.6942724	21.62	Pheno33
+g1/s transition	  5.5370875	21.62	Pheno33
+glycogen synthesis	-18.6963969	21.62	Pheno33
+glycolysis	  8.0059234	21.62	Pheno33
+immortality	-43.0474478	21.62	Pheno33
+lipogenesis	-13.9506791	21.62	Pheno33
+m2 polarization	 30.2712268	21.62	Pheno33
+metastasis	-11.0447295	21.62	Pheno33
+mitotic checkpoint	  9.0312298	21.62	Pheno33
+muscle atrophy	 -8.6864796	21.62	Pheno33
+myotube hypertrophy	 -2.7423779	21.62	Pheno33
+neurogenesis	 -8.2271336	21.62	Pheno33
+proliferation	 -8.6339410	21.62	Pheno33
+protein synthesis	 -3.2710711	21.62	Pheno33
+skeletal muscle differentiation	 -3.1068298	21.62	Pheno33
+stress granules	 12.7385985	21.62	Pheno33
+survival	 -1.8401016	21.62	Pheno33
+synaptic plasticity	 -2.4696826	21.62	Pheno33
+t cell activation	  0.8335928	21.62	Pheno33
+translational regulation	  5.9120586	21.62	Pheno33
+vldl assembly	 -6.7189874	21.62	Pheno33
+adipogenesis	 -1.7734044	21.03	Pheno34
+apoptosis	 -5.0029933	21.03	Pheno34
+autophagy	 -6.0352378	21.03	Pheno34
+cell cycle block	 -1.5723954	21.03	Pheno34
+cell cycle exit	  5.2995419	21.03	Pheno34
+cell cycle progress 	 -1.5723954	21.03	Pheno34
+cell death	 -6.4193576	21.03	Pheno34
+cell growth	  0.4603049	21.03	Pheno34
+centrosome separation	 16.0808212	21.03	Pheno34
+dendritic spine morphogenesis	  6.0724772	21.03	Pheno34
+fibrosis	 -0.7817570	21.03	Pheno34
+g1/s transition	  6.0265944	21.03	Pheno34
+glycogen synthesis	-18.6642122	21.03	Pheno34
+glycolysis	  7.6681902	21.03	Pheno34
+immortality	-11.5321257	21.03	Pheno34
+lipogenesis	-11.5666419	21.03	Pheno34
+m2 polarization	 41.1936436	21.03	Pheno34
+metastasis	 -4.6230404	21.03	Pheno34
+mitotic checkpoint	  8.1797089	21.03	Pheno34
+muscle atrophy	 -6.0352378	21.03	Pheno34
+myotube hypertrophy	 -2.0197078	21.03	Pheno34
+neurogenesis	 -8.7142006	21.03	Pheno34
+proliferation	 -7.5337743	21.03	Pheno34
+protein synthesis	 -2.9988570	21.03	Pheno34
+skeletal muscle differentiation	 -3.3026197	21.03	Pheno34
+stress granules	 13.3891573	21.03	Pheno34
+survival	 -1.9476919	21.03	Pheno34
+synaptic plasticity	 -2.4198536	21.03	Pheno34
+t cell activation	 -0.3749922	21.03	Pheno34
+translational regulation	  5.0885422	21.03	Pheno34
+vldl assembly	 -5.5380292	21.03	Pheno34
+adipogenesis	-14.7030624	22.88	Pheno35
+alternative splicing regulation	-45.8415563	22.88	Pheno35
+apoptosis	  0.0000000	22.88	Pheno35
+autophagy	 -4.0721291	22.88	Pheno35
+cell cycle block	-25.7099708	22.88	Pheno35
+cell cycle exit	 -8.1675040	22.88	Pheno35
+cell cycle progress 	-25.7099708	22.88	Pheno35
+cell death	  2.0773866	22.88	Pheno35
+cell growth	 28.7567774	22.88	Pheno35
+centrosome separation	  8.0539006	22.88	Pheno35
+chromatine condensation	 10.0584276	22.88	Pheno35
+chromosome segregation	 -2.9186699	22.88	Pheno35
+dendritic spine morphogenesis	  3.2125146	22.88	Pheno35
+differentiation	-15.9632076	22.88	Pheno35
+dna repair	 -3.5738170	22.88	Pheno35
+epigenetic regulation	  1.5141826	22.88	Pheno35
+epithelial-mesenchymal transition	  9.8054623	22.88	Pheno35
+fatty acid biosynthesis	  0.4762193	22.88	Pheno35
+fibrosis	 12.4971808	22.88	Pheno35
+food intake	  5.3339081	22.88	Pheno35
+g1/s transition	-28.7303957	22.88	Pheno35
+glycogen synthesis	 -5.7210198	22.88	Pheno35
+glycolysis	  2.6481323	22.88	Pheno35
+hexosamine biosynthesis	-12.2272478	22.88	Pheno35
+immortality	 -6.1081872	22.88	Pheno35
+lipogenesis	 -3.2539904	22.88	Pheno35
+m1 polarization	  9.0768994	22.88	Pheno35
+m2 polarization	 20.0255960	22.88	Pheno35
+mast-cell diff	 -8.2880918	22.88	Pheno35
+megakaryocyte differentiation 	 -8.2880918	22.88	Pheno35
+metastasis	 -6.7133136	22.88	Pheno35
+microtubule polimerization	 -8.0710666	22.88	Pheno35
+mitochondrial fission	  2.3280118	22.88	Pheno35
+mitotic checkpoint	  0.5386552	22.88	Pheno35
+mrna capping	 -3.9132990	22.88	Pheno35
+muscle atrophy	 -6.2416179	22.88	Pheno35
+myoblast fusion	 -1.3723488	22.88	Pheno35
+myotube hypertrophy	-10.4405124	22.88	Pheno35
+neurite outgrowth	 -4.5147073	22.88	Pheno35
+neurodegeneration	  4.5121166	22.88	Pheno35
+neurogenesis	 -5.5998482	22.88	Pheno35
+neuron maturation	       -Inf	22.88	Pheno35
+nucleotide synthesis	  0.0000000	22.88	Pheno35
+osteoclast differentiation	  8.0520439	22.88	Pheno35
+proliferation	 -4.6675498	22.88	Pheno35
+protein aggregates	  2.6810267	22.88	Pheno35
+protein glycosylation	-12.2272478	22.88	Pheno35
+protein synthesis	-10.1526201	22.88	Pheno35
+pyrimidine biosynthesis	-27.0721618	22.88	Pheno35
+rrna transcription	  1.8486350	22.88	Pheno35
+skeletal muscle differentiation	-24.0273323	22.88	Pheno35
+spindle assembly	 -4.8162775	22.88	Pheno35
+stress granules	 16.2880322	22.88	Pheno35
+survival	 -6.7179823	22.88	Pheno35
+synaptic plasticity	-11.6843220	22.88	Pheno35
+synaptic vesicle exocytosis	 -4.2510386	22.88	Pheno35
+t cell activation	  7.4937029	22.88	Pheno35
+translational regulation	 -8.1574492	22.88	Pheno35
+vesicle transport	       -Inf	22.88	Pheno35
+vldl assembly	 -3.3511348	22.88	Pheno35
+adipogenesis	-12.9526139	24.32	Pheno36
+alternative splicing regulation	-39.6600912	24.32	Pheno36
+apoptosis	  0.0000000	24.32	Pheno36
+autophagy	 -4.6738530	24.32	Pheno36
+cell cycle block	-24.1959548	24.32	Pheno36
+cell cycle exit	 -8.0197252	24.32	Pheno36
+cell cycle progress 	-24.1959548	24.32	Pheno36
+cell death	  2.2096473	24.32	Pheno36
+cell growth	 33.5751954	24.32	Pheno36
+centrosome separation	  5.7012186	24.32	Pheno36
+chromatine condensation	 18.5485267	24.32	Pheno36
+chromosome segregation	 -2.6974807	24.32	Pheno36
+dendritic spine morphogenesis	  3.9198509	24.32	Pheno36
+differentiation	-16.9353999	24.32	Pheno36
+dna repair	 -3.9443709	24.32	Pheno36
+epigenetic regulation	  1.3154956	24.32	Pheno36
+epithelial-mesenchymal transition	  8.7793385	24.32	Pheno36
+fatty acid biosynthesis	  0.9429358	24.32	Pheno36
+fibrosis	 14.8318362	24.32	Pheno36
+food intake	  9.1161660	24.32	Pheno36
+g1/s transition	-25.7807447	24.32	Pheno36
+glycogen synthesis	 -4.7738457	24.32	Pheno36
+glycolysis	  2.6206059	24.32	Pheno36
+hexosamine biosynthesis	-20.5565673	24.32	Pheno36
+immortality	 -7.6786674	24.32	Pheno36
+lipogenesis	 -3.1087329	24.32	Pheno36
+m1 polarization	  7.8582839	24.32	Pheno36
+m2 polarization	 22.7058626	24.32	Pheno36
+mast-cell diff	 -8.5626860	24.32	Pheno36
+megakaryocyte differentiation 	 -8.5626860	24.32	Pheno36
+metastasis	 -5.7931094	24.32	Pheno36
+microtubule polimerization	 -8.4766661	24.32	Pheno36
+mitochondrial fission	  2.5522143	24.32	Pheno36
+mitotic checkpoint	 -1.1366910	24.32	Pheno36
+mrna capping	 -3.6974374	24.32	Pheno36
+muscle atrophy	 -6.9757551	24.32	Pheno36
+myoblast fusion	 -1.4056536	24.32	Pheno36
+myotube hypertrophy	 -9.4636579	24.32	Pheno36
+neurite outgrowth	 -3.7855106	24.32	Pheno36
+neurodegeneration	  4.9667795	24.32	Pheno36
+neurogenesis	 -6.3215072	24.32	Pheno36
+neuron maturation	       -Inf	24.32	Pheno36
+nucleotide synthesis	  0.0000000	24.32	Pheno36
+osteoclast differentiation	  9.4847312	24.32	Pheno36
+proliferation	 -4.5629741	24.32	Pheno36
+protein aggregates	  3.7611099	24.32	Pheno36
+protein glycosylation	-20.5565673	24.32	Pheno36
+protein synthesis	-10.8368349	24.32	Pheno36
+pyrimidine biosynthesis	-27.4802978	24.32	Pheno36
+rrna transcription	  1.4173684	24.32	Pheno36
+skeletal muscle differentiation	-20.7387521	24.32	Pheno36
+spindle assembly	 -4.9689348	24.32	Pheno36
+stress granules	 13.5866811	24.32	Pheno36
+survival	-12.4791389	24.32	Pheno36
+synaptic plasticity	-11.2793195	24.32	Pheno36
+synaptic vesicle exocytosis	 -5.2076365	24.32	Pheno36
+t cell activation	  7.5299782	24.32	Pheno36
+translational regulation	 -8.7975873	24.32	Pheno36
+vesicle transport	       -Inf	24.32	Pheno36
+vldl assembly	 -3.0849268	24.32	Pheno36
+cell death	 -4.384753	19.94	Pheno37
+glycolysis	 16.305761	19.94	Pheno37
+lipogenesis	 11.179008	19.94	Pheno37
+myotube hypertrophy	-17.337487	19.94	Pheno37
+proliferation	  0.000000	19.94	Pheno37
+vldl assembly	 24.531913	19.94	Pheno37
+cell death	 -4.710375	20.37	Pheno38
+glycolysis	 22.098904	20.37	Pheno38
+lipogenesis	  5.964140	20.37	Pheno38
+myotube hypertrophy	-20.407348	20.37	Pheno38
+proliferation	  0.000000	20.37	Pheno38
+vldl assembly	 10.574611	20.37	Pheno38
+apoptosis	 -5.6007723	20.53	Pheno39
+autophagy	 -6.7275713	20.53	Pheno39
+cell cycle block	 -1.6118334	20.53	Pheno39
+cell cycle exit	  4.5841543	20.53	Pheno39
+cell cycle progress 	 -1.6118334	20.53	Pheno39
+cell death	 -5.9603852	20.53	Pheno39
+cell growth	  9.5725400	20.53	Pheno39
+centrosome separation	 17.3487680	20.53	Pheno39
+dendritic spine morphogenesis	  6.4822735	20.53	Pheno39
+fibrosis	 -0.7572069	20.53	Pheno39
+glycolysis	  8.3852406	20.53	Pheno39
+lipogenesis	-21.4745391	20.53	Pheno39
+m2 polarization	 38.1509499	20.53	Pheno39
+metastasis	 -6.5861258	20.53	Pheno39
+muscle atrophy	 -6.7275713	20.53	Pheno39
+myotube hypertrophy	 -2.6476486	20.53	Pheno39
+proliferation	 -5.2944178	20.53	Pheno39
+protein synthesis	 -0.7352584	20.53	Pheno39
+skeletal muscle differentiation	 -2.9781599	20.53	Pheno39
+survival	 -1.7250427	20.53	Pheno39
+t cell activation	  0.7222530	20.53	Pheno39
+translational regulation	  6.9181572	20.53	Pheno39
+vldl assembly	-13.1843254	20.53	Pheno39
+apoptosis	 -5.9797936	20.42	Pheno40
+autophagy	-10.2093146	20.42	Pheno40
+cell cycle block	 -1.7094344	20.42	Pheno40
+cell cycle exit	  5.0439302	20.42	Pheno40
+cell cycle progress 	 -1.7094344	20.42	Pheno40
+cell death	 -6.8098614	20.42	Pheno40
+cell growth	  7.1496852	20.42	Pheno40
+centrosome separation	 17.4109159	20.42	Pheno40
+dendritic spine morphogenesis	  6.4652402	20.42	Pheno40
+fibrosis	 -0.6113841	20.42	Pheno40
+glycolysis	  9.7479775	20.42	Pheno40
+lipogenesis	-20.3253499	20.42	Pheno40
+m2 polarization	 21.3433911	20.42	Pheno40
+metastasis	 -4.9157186	20.42	Pheno40
+muscle atrophy	-10.2093146	20.42	Pheno40
+myotube hypertrophy	 -3.1288112	20.42	Pheno40
+proliferation	 -5.2536877	20.42	Pheno40
+protein synthesis	 -0.7133224	20.42	Pheno40
+skeletal muscle differentiation	 -3.0034355	20.42	Pheno40
+survival	 -1.9883006	20.42	Pheno40
+t cell activation	 -0.1025509	20.42	Pheno40
+translational regulation	  8.1792691	20.42	Pheno40
+vldl assembly	 -7.7514553	20.42	Pheno40
+adipogenesis	-14.2591863	22.34	Pheno41
+alternative splicing regulation	-27.2962120	22.34	Pheno41
+apoptosis	 -0.1999747	22.34	Pheno41
+autophagy	 -9.7181191	22.34	Pheno41
+cell cycle block	-30.9861728	22.34	Pheno41
+cell cycle exit	-11.2680281	22.34	Pheno41
+cell cycle progress 	-30.9861728	22.34	Pheno41
+cell death	 -1.1047850	22.34	Pheno41
+cell growth	 28.8508589	22.34	Pheno41
+centrosome separation	  7.4280823	22.34	Pheno41
+chromatine condensation	 43.2450872	22.34	Pheno41
+cilium assembly	 12.8970582	22.34	Pheno41
+dendritic spine morphogenesis	  4.3793275	22.34	Pheno41
+differentiation	-17.2747676	22.34	Pheno41
+dna repair	 -4.0205236	22.34	Pheno41
+epigenetic regulation	  1.8190708	22.34	Pheno41
+epithelial-mesenchymal transition	  3.4613063	22.34	Pheno41
+fatty acid biosynthesis	  9.4995553	22.34	Pheno41
+fibrosis	 18.5158763	22.34	Pheno41
+food intake	  6.1777668	22.34	Pheno41
+g1/s transition	-13.9820561	22.34	Pheno41
+glycogen synthesis	 -5.8601980	22.34	Pheno41
+glycolysis	  3.9159961	22.34	Pheno41
+immortality	 -8.2944253	22.34	Pheno41
+lipogenesis	 -9.7178219	22.34	Pheno41
+m1 polarization	  7.5974869	22.34	Pheno41
+m2 polarization	 19.5111650	22.34	Pheno41
+mast-cell diff	 -6.3798265	22.34	Pheno41
+megakaryocyte differentiation 	 -6.3798265	22.34	Pheno41
+metastasis	 -7.9427830	22.34	Pheno41
+microtubule polimerization	 -8.4907381	22.34	Pheno41
+mitochondrial fission	  4.6670280	22.34	Pheno41
+mitotic checkpoint	 -0.4252623	22.34	Pheno41
+muscle atrophy	 -9.1823522	22.34	Pheno41
+myoblast fusion	 -0.6640330	22.34	Pheno41
+myotube hypertrophy	-10.5966917	22.34	Pheno41
+neurite outgrowth	 -6.4045509	22.34	Pheno41
+neurodegeneration	  4.3755940	22.34	Pheno41
+neurogenesis	 -7.8745992	22.34	Pheno41
+neuron maturation	       -Inf	22.34	Pheno41
+nucleotide synthesis	  0.0000000	22.34	Pheno41
+osteoclast differentiation	 15.3229172	22.34	Pheno41
+proliferation	 -3.5828879	22.34	Pheno41
+protein synthesis	-12.9903389	22.34	Pheno41
+pyrimidine biosynthesis	-18.1467148	22.34	Pheno41
+rrna transcription	  8.9905334	22.34	Pheno41
+skeletal muscle differentiation	-26.0446598	22.34	Pheno41
+spindle assembly	-21.2732335	22.34	Pheno41
+stress granules	 18.8873522	22.34	Pheno41
+survival	 -7.5609277	22.34	Pheno41
+synaptic plasticity	 -6.7462456	22.34	Pheno41
+synaptic vesicle exocytosis	 -4.9453026	22.34	Pheno41
+t cell activation	 14.4369782	22.34	Pheno41
+translational regulation	 -9.3949598	22.34	Pheno41
+vesicle transport	       -Inf	22.34	Pheno41
+vldl assembly	-11.0211331	22.34	Pheno41
+adipogenesis	-15.8770865	22.23	Pheno42
+alternative splicing regulation	-31.9984995	22.23	Pheno42
+apoptosis	 -0.4143523	22.23	Pheno42
+autophagy	 -9.0783891	22.23	Pheno42
+cell cycle block	-26.6818784	22.23	Pheno42
+cell cycle exit	 -9.7693543	22.23	Pheno42
+cell cycle progress 	-26.6818784	22.23	Pheno42
+cell death	 -1.1216071	22.23	Pheno42
+cell growth	 35.2980720	22.23	Pheno42
+centrosome separation	  6.5545581	22.23	Pheno42
+chromatine condensation	 18.5333003	22.23	Pheno42
+cilium assembly	 14.3717999	22.23	Pheno42
+dendritic spine morphogenesis	  3.8953420	22.23	Pheno42
+differentiation	-16.6506946	22.23	Pheno42
+dna repair	 -3.7420961	22.23	Pheno42
+epigenetic regulation	  1.9997719	22.23	Pheno42
+epithelial-mesenchymal transition	  4.7750662	22.23	Pheno42
+fatty acid biosynthesis	 11.5759123	22.23	Pheno42
+fibrosis	 17.6326623	22.23	Pheno42
+food intake	  4.2124820	22.23	Pheno42
+g1/s transition	 -9.9924312	22.23	Pheno42
+glycogen synthesis	 -6.3051971	22.23	Pheno42
+glycolysis	  3.6923366	22.23	Pheno42
+immortality	 -6.3766678	22.23	Pheno42
+lipogenesis	 -6.8185402	22.23	Pheno42
+m1 polarization	  9.3246618	22.23	Pheno42
+m2 polarization	 23.9196415	22.23	Pheno42
+mast-cell diff	 -8.8764534	22.23	Pheno42
+megakaryocyte differentiation 	 -8.8764534	22.23	Pheno42
+metastasis	 -6.9330447	22.23	Pheno42
+microtubule polimerization	 -7.4243715	22.23	Pheno42
+mitochondrial fission	  4.0680885	22.23	Pheno42
+mitotic checkpoint	  0.1655454	22.23	Pheno42
+muscle atrophy	 -8.8204220	22.23	Pheno42
+myoblast fusion	 -1.0513848	22.23	Pheno42
+myotube hypertrophy	 -9.1538773	22.23	Pheno42
+neurite outgrowth	 -4.3440230	22.23	Pheno42
+neurodegeneration	  5.0826533	22.23	Pheno42
+neurogenesis	 -5.9861180	22.23	Pheno42
+neuron maturation	       -Inf	22.23	Pheno42
+nucleotide synthesis	  0.0000000	22.23	Pheno42
+osteoclast differentiation	 14.3717999	22.23	Pheno42
+proliferation	 -3.2989620	22.23	Pheno42
+protein synthesis	-13.8812587	22.23	Pheno42
+pyrimidine biosynthesis	-15.1251996	22.23	Pheno42
+rrna transcription	 10.4920068	22.23	Pheno42
+skeletal muscle differentiation	-21.7643616	22.23	Pheno42
+spindle assembly	-14.2178824	22.23	Pheno42
+stress granules	 24.8978836	22.23	Pheno42
+survival	 -8.8459901	22.23	Pheno42
+synaptic plasticity	 -6.6424465	22.23	Pheno42
+synaptic vesicle exocytosis	 -4.3133633	22.23	Pheno42
+t cell activation	 14.4848699	22.23	Pheno42
+translational regulation	 -9.6122827	22.23	Pheno42
+vesicle transport	       -Inf	22.23	Pheno42
+vldl assembly	 -6.8919714	22.23	Pheno42
+apoptosis	 -5.178336	20.24	Pheno43
+cell cycle block	 -9.602583	20.24	Pheno43
+cell cycle exit	  2.245136	20.24	Pheno43
+cell cycle progress 	 -9.602583	20.24	Pheno43
+cell death	 -5.425874	20.24	Pheno43
+cell growth	  9.396342	20.24	Pheno43
+glycolysis	 17.177786	20.24	Pheno43
+lipogenesis	  7.827120	20.24	Pheno43
+myotube hypertrophy	-12.128028	20.24	Pheno43
+proliferation	  0.000000	20.24	Pheno43
+vldl assembly	 15.047123	20.24	Pheno43
+apoptosis	 -4.9515238	20.52	Pheno44
+cell cycle block	 -9.3552417	20.52	Pheno44
+cell cycle exit	  0.8285554	20.52	Pheno44
+cell cycle progress 	 -9.3552417	20.52	Pheno44
+cell death	 -4.2080035	20.52	Pheno44
+cell growth	  8.0206060	20.52	Pheno44
+glycolysis	 19.7705261	20.52	Pheno44
+lipogenesis	  9.7665710	20.52	Pheno44
+myotube hypertrophy	-17.3996348	20.52	Pheno44
+proliferation	  0.0000000	20.52	Pheno44
+vldl assembly	 18.7104834	20.52	Pheno44
+adipogenesis	 -1.6868626	19.96	Pheno45
+apoptosis	 -4.8750315	19.96	Pheno45
+autophagy	 -8.6593008	19.96	Pheno45
+cell cycle block	 -1.4837841	19.96	Pheno45
+cell cycle exit	  4.8001955	19.96	Pheno45
+cell cycle progress 	 -1.4837841	19.96	Pheno45
+cell death	 -7.2752898	19.96	Pheno45
+cell growth	 -0.2342791	19.96	Pheno45
+centrosome separation	 16.1899657	19.96	Pheno45
+dendritic spine morphogenesis	  6.0958061	19.96	Pheno45
+fibrosis	 -0.7287195	19.96	Pheno45
+g1/s transition	  7.1785950	19.96	Pheno45
+glycogen synthesis	-14.2702450	19.96	Pheno45
+glycolysis	  8.7248745	19.96	Pheno45
+immortality	-22.1080471	19.96	Pheno45
+lipogenesis	-14.8496594	19.96	Pheno45
+m2 polarization	 23.3843130	19.96	Pheno45
+metastasis	 -6.3026310	19.96	Pheno45
+mitotic checkpoint	  9.3733007	19.96	Pheno45
+muscle atrophy	 -8.6593008	19.96	Pheno45
+myotube hypertrophy	 -4.2599971	19.96	Pheno45
+neurogenesis	 -8.4706936	19.96	Pheno45
+proliferation	 -7.8851088	19.96	Pheno45
+protein synthesis	 -3.4019959	19.96	Pheno45
+skeletal muscle differentiation	 -3.6126200	19.96	Pheno45
+stress granules	 17.3186016	19.96	Pheno45
+survival	 -1.5111680	19.96	Pheno45
+synaptic plasticity	 -1.9713923	19.96	Pheno45
+t cell activation	 -0.1476032	19.96	Pheno45
+translational regulation	  5.6161301	19.96	Pheno45
+vldl assembly	 -3.2238838	19.96	Pheno45
+adipogenesis	 -1.6444856	19.43	Pheno46
+apoptosis	 -4.8701719	19.43	Pheno46
+autophagy	 -8.6282268	19.43	Pheno46
+cell cycle block	 -1.8240437	19.43	Pheno46
+cell cycle exit	  5.5701863	19.43	Pheno46
+cell cycle progress 	 -1.8240437	19.43	Pheno46
+cell death	 -6.2923697	19.43	Pheno46
+cell growth	  2.2089796	19.43	Pheno46
+centrosome separation	 20.2123716	19.43	Pheno46
+dendritic spine morphogenesis	  5.2886531	19.43	Pheno46
+fibrosis	 -0.8573496	19.43	Pheno46
+g1/s transition	  7.1928355	19.43	Pheno46
+glycogen synthesis	-12.6928410	19.43	Pheno46
+glycolysis	  5.6106412	19.43	Pheno46
+immortality	-12.0704755	19.43	Pheno46
+lipogenesis	-11.9707285	19.43	Pheno46
+m2 polarization	 36.0006511	19.43	Pheno46
+metastasis	 -6.3155959	19.43	Pheno46
+mitotic checkpoint	  9.0489585	19.43	Pheno46
+muscle atrophy	 -8.6282268	19.43	Pheno46
+myotube hypertrophy	 -2.7320331	19.43	Pheno46
+neurogenesis	 -9.7403438	19.43	Pheno46
+proliferation	 -7.7305867	19.43	Pheno46
+protein synthesis	 -3.0337081	19.43	Pheno46
+skeletal muscle differentiation	 -2.5878948	19.43	Pheno46
+stress granules	 11.5321257	19.43	Pheno46
+survival	 -2.0091511	19.43	Pheno46
+synaptic plasticity	 -2.3238338	19.43	Pheno46
+t cell activation	  0.3042036	19.43	Pheno46
+translational regulation	  5.7097761	19.43	Pheno46
+vldl assembly	 -2.9363151	19.43	Pheno46
+adipogenesis	-15.075740332	19.88	Pheno47
+alternative splicing regulation	-60.668056916	19.88	Pheno47
+apoptosis	  0.000000000	19.88	Pheno47
+autophagy	 -4.694944821	19.88	Pheno47
+cell cycle block	-25.838969121	19.88	Pheno47
+cell cycle exit	 -8.637608055	19.88	Pheno47
+cell cycle progress 	-25.838969121	19.88	Pheno47
+cell death	  1.941818578	19.88	Pheno47
+cell growth	 31.753920220	19.88	Pheno47
+centrosome separation	  5.890978893	19.88	Pheno47
+chromatine condensation	 17.168444409	19.88	Pheno47
+chromosome segregation	 -2.864098966	19.88	Pheno47
+dendritic spine morphogenesis	  3.611154996	19.88	Pheno47
+differentiation	-15.031813107	19.88	Pheno47
+dna repair	 -3.966505442	19.88	Pheno47
+epigenetic regulation	  1.450279981	19.88	Pheno47
+epithelial-mesenchymal transition	  9.197266718	19.88	Pheno47
+fatty acid biosynthesis	  0.975272115	19.88	Pheno47
+fibrosis	 15.284675988	19.88	Pheno47
+food intake	  5.722814803	19.88	Pheno47
+g1/s transition	-29.150225585	19.88	Pheno47
+glycogen synthesis	 -7.161861170	19.88	Pheno47
+glycolysis	  2.851410606	19.88	Pheno47
+hexosamine biosynthesis	-16.331066877	19.88	Pheno47
+immortality	 -5.411561427	19.88	Pheno47
+lipogenesis	 -5.888024512	19.88	Pheno47
+m1 polarization	  7.409416629	19.88	Pheno47
+m2 polarization	 24.202065578	19.88	Pheno47
+mast-cell diff	-10.269969627	19.88	Pheno47
+megakaryocyte differentiation 	-10.269969627	19.88	Pheno47
+metastasis	 -7.029553058	19.88	Pheno47
+microtubule polimerization	 -8.425389815	19.88	Pheno47
+mitochondrial fission	  2.434080243	19.88	Pheno47
+mitotic checkpoint	  0.004315863	19.88	Pheno47
+mrna capping	 -3.420206330	19.88	Pheno47
+muscle atrophy	 -7.482758753	19.88	Pheno47
+myoblast fusion	 -1.553268797	19.88	Pheno47
+myotube hypertrophy	-11.922926474	19.88	Pheno47
+neurite outgrowth	 -3.771423281	19.88	Pheno47
+neurodegeneration	  3.924277094	19.88	Pheno47
+neurogenesis	 -5.355942548	19.88	Pheno47
+neuron maturation	         -Inf	19.88	Pheno47
+nucleotide synthesis	  0.000000000	19.88	Pheno47
+osteoclast differentiation	  8.863419707	19.88	Pheno47
+proliferation	 -4.993768652	19.88	Pheno47
+protein aggregates	  2.799369292	19.88	Pheno47
+protein glycosylation	-16.331066877	19.88	Pheno47
+protein synthesis	-10.527405583	19.88	Pheno47
+pyrimidine biosynthesis	-28.208708258	19.88	Pheno47
+rrna transcription	  1.972383372	19.88	Pheno47
+skeletal muscle differentiation	-25.581827632	19.88	Pheno47
+spindle assembly	 -5.216721723	19.88	Pheno47
+stress granules	 17.486706054	19.88	Pheno47
+survival	 -7.021877442	19.88	Pheno47
+synaptic plasticity	-12.277115020	19.88	Pheno47
+synaptic vesicle exocytosis	 -5.124851166	19.88	Pheno47
+t cell activation	  7.524794970	19.88	Pheno47
+translational regulation	 -8.317872518	19.88	Pheno47
+vesicle transport	         -Inf	19.88	Pheno47
+vldl assembly	 -6.264514614	19.88	Pheno47
+adipogenesis	-13.7563345	20.72	Pheno48
+alternative splicing regulation	-49.2035553	20.72	Pheno48
+apoptosis	  0.0000000	20.72	Pheno48
+autophagy	 -4.1885177	20.72	Pheno48
+cell cycle block	-28.3218513	20.72	Pheno48
+cell cycle exit	 -8.9964873	20.72	Pheno48
+cell cycle progress 	-28.3218513	20.72	Pheno48
+cell death	  2.0234992	20.72	Pheno48
+cell growth	 31.8316249	20.72	Pheno48
+centrosome separation	  7.7760408	20.72	Pheno48
+chromatine condensation	 17.2106421	20.72	Pheno48
+chromosome segregation	 -3.0467198	20.72	Pheno48
+dendritic spine morphogenesis	  4.1484820	20.72	Pheno48
+differentiation	-17.1042062	20.72	Pheno48
+dna repair	 -3.2133005	20.72	Pheno48
+epigenetic regulation	  1.4151601	20.72	Pheno48
+epithelial-mesenchymal transition	 10.9920869	20.72	Pheno48
+fatty acid biosynthesis	  2.4204121	20.72	Pheno48
+fibrosis	 15.7961520	20.72	Pheno48
+food intake	  5.3474474	20.72	Pheno48
+g1/s transition	-34.2561482	20.72	Pheno48
+glycogen synthesis	 -5.0787920	20.72	Pheno48
+glycolysis	  2.9245605	20.72	Pheno48
+hexosamine biosynthesis	-17.5306115	20.72	Pheno48
+immortality	 -5.6207530	20.72	Pheno48
+lipogenesis	 -3.8868950	20.72	Pheno48
+m1 polarization	  7.9519143	20.72	Pheno48
+m2 polarization	 25.1611445	20.72	Pheno48
+mast-cell diff	 -8.8634197	20.72	Pheno48
+megakaryocyte differentiation 	 -8.8634197	20.72	Pheno48
+metastasis	 -6.3139537	20.72	Pheno48
+microtubule polimerization	 -7.5803539	20.72	Pheno48
+mitochondrial fission	  2.9911611	20.72	Pheno48
+mitotic checkpoint	 -0.5088886	20.72	Pheno48
+mrna capping	 -5.8474588	20.72	Pheno48
+muscle atrophy	 -6.6339942	20.72	Pheno48
+myoblast fusion	 -1.3344468	20.72	Pheno48
+myotube hypertrophy	-10.4417747	20.72	Pheno48
+neurite outgrowth	 -3.8744568	20.72	Pheno48
+neurodegeneration	  5.1669376	20.72	Pheno48
+neurogenesis	 -7.7446687	20.72	Pheno48
+neuron maturation	       -Inf	20.72	Pheno48
+nucleotide synthesis	  0.0000000	20.72	Pheno48
+osteoclast differentiation	 17.5306115	20.72	Pheno48
+proliferation	 -4.8826836	20.72	Pheno48
+protein aggregates	  2.4279357	20.72	Pheno48
+protein glycosylation	-17.5306115	20.72	Pheno48
+protein synthesis	-10.4261910	20.72	Pheno48
+pyrimidine biosynthesis	-28.9428477	20.72	Pheno48
+rrna transcription	  1.7431189	20.72	Pheno48
+skeletal muscle differentiation	-27.7345434	20.72	Pheno48
+spindle assembly	 -5.0998380	20.72	Pheno48
+stress granules	 20.5376820	20.72	Pheno48
+survival	 -9.0048642	20.72	Pheno48
+synaptic plasticity	-11.3517206	20.72	Pheno48
+synaptic vesicle exocytosis	 -5.3041848	20.72	Pheno48
+t cell activation	  7.7060519	20.72	Pheno48
+translational regulation	 -8.9269234	20.72	Pheno48
+vesicle transport	       -Inf	20.72	Pheno48
+vldl assembly	 -4.3958172	20.72	Pheno48
+cell death	  20.827591	18.65	Pheno49
+glycolysis	-151.900877	18.65	Pheno49
+lipogenesis	  73.891114	18.65	Pheno49
+myotube hypertrophy	  29.169749	18.65	Pheno49
+proliferation	  -8.708869	18.65	Pheno49
+vldl assembly	 264.237491	18.65	Pheno49
+cell death	  18.405571	18.22	Pheno50
+glycolysis	-107.929204	18.22	Pheno50
+lipogenesis	 106.067582	18.22	Pheno50
+myotube hypertrophy	  31.993534	18.22	Pheno50
+proliferation	  -8.586936	18.22	Pheno50
+vldl assembly	 264.237491	18.22	Pheno50
+apoptosis	 16.841241	17.79	Pheno51
+autophagy	 90.982048	17.79	Pheno51
+cell cycle block	 12.261834	17.79	Pheno51
+cell cycle exit	 36.876939	17.79	Pheno51
+cell cycle progress 	-12.261834	17.79	Pheno51
+cell death	 20.968548	17.79	Pheno51
+cell growth	 40.471425	17.79	Pheno51
+dendritic spine morphogenesis	-22.903003	17.79	Pheno51
+fibrosis	  7.526753	17.79	Pheno51
+glycolysis	-15.363253	17.79	Pheno51
+lipogenesis	 48.188248	17.79	Pheno51
+m2 polarization	 49.283994	17.79	Pheno51
+metastasis	 12.071452	17.79	Pheno51
+muscle atrophy	136.244468	17.79	Pheno51
+myotube hypertrophy	-25.380126	17.79	Pheno51
+proliferation	 -3.819234	17.79	Pheno51
+protein synthesis	-17.438709	17.79	Pheno51
+skeletal muscle differentiation	 14.710396	17.79	Pheno51
+survival	-13.121678	17.79	Pheno51
+t cell activation	 20.801610	17.79	Pheno51
+translational regulation	-48.790540	17.79	Pheno51
+vldl assembly	 48.319176	17.79	Pheno51
+apoptosis	 15.827248	18.32	Pheno52
+autophagy	101.007487	18.32	Pheno52
+cell cycle block	 11.101841	18.32	Pheno52
+cell cycle exit	 33.142405	18.32	Pheno52
+cell cycle progress 	-11.101841	18.32	Pheno52
+cell death	 20.985500	18.32	Pheno52
+cell growth	 42.235970	18.32	Pheno52
+dendritic spine morphogenesis	-27.475181	18.32	Pheno52
+fibrosis	  7.303739	18.32	Pheno52
+glycolysis	-12.638341	18.32	Pheno52
+lipogenesis	 56.791161	18.32	Pheno52
+m2 polarization	 65.941162	18.32	Pheno52
+metastasis	  9.091621	18.32	Pheno52
+muscle atrophy	159.221624	18.32	Pheno52
+myotube hypertrophy	-22.457502	18.32	Pheno52
+proliferation	 -3.737513	18.32	Pheno52
+protein synthesis	-20.357061	18.32	Pheno52
+skeletal muscle differentiation	 15.665581	18.32	Pheno52
+survival	-11.161366	18.32	Pheno52
+t cell activation	 22.810497	18.32	Pheno52
+translational regulation	-46.578604	18.32	Pheno52
+vldl assembly	 49.631350	18.32	Pheno52
+adipogenesis	  0.3043025	20.9	Pheno53
+alternative splicing regulation	 42.5175039	20.9	Pheno53
+apoptosis	  1.8989447	20.9	Pheno53
+autophagy	 10.1091855	20.9	Pheno53
+cell cycle block	 10.2706940	20.9	Pheno53
+cell cycle exit	 18.1917941	20.9	Pheno53
+cell cycle progress 	-10.2706940	20.9	Pheno53
+cell death	  1.0656852	20.9	Pheno53
+cell growth	  9.2552027	20.9	Pheno53
+dendritic spine morphogenesis	-13.5493048	20.9	Pheno53
+differentiation	  0.7378821	20.9	Pheno53
+dna repair	 -0.1133408	20.9	Pheno53
+epithelial-mesenchymal transition	 -0.4757019	20.9	Pheno53
+fatty acid biosynthesis	 68.6795468	20.9	Pheno53
+fibrosis	  3.8781591	20.9	Pheno53
+food intake	-37.2492459	20.9	Pheno53
+g1/s transition	-14.8294254	20.9	Pheno53
+glycogen synthesis	-11.2144382	20.9	Pheno53
+glycolysis	 -3.2304216	20.9	Pheno53
+lipogenesis	 24.1410017	20.9	Pheno53
+m1 polarization	 15.9461648	20.9	Pheno53
+m2 polarization	 10.7557369	20.9	Pheno53
+mast-cell diff	 45.5966234	20.9	Pheno53
+megakaryocyte differentiation 	 45.5966234	20.9	Pheno53
+metastasis	 -3.6937208	20.9	Pheno53
+mitotic checkpoint	 17.7576904	20.9	Pheno53
+muscle atrophy	 13.2107680	20.9	Pheno53
+myotube hypertrophy	-27.4960905	20.9	Pheno53
+neurodegeneration	 -0.3907721	20.9	Pheno53
+neurogenesis	-31.2732464	20.9	Pheno53
+nucleotide synthesis	108.3676620	20.9	Pheno53
+proliferation	 -4.8625852	20.9	Pheno53
+protein synthesis	 -5.2145135	20.9	Pheno53
+pyrimidine biosynthesis	 -9.9291699	20.9	Pheno53
+skeletal muscle differentiation	  2.7724772	20.9	Pheno53
+spindle assembly	 19.5259289	20.9	Pheno53
+survival	-12.6198236	20.9	Pheno53
+synaptic plasticity	  1.2236093	20.9	Pheno53
+synaptic vesicle exocytosis	  8.4248027	20.9	Pheno53
+t cell activation	  8.8901528	20.9	Pheno53
+translational regulation	 -8.8585159	20.9	Pheno53
+vldl assembly	 12.5945984	20.9	Pheno53
+adipogenesis	  0.6575565	19.75	Pheno54
+alternative splicing regulation	 37.5147167	19.75	Pheno54
+apoptosis	  2.0916253	19.75	Pheno54
+autophagy	 11.2195603	19.75	Pheno54
+cell cycle block	 10.4364026	19.75	Pheno54
+cell cycle exit	 16.9448869	19.75	Pheno54
+cell cycle progress 	-10.4364026	19.75	Pheno54
+cell death	  1.1849442	19.75	Pheno54
+cell growth	  9.9079276	19.75	Pheno54
+dendritic spine morphogenesis	-15.0141568	19.75	Pheno54
+differentiation	  1.0994627	19.75	Pheno54
+dna repair	 -0.2769579	19.75	Pheno54
+epithelial-mesenchymal transition	  0.1573392	19.75	Pheno54
+fatty acid biosynthesis	107.4989065	19.75	Pheno54
+fibrosis	  3.4588216	19.75	Pheno54
+food intake	-61.2204591	19.75	Pheno54
+g1/s transition	-16.5577069	19.75	Pheno54
+glycogen synthesis	-12.6895167	19.75	Pheno54
+glycolysis	 -3.8291463	19.75	Pheno54
+lipogenesis	 27.1687920	19.75	Pheno54
+m1 polarization	 14.2917268	19.75	Pheno54
+m2 polarization	 10.9898514	19.75	Pheno54
+mast-cell diff	 37.5147167	19.75	Pheno54
+megakaryocyte differentiation 	 37.5147167	19.75	Pheno54
+metastasis	 -3.5773452	19.75	Pheno54
+mitotic checkpoint	 19.9252868	19.75	Pheno54
+muscle atrophy	 11.8481247	19.75	Pheno54
+myotube hypertrophy	-25.8895534	19.75	Pheno54
+neurodegeneration	 -0.5396468	19.75	Pheno54
+neurogenesis	-37.1246123	19.75	Pheno54
+nucleotide synthesis	139.0165424	19.75	Pheno54
+proliferation	 -4.3412891	19.75	Pheno54
+protein synthesis	 -5.1767014	19.75	Pheno54
+pyrimidine biosynthesis	-12.8838037	19.75	Pheno54
+skeletal muscle differentiation	  2.7373972	19.75	Pheno54
+spindle assembly	 20.5514691	19.75	Pheno54
+survival	-11.4691539	19.75	Pheno54
+synaptic plasticity	  1.2921254	19.75	Pheno54
+synaptic vesicle exocytosis	  6.8751121	19.75	Pheno54
+t cell activation	  9.5781139	19.75	Pheno54
+translational regulation	 -8.7246573	19.75	Pheno54
+vldl assembly	 15.4724877	19.75	Pheno54
+apoptosis	  11.29864	18.35	Pheno55
+cell cycle block	  38.46167	18.35	Pheno55
+cell cycle progress 	 -38.46167	18.35	Pheno55
+cell death	  34.18467	18.35	Pheno55
+cell growth	  59.32537	18.35	Pheno55
+glycolysis	-116.02124	18.35	Pheno55
+lipogenesis	  74.42595	18.35	Pheno55
+myotube hypertrophy	  31.37094	18.35	Pheno55
+proliferation	 -11.20591	18.35	Pheno55
+vldl assembly	 104.48460	18.35	Pheno55
+apoptosis	  13.37883	18.43	Pheno56
+cell cycle block	  42.68456	18.43	Pheno56
+cell cycle progress 	 -42.68456	18.43	Pheno56
+cell death	  44.12884	18.43	Pheno56
+cell growth	  42.50850	18.43	Pheno56
+glycolysis	-175.49376	18.43	Pheno56
+lipogenesis	 150.14059	18.43	Pheno56
+myotube hypertrophy	  39.37411	18.43	Pheno56
+proliferation	 -10.38961	18.43	Pheno56
+vldl assembly	 328.16907	18.43	Pheno56
+adipogenesis	  8.900408	18.63	Pheno57
+apoptosis	 11.660327	18.63	Pheno57
+autophagy	 65.020994	18.63	Pheno57
+cell cycle block	  8.806597	18.63	Pheno57
+cell cycle exit	 32.792947	18.63	Pheno57
+cell cycle progress 	 -8.806597	18.63	Pheno57
+cell death	 13.765659	18.63	Pheno57
+cell growth	 33.020632	18.63	Pheno57
+dendritic spine morphogenesis	-25.517958	18.63	Pheno57
+fibrosis	  3.894474	18.63	Pheno57
+glycolysis	 -8.097347	18.63	Pheno57
+lipogenesis	 33.745198	18.63	Pheno57
+m2 polarization	 37.579989	18.63	Pheno57
+metastasis	 10.773050	18.63	Pheno57
+muscle atrophy	128.329953	18.63	Pheno57
+myotube hypertrophy	-27.604854	18.63	Pheno57
+neurogenesis	 12.536071	18.63	Pheno57
+proliferation	 -2.916048	18.63	Pheno57
+protein synthesis	-19.266294	18.63	Pheno57
+skeletal muscle differentiation	 17.006879	18.63	Pheno57
+survival	-10.524331	18.63	Pheno57
+synaptic plasticity	-14.186764	18.63	Pheno57
+t cell activation	 25.210749	18.63	Pheno57
+translational regulation	-25.522379	18.63	Pheno57
+vldl assembly	 37.747626	18.63	Pheno57
+adipogenesis	  9.627864	19.28	Pheno58
+apoptosis	 12.772661	19.28	Pheno58
+autophagy	 88.190007	19.28	Pheno58
+cell cycle block	 10.774641	19.28	Pheno58
+cell cycle exit	 26.580840	19.28	Pheno58
+cell cycle progress 	-10.774641	19.28	Pheno58
+cell death	 14.741929	19.28	Pheno58
+cell growth	 24.998318	19.28	Pheno58
+dendritic spine morphogenesis	-28.333584	19.28	Pheno58
+fibrosis	  4.704925	19.28	Pheno58
+glycolysis	 -9.215049	19.28	Pheno58
+lipogenesis	 39.301400	19.28	Pheno58
+m2 polarization	 42.551296	19.28	Pheno58
+metastasis	 12.378498	19.28	Pheno58
+muscle atrophy	118.407747	19.28	Pheno58
+myotube hypertrophy	-27.604854	19.28	Pheno58
+neurogenesis	 19.823187	19.28	Pheno58
+proliferation	 -3.231590	19.28	Pheno58
+protein synthesis	-20.692119	19.28	Pheno58
+skeletal muscle differentiation	 18.819442	19.28	Pheno58
+survival	-10.601471	19.28	Pheno58
+synaptic plasticity	-15.484177	19.28	Pheno58
+t cell activation	 27.609980	19.28	Pheno58
+translational regulation	-35.889251	19.28	Pheno58
+vldl assembly	 48.405856	19.28	Pheno58
+adipogenesis	  4.0613903	20.11	Pheno59
+alternative splicing regulation	 21.3044005	20.11	Pheno59
+apoptosis	  2.1936883	20.11	Pheno59
+autophagy	 10.3918840	20.11	Pheno59
+cell cycle block	  8.4697300	20.11	Pheno59
+cell cycle exit	 10.1860643	20.11	Pheno59
+cell cycle progress 	 -8.4697300	20.11	Pheno59
+cell death	  1.0417919	20.11	Pheno59
+cell growth	  8.3579914	20.11	Pheno59
+dendritic spine morphogenesis	-13.1826712	20.11	Pheno59
+differentiation	  1.1243972	20.11	Pheno59
+dna repair	  1.8717273	20.11	Pheno59
+epithelial-mesenchymal transition	  2.6566589	20.11	Pheno59
+fatty acid biosynthesis	100.3203256	20.11	Pheno59
+fibrosis	  2.8100318	20.11	Pheno59
+food intake	-39.8009777	20.11	Pheno59
+g1/s transition	-20.8335675	20.11	Pheno59
+glycogen synthesis	-14.3544694	20.11	Pheno59
+glycolysis	 -3.2655595	20.11	Pheno59
+hexosamine biosynthesis	 98.0288898	20.11	Pheno59
+lipogenesis	 14.2618017	20.11	Pheno59
+m1 polarization	 11.9190543	20.11	Pheno59
+m2 polarization	  7.8090049	20.11	Pheno59
+mast-cell diff	 33.6749822	20.11	Pheno59
+megakaryocyte differentiation 	 33.6749822	20.11	Pheno59
+microtubule polimerization	 -3.9578000	20.11	Pheno59
+mitotic checkpoint	 13.5892007	20.11	Pheno59
+muscle atrophy	  9.4148166	20.11	Pheno59
+myoblast fusion	 -7.6747078	20.11	Pheno59
+myotube hypertrophy	-39.6185793	20.11	Pheno59
+neurodegeneration	 -0.4428032	20.11	Pheno59
+neurogenesis	-18.5428135	20.11	Pheno59
+nucleotide synthesis	139.1866534	20.11	Pheno59
+proliferation	 -4.2054733	20.11	Pheno59
+protein glycosylation	 98.0288898	20.11	Pheno59
+protein synthesis	 -5.2837031	20.11	Pheno59
+pyrimidine biosynthesis	-10.1189159	20.11	Pheno59
+rrna transcription	  2.2801680	20.11	Pheno59
+skeletal muscle differentiation	  3.2745437	20.11	Pheno59
+spindle assembly	  3.1496527	20.11	Pheno59
+survival	-11.0634728	20.11	Pheno59
+synaptic plasticity	  2.5890789	20.11	Pheno59
+synaptic vesicle exocytosis	  9.5578974	20.11	Pheno59
+t cell activation	  5.8610806	20.11	Pheno59
+translational regulation	 -9.2035152	20.11	Pheno59
+vldl assembly	  9.3616211	20.11	Pheno59
+adipogenesis	  2.7094487	19.53	Pheno60
+alternative splicing regulation	 19.4651613	19.53	Pheno60
+apoptosis	  1.8253813	19.53	Pheno60
+autophagy	 10.1595163	19.53	Pheno60
+cell cycle block	  7.9703969	19.53	Pheno60
+cell cycle exit	 10.3050460	19.53	Pheno60
+cell cycle progress 	 -7.9703969	19.53	Pheno60
+cell death	  0.8100555	19.53	Pheno60
+cell growth	  7.7762819	19.53	Pheno60
+dendritic spine morphogenesis	-15.1104187	19.53	Pheno60
+differentiation	  1.0187032	19.53	Pheno60
+dna repair	  1.7225064	19.53	Pheno60
+epithelial-mesenchymal transition	  1.5447593	19.53	Pheno60
+fatty acid biosynthesis	 60.7142882	19.53	Pheno60
+fibrosis	  2.6750890	19.53	Pheno60
+food intake	-57.6688919	19.53	Pheno60
+g1/s transition	-21.1316688	19.53	Pheno60
+glycogen synthesis	-13.8137426	19.53	Pheno60
+glycolysis	 -2.9610645	19.53	Pheno60
+hexosamine biosynthesis	 76.7390837	19.53	Pheno60
+lipogenesis	 12.3152919	19.53	Pheno60
+m1 polarization	 11.8996982	19.53	Pheno60
+m2 polarization	  7.0486333	19.53	Pheno60
+mast-cell diff	 37.3950112	19.53	Pheno60
+megakaryocyte differentiation 	 37.3950112	19.53	Pheno60
+microtubule polimerization	 -3.7900727	19.53	Pheno60
+mitotic checkpoint	 13.9253588	19.53	Pheno60
+muscle atrophy	  9.4421930	19.53	Pheno60
+myoblast fusion	 -6.9949280	19.53	Pheno60
+myotube hypertrophy	-31.0146886	19.53	Pheno60
+neurodegeneration	 -0.4395051	19.53	Pheno60
+neurogenesis	-18.5613070	19.53	Pheno60
+nucleotide synthesis	138.0809637	19.53	Pheno60
+proliferation	 -3.7925426	19.53	Pheno60
+protein glycosylation	 76.7390837	19.53	Pheno60
+protein synthesis	 -4.1716850	19.53	Pheno60
+pyrimidine biosynthesis	 -7.7178704	19.53	Pheno60
+rrna transcription	  1.9676642	19.53	Pheno60
+skeletal muscle differentiation	  2.7858989	19.53	Pheno60
+spindle assembly	  3.2681105	19.53	Pheno60
+survival	-10.1059364	19.53	Pheno60
+synaptic plasticity	  2.9847792	19.53	Pheno60
+synaptic vesicle exocytosis	 10.3111915	19.53	Pheno60
+t cell activation	  4.7531892	19.53	Pheno60
+translational regulation	 -7.1854749	19.53	Pheno60
+vldl assembly	  9.4978855	19.53	Pheno60
+cell death	  16.199869	18.56	Pheno61
+glycolysis	-131.804865	18.56	Pheno61
+lipogenesis	  67.223927	18.56	Pheno61
+myotube hypertrophy	  29.169749	18.56	Pheno61
+proliferation	  -8.612814	18.56	Pheno61
+vldl assembly	 149.330594	18.56	Pheno61
+cell death	  16.526330	17.1	Pheno62
+glycolysis	-131.804865	17.1	Pheno62
+lipogenesis	 106.067582	17.1	Pheno62
+myotube hypertrophy	  31.993534	17.1	Pheno62
+proliferation	  -8.957286	17.1	Pheno62
+vldl assembly	 149.330594	17.1	Pheno62
+apoptosis	 15.002419	19.61	Pheno63
+autophagy	109.433638	19.61	Pheno63
+cell cycle block	  9.939535	19.61	Pheno63
+cell cycle exit	 25.158321	19.61	Pheno63
+cell cycle progress 	 -9.939535	19.61	Pheno63
+cell death	 18.701573	19.61	Pheno63
+cell growth	 36.354175	19.61	Pheno63
+dendritic spine morphogenesis	-29.308447	19.61	Pheno63
+fibrosis	  5.868865	19.61	Pheno63
+glycolysis	-12.432033	19.61	Pheno63
+lipogenesis	 50.122031	19.61	Pheno63
+m2 polarization	 37.790071	19.61	Pheno63
+metastasis	 10.080405	19.61	Pheno63
+muscle atrophy	175.331777	19.61	Pheno63
+myotube hypertrophy	-22.457502	19.61	Pheno63
+proliferation	 -3.886017	19.61	Pheno63
+protein synthesis	-19.614489	19.61	Pheno63
+skeletal muscle differentiation	 14.759717	19.61	Pheno63
+survival	-14.154248	19.61	Pheno63
+t cell activation	 24.890498	19.61	Pheno63
+translational regulation	-36.568554	19.61	Pheno63
+vldl assembly	 51.518414	19.61	Pheno63
+apoptosis	 15.314734	18.18	Pheno64
+autophagy	104.685979	18.18	Pheno64
+cell cycle block	 11.677949	18.18	Pheno64
+cell cycle exit	 33.235378	18.18	Pheno64
+cell cycle progress 	-11.677949	18.18	Pheno64
+cell death	 18.213047	18.18	Pheno64
+cell growth	 60.438382	18.18	Pheno64
+dendritic spine morphogenesis	-25.303051	18.18	Pheno64
+fibrosis	  6.543575	18.18	Pheno64
+glycolysis	-12.245813	18.18	Pheno64
+lipogenesis	 51.210516	18.18	Pheno64
+m2 polarization	 39.608558	18.18	Pheno64
+metastasis	 10.018991	18.18	Pheno64
+muscle atrophy	121.179892	18.18	Pheno64
+myotube hypertrophy	-19.160867	18.18	Pheno64
+proliferation	 -3.577216	18.18	Pheno64
+protein synthesis	-21.507580	18.18	Pheno64
+skeletal muscle differentiation	 13.527514	18.18	Pheno64
+survival	-12.684039	18.18	Pheno64
+t cell activation	 21.058203	18.18	Pheno64
+translational regulation	-54.180215	18.18	Pheno64
+vldl assembly	 48.003277	18.18	Pheno64
+adipogenesis	  0.4528435	19.74	Pheno65
+alternative splicing regulation	 37.3198106	19.74	Pheno65
+apoptosis	  2.0052057	19.74	Pheno65
+autophagy	 13.1596943	19.74	Pheno65
+cell cycle block	  8.0178809	19.74	Pheno65
+cell cycle exit	 13.9489357	19.74	Pheno65
+cell cycle progress 	 -8.0178809	19.74	Pheno65
+cell death	  1.0556926	19.74	Pheno65
+cell growth	  7.2974474	19.74	Pheno65
+dendritic spine morphogenesis	-12.0893396	19.74	Pheno65
+differentiation	  1.1823909	19.74	Pheno65
+dna repair	 -0.1334479	19.74	Pheno65
+epithelial-mesenchymal transition	  0.4546190	19.74	Pheno65
+fatty acid biosynthesis	 88.0807843	19.74	Pheno65
+fibrosis	  3.2328049	19.74	Pheno65
+food intake	-38.4484759	19.74	Pheno65
+g1/s transition	-12.4108245	19.74	Pheno65
+glycogen synthesis	-12.0538285	19.74	Pheno65
+glycolysis	 -3.4191499	19.74	Pheno65
+lipogenesis	 26.6141637	19.74	Pheno65
+m1 polarization	 13.3702435	19.74	Pheno65
+m2 polarization	 10.7966849	19.74	Pheno65
+mast-cell diff	 30.3114698	19.74	Pheno65
+megakaryocyte differentiation 	 30.3114698	19.74	Pheno65
+metastasis	 -3.9458067	19.74	Pheno65
+mitotic checkpoint	 14.3051769	19.74	Pheno65
+muscle atrophy	 14.5617029	19.74	Pheno65
+myotube hypertrophy	-23.3234476	19.74	Pheno65
+neurodegeneration	 -0.4113210	19.74	Pheno65
+neurogenesis	-30.7972608	19.74	Pheno65
+nucleotide synthesis	 82.7234143	19.74	Pheno65
+proliferation	 -4.3074407	19.74	Pheno65
+protein synthesis	 -4.9969079	19.74	Pheno65
+pyrimidine biosynthesis	-12.0138894	19.74	Pheno65
+skeletal muscle differentiation	  2.6946534	19.74	Pheno65
+spindle assembly	 10.9432164	19.74	Pheno65
+survival	 -9.4021836	19.74	Pheno65
+synaptic plasticity	  1.6858553	19.74	Pheno65
+synaptic vesicle exocytosis	  8.8306909	19.74	Pheno65
+t cell activation	  6.7310959	19.74	Pheno65
+translational regulation	 -8.8079257	19.74	Pheno65
+vldl assembly	 14.1144358	19.74	Pheno65
+adipogenesis	  0.6895431	20.09	Pheno66
+alternative splicing regulation	 30.5065969	20.09	Pheno66
+apoptosis	  1.9446430	20.09	Pheno66
+autophagy	 11.7390994	20.09	Pheno66
+cell cycle block	 10.0804649	20.09	Pheno66
+cell cycle exit	 16.6662340	20.09	Pheno66
+cell cycle progress 	-10.0804649	20.09	Pheno66
+cell death	  0.9935382	20.09	Pheno66
+cell growth	  8.2573309	20.09	Pheno66
+dendritic spine morphogenesis	-13.1648149	20.09	Pheno66
+differentiation	  1.1980835	20.09	Pheno66
+dna repair	 -0.1326911	20.09	Pheno66
+epithelial-mesenchymal transition	  0.5115454	20.09	Pheno66
+fatty acid biosynthesis	 71.9735568	20.09	Pheno66
+fibrosis	  3.2259982	20.09	Pheno66
+food intake	-35.0858145	20.09	Pheno66
+g1/s transition	-15.8438468	20.09	Pheno66
+glycogen synthesis	-10.6600113	20.09	Pheno66
+glycolysis	 -3.4035939	20.09	Pheno66
+lipogenesis	 24.1808343	20.09	Pheno66
+m1 polarization	 12.7110896	20.09	Pheno66
+m2 polarization	  9.6644453	20.09	Pheno66
+mast-cell diff	 45.5345278	20.09	Pheno66
+megakaryocyte differentiation 	 45.5345278	20.09	Pheno66
+metastasis	 -4.1459471	20.09	Pheno66
+mitotic checkpoint	 17.1548979	20.09	Pheno66
+muscle atrophy	 12.0085408	20.09	Pheno66
+myotube hypertrophy	-30.4718788	20.09	Pheno66
+neurodegeneration	 -0.3775408	20.09	Pheno66
+neurogenesis	-40.9082704	20.09	Pheno66
+nucleotide synthesis	108.6314936	20.09	Pheno66
+proliferation	 -4.3897124	20.09	Pheno66
+protein synthesis	 -4.9622453	20.09	Pheno66
+pyrimidine biosynthesis	-10.6940625	20.09	Pheno66
+skeletal muscle differentiation	  1.5068645	20.09	Pheno66
+spindle assembly	 19.7723394	20.09	Pheno66
+survival	-10.5522637	20.09	Pheno66
+synaptic plasticity	  1.1493841	20.09	Pheno66
+synaptic vesicle exocytosis	  8.2310142	20.09	Pheno66
+t cell activation	  6.8748684	20.09	Pheno66
+translational regulation	 -9.9451444	20.09	Pheno66
+vldl assembly	 13.1519407	20.09	Pheno66
+apoptosis	  12.729126	18.92	Pheno67
+cell cycle block	  30.971538	18.92	Pheno67
+cell cycle progress 	 -30.971538	18.92	Pheno67
+cell death	  40.753736	18.92	Pheno67
+cell growth	  48.240359	18.92	Pheno67
+glycolysis	-105.016184	18.92	Pheno67
+lipogenesis	  76.774633	18.92	Pheno67
+myotube hypertrophy	  21.426792	18.92	Pheno67
+proliferation	  -7.866201	18.92	Pheno67
+vldl assembly	 122.193622	18.92	Pheno67
+apoptosis	 11.396407	18.5	Pheno68
+cell cycle block	 38.602636	18.5	Pheno68
+cell cycle progress 	-38.602636	18.5	Pheno68
+cell death	 38.624125	18.5	Pheno68
+cell growth	 53.034934	18.5	Pheno68
+glycolysis	-97.742067	18.5	Pheno68
+lipogenesis	 64.875588	18.5	Pheno68
+myotube hypertrophy	 51.595141	18.5	Pheno68
+proliferation	 -9.756032	18.5	Pheno68
+vldl assembly	189.485651	18.5	Pheno68
+adipogenesis	  8.801929	17.92	Pheno69
+apoptosis	 15.947550	17.92	Pheno69
+autophagy	109.672186	17.92	Pheno69
+cell cycle block	 14.420563	17.92	Pheno69
+cell cycle exit	 39.403767	17.92	Pheno69
+cell cycle progress 	-14.420563	17.92	Pheno69
+cell death	 18.467145	17.92	Pheno69
+cell growth	 34.878677	17.92	Pheno69
+dendritic spine morphogenesis	-31.463790	17.92	Pheno69
+fibrosis	  5.983875	17.92	Pheno69
+glycolysis	 -9.936135	17.92	Pheno69
+lipogenesis	 42.434047	17.92	Pheno69
+m2 polarization	 49.229108	17.92	Pheno69
+metastasis	 12.170485	17.92	Pheno69
+muscle atrophy	150.166977	17.92	Pheno69
+myotube hypertrophy	-25.285228	17.92	Pheno69
+neurogenesis	 22.608557	17.92	Pheno69
+proliferation	 -3.844428	17.92	Pheno69
+protein synthesis	-19.599332	17.92	Pheno69
+skeletal muscle differentiation	 13.648054	17.92	Pheno69
+survival	-12.292465	17.92	Pheno69
+synaptic plasticity	-15.119768	17.92	Pheno69
+t cell activation	 32.558426	17.92	Pheno69
+translational regulation	-40.224873	17.92	Pheno69
+vldl assembly	 47.241843	17.92	Pheno69
+adipogenesis	  8.805937	17.41	Pheno70
+apoptosis	 12.423432	17.41	Pheno70
+autophagy	 79.215643	17.41	Pheno70
+cell cycle block	 10.163584	17.41	Pheno70
+cell cycle exit	 24.170317	17.41	Pheno70
+cell cycle progress 	-10.163584	17.41	Pheno70
+cell death	 15.337282	17.41	Pheno70
+cell growth	 35.711931	17.41	Pheno70
+dendritic spine morphogenesis	-22.576023	17.41	Pheno70
+fibrosis	  5.754083	17.41	Pheno70
+glycolysis	 -9.535744	17.41	Pheno70
+lipogenesis	 36.540402	17.41	Pheno70
+m2 polarization	 54.518096	17.41	Pheno70
+metastasis	 10.606755	17.41	Pheno70
+muscle atrophy	124.052056	17.41	Pheno70
+myotube hypertrophy	-28.636342	17.41	Pheno70
+neurogenesis	 14.785489	17.41	Pheno70
+proliferation	 -3.262957	17.41	Pheno70
+protein synthesis	-20.371110	17.41	Pheno70
+skeletal muscle differentiation	 16.214784	17.41	Pheno70
+survival	-13.336257	17.41	Pheno70
+synaptic plasticity	-13.226102	17.41	Pheno70
+t cell activation	 23.230042	17.41	Pheno70
+translational regulation	-45.475688	17.41	Pheno70
+vldl assembly	 36.000026	17.41	Pheno70
+adipogenesis	  3.1553294	19.68	Pheno71
+alternative splicing regulation	 21.9642827	19.68	Pheno71
+apoptosis	  1.9092105	19.68	Pheno71
+autophagy	  9.7137370	19.68	Pheno71
+cell cycle block	  7.8170695	19.68	Pheno71
+cell cycle exit	  9.5118641	19.68	Pheno71
+cell cycle progress 	 -7.8170695	19.68	Pheno71
+cell death	  0.8347379	19.68	Pheno71
+cell growth	 11.5775840	19.68	Pheno71
+dendritic spine morphogenesis	-13.4373383	19.68	Pheno71
+differentiation	  1.3360477	19.68	Pheno71
+dna repair	  1.5163736	19.68	Pheno71
+epithelial-mesenchymal transition	  3.6657568	19.68	Pheno71
+fatty acid biosynthesis	126.6679451	19.68	Pheno71
+fibrosis	  3.8955491	19.68	Pheno71
+food intake	-46.0083703	19.68	Pheno71
+g1/s transition	-20.6655523	19.68	Pheno71
+glycogen synthesis	-12.3605710	19.68	Pheno71
+glycolysis	 -3.1867987	19.68	Pheno71
+hexosamine biosynthesis	 77.3429807	19.68	Pheno71
+lipogenesis	 16.5116628	19.68	Pheno71
+m1 polarization	 17.4467283	19.68	Pheno71
+m2 polarization	 11.6353471	19.68	Pheno71
+mast-cell diff	 27.8700364	19.68	Pheno71
+megakaryocyte differentiation 	 27.8700364	19.68	Pheno71
+microtubule polimerization	 -3.8147962	19.68	Pheno71
+mitotic checkpoint	 15.5965529	19.68	Pheno71
+muscle atrophy	  7.5394535	19.68	Pheno71
+myoblast fusion	 -7.7430638	19.68	Pheno71
+myotube hypertrophy	-33.2416652	19.68	Pheno71
+neurodegeneration	 -0.4513966	19.68	Pheno71
+neurogenesis	-19.3801140	19.68	Pheno71
+nucleotide synthesis	138.5218511	19.68	Pheno71
+proliferation	 -4.2086634	19.68	Pheno71
+protein glycosylation	 77.3429807	19.68	Pheno71
+protein synthesis	 -4.7756252	19.68	Pheno71
+pyrimidine biosynthesis	-13.0267654	19.68	Pheno71
+rrna transcription	  4.0643703	19.68	Pheno71
+skeletal muscle differentiation	  3.7189307	19.68	Pheno71
+spindle assembly	  3.6122707	19.68	Pheno71
+survival	 -9.5441585	19.68	Pheno71
+synaptic plasticity	  2.6514874	19.68	Pheno71
+synaptic vesicle exocytosis	 10.6866040	19.68	Pheno71
+t cell activation	  6.8234640	19.68	Pheno71
+translational regulation	 -8.4717556	19.68	Pheno71
+vldl assembly	 10.9848522	19.68	Pheno71
+adipogenesis	  3.0691524	19.3	Pheno72
+alternative splicing regulation	 18.9798532	19.3	Pheno72
+apoptosis	  2.0903694	19.3	Pheno72
+autophagy	 11.6896433	19.3	Pheno72
+cell cycle block	  9.3355591	19.3	Pheno72
+cell cycle exit	 11.5058949	19.3	Pheno72
+cell cycle progress 	 -9.3355591	19.3	Pheno72
+cell death	  0.8398229	19.3	Pheno72
+cell growth	  9.8493582	19.3	Pheno72
+dendritic spine morphogenesis	-12.9103842	19.3	Pheno72
+differentiation	  0.7264761	19.3	Pheno72
+dna repair	  1.7184804	19.3	Pheno72
+epithelial-mesenchymal transition	  2.8630354	19.3	Pheno72
+fatty acid biosynthesis	116.6763278	19.3	Pheno72
+fibrosis	  4.1339213	19.3	Pheno72
+food intake	-57.9935221	19.3	Pheno72
+g1/s transition	-30.1979086	19.3	Pheno72
+glycogen synthesis	-13.5687044	19.3	Pheno72
+glycolysis	 -3.4413708	19.3	Pheno72
+hexosamine biosynthesis	114.7819436	19.3	Pheno72
+lipogenesis	 16.6671079	19.3	Pheno72
+m1 polarization	 15.4611157	19.3	Pheno72
+m2 polarization	 11.4920627	19.3	Pheno72
+mast-cell diff	 37.6123536	19.3	Pheno72
+megakaryocyte differentiation 	 37.6123536	19.3	Pheno72
+microtubule polimerization	 -4.0930804	19.3	Pheno72
+mitotic checkpoint	 19.9137953	19.3	Pheno72
+muscle atrophy	 10.3313501	19.3	Pheno72
+myoblast fusion	 -7.8322102	19.3	Pheno72
+myotube hypertrophy	-37.1377582	19.3	Pheno72
+neurodegeneration	 -0.3984697	19.3	Pheno72
+neurogenesis	-22.0137838	19.3	Pheno72
+nucleotide synthesis	239.5282750	19.3	Pheno72
+proliferation	 -4.2067904	19.3	Pheno72
+protein glycosylation	114.7819436	19.3	Pheno72
+protein synthesis	 -4.9001170	19.3	Pheno72
+pyrimidine biosynthesis	-11.0161617	19.3	Pheno72
+rrna transcription	  3.4340565	19.3	Pheno72
+skeletal muscle differentiation	  1.4517779	19.3	Pheno72
+spindle assembly	  5.2081364	19.3	Pheno72
+survival	-10.4195695	19.3	Pheno72
+synaptic plasticity	  2.4380596	19.3	Pheno72
+synaptic vesicle exocytosis	  8.2510589	19.3	Pheno72
+t cell activation	  7.2637818	19.3	Pheno72
+translational regulation	 -8.8151249	19.3	Pheno72
+vldl assembly	 10.5914158	19.3	Pheno72
+cell death	 17.59987	17.34	Pheno73
+glycolysis	-98.40325	17.34	Pheno73
+lipogenesis	 61.70579	17.34	Pheno73
+myotube hypertrophy	 39.07101	17.34	Pheno73
+proliferation	-16.36813	17.34	Pheno73
+vldl assembly	123.77660	17.34	Pheno73
+cell death	  17.59987	17.1	Pheno74
+glycolysis	-151.90088	17.1	Pheno74
+lipogenesis	  82.11136	17.1	Pheno74
+myotube hypertrophy	  51.96819	17.1	Pheno74
+proliferation	 -22.47051	17.1	Pheno74
+vldl assembly	 150.38950	17.1	Pheno74
+apoptosis	 50.12713	18.18	Pheno75
+autophagy	115.70023	18.18	Pheno75
+cell cycle block	 19.68647	18.18	Pheno75
+cell cycle exit	 26.75368	18.18	Pheno75
+cell cycle progress 	-19.68647	18.18	Pheno75
+cell death	 53.69881	18.18	Pheno75
+cell growth	 42.36815	18.18	Pheno75
+dendritic spine morphogenesis	-26.72881	18.18	Pheno75
+fibrosis	 14.09731	18.18	Pheno75
+glycolysis	-12.32068	18.18	Pheno75
+lipogenesis	 60.35028	18.18	Pheno75
+m2 polarization	 51.93647	18.18	Pheno75
+metastasis	 12.10907	18.18	Pheno75
+muscle atrophy	165.01664	18.18	Pheno75
+myotube hypertrophy	-78.41304	18.18	Pheno75
+proliferation	-16.46314	18.18	Pheno75
+protein synthesis	-22.78428	18.18	Pheno75
+skeletal muscle differentiation	 18.13559	18.18	Pheno75
+survival	-11.16910	18.18	Pheno75
+t cell activation	 25.29577	18.18	Pheno75
+translational regulation	-46.57860	18.18	Pheno75
+vldl assembly	 50.07134	18.18	Pheno75
+apoptosis	 48.12605	18.05	Pheno76
+autophagy	 86.61425	18.05	Pheno76
+cell cycle block	 22.41009	18.05	Pheno76
+cell cycle exit	 28.11590	18.05	Pheno76
+cell cycle progress 	-22.41009	18.05	Pheno76
+cell death	 55.89765	18.05	Pheno76
+cell growth	 69.70814	18.05	Pheno76
+dendritic spine morphogenesis	-30.40390	18.05	Pheno76
+fibrosis	 14.53620	18.05	Pheno76
+glycolysis	-13.81350	18.05	Pheno76
+lipogenesis	 62.10807	18.05	Pheno76
+m2 polarization	 83.29941	18.05	Pheno76
+metastasis	 12.14441	18.05	Pheno76
+muscle atrophy	112.69586	18.05	Pheno76
+myotube hypertrophy	-50.66179	18.05	Pheno76
+proliferation	-18.29784	18.05	Pheno76
+protein synthesis	-23.71006	18.05	Pheno76
+skeletal muscle differentiation	 18.87249	18.05	Pheno76
+survival	-11.49386	18.05	Pheno76
+t cell activation	 39.87940	18.05	Pheno76
+translational regulation	-82.46538	18.05	Pheno76
+vldl assembly	 51.94285	18.05	Pheno76
+adipogenesis	 -1.0775727	19.25	Pheno77
+alternative splicing regulation	 42.4025592	19.25	Pheno77
+apoptosis	  3.2522369	19.25	Pheno77
+autophagy	 24.3908103	19.25	Pheno77
+cell cycle block	 28.6171921	19.25	Pheno77
+cell cycle exit	 62.3549368	19.25	Pheno77
+cell cycle progress 	-28.6171921	19.25	Pheno77
+cell death	  1.4034671	19.25	Pheno77
+cell growth	 37.9263587	19.25	Pheno77
+dendritic spine morphogenesis	-30.9579806	19.25	Pheno77
+differentiation	  7.7963508	19.25	Pheno77
+dna repair	 -0.3612274	19.25	Pheno77
+epithelial-mesenchymal transition	  1.4597347	19.25	Pheno77
+fatty acid biosynthesis	 79.1894970	19.25	Pheno77
+fibrosis	 28.8436124	19.25	Pheno77
+food intake	-34.1231796	19.25	Pheno77
+g1/s transition	-13.0867843	19.25	Pheno77
+glycogen synthesis	-14.8693157	19.25	Pheno77
+glycolysis	-15.3066657	19.25	Pheno77
+lipogenesis	 34.8543949	19.25	Pheno77
+m1 polarization	 12.9715280	19.25	Pheno77
+m2 polarization	 37.8506122	19.25	Pheno77
+mast-cell diff	 32.0452041	19.25	Pheno77
+megakaryocyte differentiation 	 32.0452041	19.25	Pheno77
+metastasis	 -3.5806864	19.25	Pheno77
+mitotic checkpoint	 22.6948490	19.25	Pheno77
+muscle atrophy	 24.2603988	19.25	Pheno77
+myotube hypertrophy	-30.3488113	19.25	Pheno77
+neurodegeneration	 -0.4630296	19.25	Pheno77
+neurogenesis	-33.6298057	19.25	Pheno77
+nucleotide synthesis	109.0723809	19.25	Pheno77
+proliferation	-49.3667238	19.25	Pheno77
+protein synthesis	-16.6050188	19.25	Pheno77
+pyrimidine biosynthesis	-28.6432690	19.25	Pheno77
+skeletal muscle differentiation	  2.2838148	19.25	Pheno77
+spindle assembly	 29.8539812	19.25	Pheno77
+survival	-32.1604199	19.25	Pheno77
+synaptic plasticity	 -0.2857941	19.25	Pheno77
+synaptic vesicle exocytosis	 11.7383764	19.25	Pheno77
+t cell activation	 39.2493555	19.25	Pheno77
+translational regulation	-23.2116962	19.25	Pheno77
+vldl assembly	 28.4313713	19.25	Pheno77
+adipogenesis	 -0.5526697	18.86	Pheno78
+alternative splicing regulation	 45.3992553	18.86	Pheno78
+apoptosis	  8.2670325	18.86	Pheno78
+autophagy	 29.0076209	18.86	Pheno78
+cell cycle block	 30.3861355	18.86	Pheno78
+cell cycle exit	 50.9204064	18.86	Pheno78
+cell cycle progress 	-30.3861355	18.86	Pheno78
+cell death	  6.3539145	18.86	Pheno78
+cell growth	 33.6759555	18.86	Pheno78
+dendritic spine morphogenesis	-26.3615539	18.86	Pheno78
+differentiation	 10.2857262	18.86	Pheno78
+dna repair	 -0.1589432	18.86	Pheno78
+epithelial-mesenchymal transition	  0.2299132	18.86	Pheno78
+fatty acid biosynthesis	 68.8428243	18.86	Pheno78
+fibrosis	 26.8173981	18.86	Pheno78
+food intake	-42.8441926	18.86	Pheno78
+g1/s transition	-14.5264272	18.86	Pheno78
+glycogen synthesis	-11.5649662	18.86	Pheno78
+glycolysis	-13.7071543	18.86	Pheno78
+lipogenesis	 31.4506542	18.86	Pheno78
+m1 polarization	 17.1076170	18.86	Pheno78
+m2 polarization	 38.9510326	18.86	Pheno78
+mast-cell diff	 39.8000725	18.86	Pheno78
+megakaryocyte differentiation 	 39.8000725	18.86	Pheno78
+metastasis	 -3.7654380	18.86	Pheno78
+mitotic checkpoint	 19.1790468	18.86	Pheno78
+muscle atrophy	 31.6628530	18.86	Pheno78
+myotube hypertrophy	-33.9504214	18.86	Pheno78
+neurodegeneration	 -0.3990366	18.86	Pheno78
+neurogenesis	-45.7968879	18.86	Pheno78
+nucleotide synthesis	 98.0135885	18.86	Pheno78
+proliferation	-68.0333919	18.86	Pheno78
+protein synthesis	-15.8685942	18.86	Pheno78
+pyrimidine biosynthesis	-35.4488730	18.86	Pheno78
+skeletal muscle differentiation	  2.2817294	18.86	Pheno78
+spindle assembly	 30.9348903	18.86	Pheno78
+survival	-40.4853450	18.86	Pheno78
+synaptic plasticity	  0.4945777	18.86	Pheno78
+synaptic vesicle exocytosis	  9.2832699	18.86	Pheno78
+t cell activation	 34.3246031	18.86	Pheno78
+translational regulation	-18.2299042	18.86	Pheno78
+vldl assembly	 24.8305090	18.86	Pheno78
+apoptosis	 22.37394	17.81	Pheno79
+cell cycle block	 75.92384	17.81	Pheno79
+cell cycle progress 	-75.92384	17.81	Pheno79
+cell death	 68.82602	17.81	Pheno79
+cell growth	 55.99664	17.81	Pheno79
+glycolysis	-97.14477	17.81	Pheno79
+lipogenesis	 62.24063	17.81	Pheno79
+myotube hypertrophy	 77.33780	17.81	Pheno79
+proliferation	-19.10518	17.81	Pheno79
+vldl assembly	133.11694	17.81	Pheno79
+apoptosis	 26.86674	17.99	Pheno80
+cell cycle block	 62.44565	17.99	Pheno80
+cell cycle progress 	-62.44565	17.99	Pheno80
+cell death	 81.78986	17.99	Pheno80
+cell growth	 55.39650	17.99	Pheno80
+glycolysis	-89.19876	17.99	Pheno80
+lipogenesis	 52.38536	17.99	Pheno80
+myotube hypertrophy	 38.69796	17.99	Pheno80
+proliferation	-16.43456	17.99	Pheno80
+vldl assembly	104.48460	17.99	Pheno80
+adipogenesis	  7.454767	19.7	Pheno81
+apoptosis	 38.456319	19.7	Pheno81
+autophagy	 95.636087	19.7	Pheno81
+cell cycle block	 26.458914	19.7	Pheno81
+cell cycle exit	 32.897861	19.7	Pheno81
+cell cycle progress 	-26.458914	19.7	Pheno81
+cell death	 44.766936	19.7	Pheno81
+cell growth	 29.751490	19.7	Pheno81
+dendritic spine morphogenesis	-23.362457	19.7	Pheno81
+fibrosis	  8.404620	19.7	Pheno81
+glycolysis	 -9.501143	19.7	Pheno81
+lipogenesis	 48.462350	19.7	Pheno81
+m2 polarization	 44.675618	19.7	Pheno81
+metastasis	  9.023927	19.7	Pheno81
+muscle atrophy	145.335310	19.7	Pheno81
+myotube hypertrophy	-57.272685	19.7	Pheno81
+neurogenesis	 13.722561	19.7	Pheno81
+proliferation	-18.440780	19.7	Pheno81
+protein synthesis	-20.320510	19.7	Pheno81
+skeletal muscle differentiation	 13.646184	19.7	Pheno81
+survival	-10.239691	19.7	Pheno81
+synaptic plasticity	-12.683351	19.7	Pheno81
+t cell activation	 23.607623	19.7	Pheno81
+translational regulation	-26.986491	19.7	Pheno81
+vldl assembly	 64.360965	19.7	Pheno81
+adipogenesis	  8.151913	17.89	Pheno82
+apoptosis	 43.123128	17.89	Pheno82
+autophagy	147.817154	17.89	Pheno82
+cell cycle block	 28.565797	17.89	Pheno82
+cell cycle exit	 37.549785	17.89	Pheno82
+cell cycle progress 	-28.565797	17.89	Pheno82
+cell death	 48.734172	17.89	Pheno82
+cell growth	 28.118212	17.89	Pheno82
+dendritic spine morphogenesis	-48.271280	17.89	Pheno82
+fibrosis	  8.979307	17.89	Pheno82
+glycolysis	 -9.690910	17.89	Pheno82
+lipogenesis	 45.725033	17.89	Pheno82
+m2 polarization	 42.981442	17.89	Pheno82
+metastasis	 11.219433	17.89	Pheno82
+muscle atrophy	183.499731	17.89	Pheno82
+myotube hypertrophy	-68.164477	17.89	Pheno82
+neurogenesis	 16.108838	17.89	Pheno82
+proliferation	-20.297274	17.89	Pheno82
+protein synthesis	-24.876521	17.89	Pheno82
+skeletal muscle differentiation	 15.383033	17.89	Pheno82
+survival	-14.522054	17.89	Pheno82
+synaptic plasticity	-14.512045	17.89	Pheno82
+t cell activation	 21.003044	17.89	Pheno82
+translational regulation	-31.433740	17.89	Pheno82
+vldl assembly	 54.770421	17.89	Pheno82
+actin cytoskeleton reorganization	  -4.7337297	18.99	Pheno83
+adipogenesis	   6.5907136	18.99	Pheno83
+alternative splicing regulation	  26.2091346	18.99	Pheno83
+apoptosis	   6.1091832	18.99	Pheno83
+autophagy	  20.8742095	18.99	Pheno83
+cell cycle block	  22.9744765	18.99	Pheno83
+cell cycle exit	  40.9209870	18.99	Pheno83
+cell cycle progress 	 -22.9744765	18.99	Pheno83
+cell death	   2.9034593	18.99	Pheno83
+cell growth	  50.2334378	18.99	Pheno83
+dendritic spine morphogenesis	 -35.8184177	18.99	Pheno83
+differentiation	  10.6307137	18.99	Pheno83
+dna repair	   0.3878328	18.99	Pheno83
+epithelial-mesenchymal transition	  11.0109718	18.99	Pheno83
+fatty acid biosynthesis	  71.6216586	18.99	Pheno83
+fibrosis	  27.1681131	18.99	Pheno83
+food intake	 -42.4949502	18.99	Pheno83
+g1/s transition	-109.4608391	18.99	Pheno83
+glycogen synthesis	 -12.1455958	18.99	Pheno83
+glycolysis	 -14.9535891	18.99	Pheno83
+hexosamine biosynthesis	  98.0288898	18.99	Pheno83
+lipogenesis	  15.8340338	18.99	Pheno83
+m1 polarization	  12.1087748	18.99	Pheno83
+m2 polarization	  34.3406289	18.99	Pheno83
+mast-cell diff	  23.9213146	18.99	Pheno83
+megakaryocyte differentiation 	  23.9213146	18.99	Pheno83
+metastasis	  -3.5803768	18.99	Pheno83
+microtubule polimerization	  -4.0817615	18.99	Pheno83
+mitotic checkpoint	  17.1132868	18.99	Pheno83
+muscle atrophy	  29.1439448	18.99	Pheno83
+myoblast fusion	  -7.6770884	18.99	Pheno83
+myotube hypertrophy	 -41.6218852	18.99	Pheno83
+neurogenesis	 -38.2513615	18.99	Pheno83
+nucleotide synthesis	 139.1866534	18.99	Pheno83
+proliferation	 -44.7874040	18.99	Pheno83
+protein glycosylation	  98.0288898	18.99	Pheno83
+protein synthesis	 -13.3792689	18.99	Pheno83
+pyrimidine biosynthesis	 -16.8034630	18.99	Pheno83
+rrna transcription	   1.5499419	18.99	Pheno83
+skeletal muscle differentiation	   2.2610097	18.99	Pheno83
+spindle assembly	  -2.2478444	18.99	Pheno83
+survival	 -32.8926151	18.99	Pheno83
+synaptic plasticity	   2.6555936	18.99	Pheno83
+synaptic vesicle exocytosis	  10.0742371	18.99	Pheno83
+t cell activation	  22.6540717	18.99	Pheno83
+translational regulation	 -15.1056887	18.99	Pheno83
+vldl assembly	  19.1565847	18.99	Pheno83
+adipogenesis	   5.5147283	18.85	Pheno84
+alternative splicing regulation	  23.5002168	18.85	Pheno84
+apoptosis	   4.4728207	18.85	Pheno84
+autophagy	  21.6733812	18.85	Pheno84
+cell cycle block	  26.4897343	18.85	Pheno84
+cell cycle exit	  40.1411286	18.85	Pheno84
+cell cycle progress 	 -26.4897343	18.85	Pheno84
+cell death	   1.7560311	18.85	Pheno84
+cell growth	  50.7308875	18.85	Pheno84
+dendritic spine morphogenesis	 -31.2723356	18.85	Pheno84
+differentiation	   8.0309691	18.85	Pheno84
+dna repair	   0.2247050	18.85	Pheno84
+epithelial-mesenchymal transition	   6.6095747	18.85	Pheno84
+fatty acid biosynthesis	  60.7839347	18.85	Pheno84
+fibrosis	  28.2487268	18.85	Pheno84
+food intake	 -42.7031216	18.85	Pheno84
+g1/s transition	-137.8450546	18.85	Pheno84
+glycogen synthesis	 -12.5130548	18.85	Pheno84
+glycolysis	 -16.0115144	18.85	Pheno84
+hexosamine biosynthesis	  86.1401201	18.85	Pheno84
+lipogenesis	  16.9069390	18.85	Pheno84
+m1 polarization	  12.2617024	18.85	Pheno84
+m2 polarization	  36.0883921	18.85	Pheno84
+mast-cell diff	  39.8687291	18.85	Pheno84
+megakaryocyte differentiation 	  39.8687291	18.85	Pheno84
+microtubule polimerization	  -4.0250119	18.85	Pheno84
+mitotic checkpoint	  22.5875659	18.85	Pheno84
+muscle atrophy	  27.3520883	18.85	Pheno84
+myoblast fusion	  -7.9466033	18.85	Pheno84
+myotube hypertrophy	 -39.4638108	18.85	Pheno84
+neurodegeneration	  -0.4064958	18.85	Pheno84
+neurogenesis	 -35.3242450	18.85	Pheno84
+nucleotide synthesis	  98.4475311	18.85	Pheno84
+proliferation	 -47.9269023	18.85	Pheno84
+protein glycosylation	  86.1401201	18.85	Pheno84
+protein synthesis	 -13.6132167	18.85	Pheno84
+pyrimidine biosynthesis	 -16.8034630	18.85	Pheno84
+rrna transcription	   2.0245289	18.85	Pheno84
+skeletal muscle differentiation	   2.7326663	18.85	Pheno84
+spindle assembly	  -3.3863168	18.85	Pheno84
+survival	 -32.6523546	18.85	Pheno84
+synaptic plasticity	   2.3702569	18.85	Pheno84
+synaptic vesicle exocytosis	   9.3165587	18.85	Pheno84
+t cell activation	  21.3331540	18.85	Pheno84
+translational regulation	 -16.2330765	18.85	Pheno84
+vldl assembly	  20.4196007	18.85	Pheno84
+cell death	  21.39766	17.34	Pheno85
+glycolysis	-176.75224	17.34	Pheno85
+lipogenesis	  86.98527	17.34	Pheno85
+myotube hypertrophy	  21.62279	17.34	Pheno85
+proliferation	 -16.95022	17.34	Pheno85
+vldl assembly	 222.32793	17.34	Pheno85
+cell death	  14.50402	17.67	Pheno86
+glycolysis	-134.08584	17.67	Pheno86
+lipogenesis	  67.22393	17.67	Pheno86
+myotube hypertrophy	  44.60149	17.67	Pheno86
+proliferation	 -16.39063	17.67	Pheno86
+vldl assembly	 168.65997	17.67	Pheno86
+apoptosis	 48.55717	17.77	Pheno87
+autophagy	 87.41125	17.77	Pheno87
+cell cycle block	 26.15830	17.77	Pheno87
+cell cycle exit	 36.00719	17.77	Pheno87
+cell cycle progress 	-26.15830	17.77	Pheno87
+cell death	 53.46051	17.77	Pheno87
+cell growth	 64.44709	17.77	Pheno87
+dendritic spine morphogenesis	-30.24834	17.77	Pheno87
+fibrosis	 14.07806	17.77	Pheno87
+glycolysis	-12.61364	17.77	Pheno87
+lipogenesis	 59.38938	17.77	Pheno87
+m2 polarization	 55.05337	17.77	Pheno87
+metastasis	 11.38982	17.77	Pheno87
+muscle atrophy	136.61781	17.77	Pheno87
+myotube hypertrophy	-73.85370	17.77	Pheno87
+proliferation	-16.71376	17.77	Pheno87
+protein synthesis	-19.47986	17.77	Pheno87
+skeletal muscle differentiation	 16.48236	17.77	Pheno87
+survival	-12.79923	17.77	Pheno87
+t cell activation	 26.48279	17.77	Pheno87
+translational regulation	-61.20683	17.77	Pheno87
+vldl assembly	 75.01340	17.77	Pheno87
+apoptosis	 50.04975	17.53	Pheno88
+autophagy	 90.45652	17.53	Pheno88
+cell cycle block	 27.47119	17.53	Pheno88
+cell cycle exit	 33.23538	17.53	Pheno88
+cell cycle progress 	-27.47119	17.53	Pheno88
+cell death	 55.30900	17.53	Pheno88
+cell growth	 81.15687	17.53	Pheno88
+dendritic spine morphogenesis	-34.90444	17.53	Pheno88
+fibrosis	 10.70806	17.53	Pheno88
+glycolysis	-13.86669	17.53	Pheno88
+lipogenesis	 63.28932	17.53	Pheno88
+m2 polarization	 62.15105	17.53	Pheno88
+metastasis	 10.95488	17.53	Pheno88
+muscle atrophy	169.15094	17.53	Pheno88
+myotube hypertrophy	-57.36402	17.53	Pheno88
+proliferation	-16.69163	17.53	Pheno88
+protein synthesis	-23.85540	17.53	Pheno88
+skeletal muscle differentiation	 12.93721	17.53	Pheno88
+survival	-12.45314	17.53	Pheno88
+t cell activation	 32.52946	17.53	Pheno88
+translational regulation	-51.84230	17.53	Pheno88
+vldl assembly	 48.31088	17.53	Pheno88
+actin cytoskeleton reorganization	 -4.6526210	18.62	Pheno89
+adipogenesis	 -1.2636092	18.62	Pheno89
+alternative splicing regulation	 35.3297908	18.62	Pheno89
+apoptosis	  8.1386746	18.62	Pheno89
+autophagy	 24.1376851	18.62	Pheno89
+cell cycle block	 30.5933028	18.62	Pheno89
+cell cycle exit	 61.2222943	18.62	Pheno89
+cell cycle progress 	-30.5933028	18.62	Pheno89
+cell death	  5.6266858	18.62	Pheno89
+cell growth	 33.8508918	18.62	Pheno89
+dendritic spine morphogenesis	-34.0278799	18.62	Pheno89
+differentiation	  7.2711022	18.62	Pheno89
+dna repair	 -0.2152269	18.62	Pheno89
+epithelial-mesenchymal transition	  0.3660034	18.62	Pheno89
+fatty acid biosynthesis	 65.8455362	18.62	Pheno89
+fibrosis	 26.4087141	18.62	Pheno89
+food intake	-33.0962155	18.62	Pheno89
+g1/s transition	-15.7988323	18.62	Pheno89
+glycogen synthesis	-10.7836872	18.62	Pheno89
+glycolysis	-13.8662957	18.62	Pheno89
+lipogenesis	 25.5679285	18.62	Pheno89
+m1 polarization	 12.5215696	18.62	Pheno89
+m2 polarization	 36.7423400	18.62	Pheno89
+mast-cell diff	 31.9776576	18.62	Pheno89
+megakaryocyte differentiation 	 31.9776576	18.62	Pheno89
+metastasis	 -4.1925387	18.62	Pheno89
+mitotic checkpoint	 19.9477985	18.62	Pheno89
+muscle atrophy	 25.9340849	18.62	Pheno89
+myotube hypertrophy	-28.2815026	18.62	Pheno89
+neurodegeneration	 -0.3527250	18.62	Pheno89
+neurogenesis	-38.9450177	18.62	Pheno89
+nucleotide synthesis	 82.2825269	18.62	Pheno89
+proliferation	-57.7674474	18.62	Pheno89
+protein synthesis	-15.4121462	18.62	Pheno89
+pyrimidine biosynthesis	-25.6835898	18.62	Pheno89
+skeletal muscle differentiation	  1.7590239	18.62	Pheno89
+spindle assembly	 34.6579777	18.62	Pheno89
+survival	-31.6149528	18.62	Pheno89
+synaptic plasticity	 -2.0205752	18.62	Pheno89
+synaptic vesicle exocytosis	  8.2184784	18.62	Pheno89
+t cell activation	 35.3971065	18.62	Pheno89
+translational regulation	-20.9686000	18.62	Pheno89
+vldl assembly	 19.7164520	18.62	Pheno89
+adipogenesis	 -0.9768431	19.93	Pheno90
+alternative splicing regulation	 35.3297908	19.93	Pheno90
+apoptosis	  5.8851258	19.93	Pheno90
+autophagy	 23.7688674	19.93	Pheno90
+cell cycle block	 26.0461450	19.93	Pheno90
+cell cycle exit	 58.5003959	19.93	Pheno90
+cell cycle progress 	-26.0461450	19.93	Pheno90
+cell death	  4.0438324	19.93	Pheno90
+cell growth	 32.8226343	19.93	Pheno90
+dendritic spine morphogenesis	-28.6176129	19.93	Pheno90
+differentiation	  6.2889224	19.93	Pheno90
+dna repair	 -0.5266337	19.93	Pheno90
+epithelial-mesenchymal transition	  0.6799806	19.93	Pheno90
+fatty acid biosynthesis	 68.5053763	19.93	Pheno90
+fibrosis	 25.1813541	19.93	Pheno90
+food intake	-47.9035949	19.93	Pheno90
+g1/s transition	 -9.8534184	19.93	Pheno90
+glycogen synthesis	-11.2621657	19.93	Pheno90
+glycolysis	-13.1626445	19.93	Pheno90
+lipogenesis	 30.3564125	19.93	Pheno90
+m1 polarization	 11.4613782	19.93	Pheno90
+m2 polarization	 41.6679113	19.93	Pheno90
+mast-cell diff	 37.3198106	19.93	Pheno90
+megakaryocyte differentiation 	 37.3198106	19.93	Pheno90
+metastasis	 -4.3413720	19.93	Pheno90
+mitotic checkpoint	 14.2813556	19.93	Pheno90
+muscle atrophy	 27.2421221	19.93	Pheno90
+myotube hypertrophy	-36.1360176	19.93	Pheno90
+neurodegeneration	 -0.4277974	19.93	Pheno90
+neurogenesis	-62.3493609	19.93	Pheno90
+nucleotide synthesis	139.0165424	19.93	Pheno90
+proliferation	-56.4691970	19.93	Pheno90
+protein synthesis	-17.3496241	19.93	Pheno90
+pyrimidine biosynthesis	-28.6699329	19.93	Pheno90
+skeletal muscle differentiation	  2.2615533	19.93	Pheno90
+spindle assembly	 22.7064283	19.93	Pheno90
+survival	-35.2099533	19.93	Pheno90
+synaptic plasticity	  0.7039522	19.93	Pheno90
+synaptic vesicle exocytosis	  9.7910129	19.93	Pheno90
+t cell activation	 33.5333701	19.93	Pheno90
+translational regulation	-18.7194670	19.93	Pheno90
+vldl assembly	 24.6874798	19.93	Pheno90
+apoptosis	  24.58211	16.98	Pheno91
+cell cycle block	  86.13144	16.98	Pheno91
+cell cycle progress 	 -86.13144	16.98	Pheno91
+cell death	  78.04360	16.98	Pheno91
+cell growth	  67.39755	16.98	Pheno91
+glycolysis	-150.64240	16.98	Pheno91
+lipogenesis	  74.11835	16.98	Pheno91
+myotube hypertrophy	  44.65504	16.98	Pheno91
+proliferation	 -17.04470	16.98	Pheno91
+vldl assembly	 112.95003	16.98	Pheno91
+apoptosis	  28.01024	16.98	Pheno92
+cell cycle block	  99.55842	16.98	Pheno92
+cell cycle progress 	 -99.55842	16.98	Pheno92
+cell death	  90.16436	16.98	Pheno92
+cell growth	  50.62063	16.98	Pheno92
+glycolysis	-208.81215	16.98	Pheno92
+lipogenesis	  86.86377	16.98	Pheno92
+myotube hypertrophy	  35.06841	16.98	Pheno92
+proliferation	 -17.80909	16.98	Pheno92
+vldl assembly	 220.74495	16.98	Pheno92
+adipogenesis	   7.822583	17.72	Pheno93
+apoptosis	  43.974105	17.72	Pheno93
+autophagy	  86.968372	17.72	Pheno93
+cell cycle block	  27.357198	17.72	Pheno93
+cell cycle exit	  33.697520	17.72	Pheno93
+cell cycle progress 	 -27.357198	17.72	Pheno93
+cell death	  58.572080	17.72	Pheno93
+cell growth	  34.740678	17.72	Pheno93
+dendritic spine morphogenesis	 -34.724391	17.72	Pheno93
+fibrosis	   8.297663	17.72	Pheno93
+glycolysis	 -11.502932	17.72	Pheno93
+lipogenesis	  32.548482	17.72	Pheno93
+m2 polarization	  49.073911	17.72	Pheno93
+metastasis	   9.981852	17.72	Pheno93
+muscle atrophy	 118.241762	17.72	Pheno93
+myotube hypertrophy	-141.081020	17.72	Pheno93
+neurogenesis	  21.123693	17.72	Pheno93
+proliferation	 -20.299760	17.72	Pheno93
+protein synthesis	 -19.384056	17.72	Pheno93
+skeletal muscle differentiation	  12.562236	17.72	Pheno93
+survival	 -11.035529	17.72	Pheno93
+synaptic plasticity	 -14.153386	17.72	Pheno93
+t cell activation	  21.172726	17.72	Pheno93
+translational regulation	 -37.361231	17.72	Pheno93
+vldl assembly	  57.122022	17.72	Pheno93
+adipogenesis	  8.092597	18.23	Pheno94
+apoptosis	 35.830500	18.23	Pheno94
+autophagy	 72.468767	18.23	Pheno94
+cell cycle block	 27.108506	18.23	Pheno94
+cell cycle exit	 31.333136	18.23	Pheno94
+cell cycle progress 	-27.108506	18.23	Pheno94
+cell death	 42.099883	18.23	Pheno94
+cell growth	 25.961575	18.23	Pheno94
+dendritic spine morphogenesis	-24.349350	18.23	Pheno94
+fibrosis	  7.083155	18.23	Pheno94
+glycolysis	-10.359734	18.23	Pheno94
+lipogenesis	 36.263444	18.23	Pheno94
+m2 polarization	 42.700084	18.23	Pheno94
+metastasis	 17.608587	18.23	Pheno94
+muscle atrophy	108.315562	18.23	Pheno94
+myotube hypertrophy	-45.372893	18.23	Pheno94
+neurogenesis	 16.809851	18.23	Pheno94
+proliferation	-17.933774	18.23	Pheno94
+protein synthesis	-21.023639	18.23	Pheno94
+skeletal muscle differentiation	 11.166613	18.23	Pheno94
+survival	-11.297385	18.23	Pheno94
+synaptic plasticity	-16.624822	18.23	Pheno94
+t cell activation	 22.471596	18.23	Pheno94
+translational regulation	-39.989086	18.23	Pheno94
+vldl assembly	 40.608992	18.23	Pheno94
+adipogenesis	  5.9859402	18.45	Pheno95
+alternative splicing regulation	 26.2981198	18.45	Pheno95
+apoptosis	  6.6878676	18.45	Pheno95
+autophagy	 18.6949495	18.45	Pheno95
+cell cycle block	 21.0494139	18.45	Pheno95
+cell cycle exit	 38.6237667	18.45	Pheno95
+cell cycle progress 	-21.0494139	18.45	Pheno95
+cell death	  2.0810418	18.45	Pheno95
+cell growth	 48.4481699	18.45	Pheno95
+dendritic spine morphogenesis	-26.5310941	18.45	Pheno95
+differentiation	  9.5527472	18.45	Pheno95
+dna repair	  0.6702137	18.45	Pheno95
+epithelial-mesenchymal transition	 13.7910764	18.45	Pheno95
+fatty acid biosynthesis	 88.3792056	18.45	Pheno95
+fibrosis	 25.1990971	18.45	Pheno95
+food intake	-34.0663337	18.45	Pheno95
+g1/s transition	-95.4144148	18.45	Pheno95
+glycogen synthesis	-14.8555129	18.45	Pheno95
+glycolysis	-15.0933318	18.45	Pheno95
+hexosamine biosynthesis	113.4413461	18.45	Pheno95
+lipogenesis	 19.6341371	18.45	Pheno95
+m1 polarization	 13.0696851	18.45	Pheno95
+m2 polarization	 31.8592774	18.45	Pheno95
+mast-cell diff	 30.3543165	18.45	Pheno95
+megakaryocyte differentiation 	 30.3543165	18.45	Pheno95
+microtubule polimerization	 -3.8858370	18.45	Pheno95
+mitotic checkpoint	 10.6276205	18.45	Pheno95
+muscle atrophy	 25.6632730	18.45	Pheno95
+myoblast fusion	 -8.2765224	18.45	Pheno95
+myotube hypertrophy	-40.6842626	18.45	Pheno95
+neurodegeneration	 -0.4085322	18.45	Pheno95
+neurogenesis	-29.1812527	18.45	Pheno95
+nucleotide synthesis	121.7829589	18.45	Pheno95
+proliferation	-42.4934753	18.45	Pheno95
+protein glycosylation	113.4413461	18.45	Pheno95
+protein synthesis	-12.5479083	18.45	Pheno95
+pyrimidine biosynthesis	-16.4705135	18.45	Pheno95
+rrna transcription	  2.9577876	18.45	Pheno95
+skeletal muscle differentiation	  3.3001484	18.45	Pheno95
+spindle assembly	 -1.6390313	18.45	Pheno95
+survival	-30.1636099	18.45	Pheno95
+synaptic plasticity	  4.6410810	18.45	Pheno95
+synaptic vesicle exocytosis	  7.8785751	18.45	Pheno95
+t cell activation	 23.6327312	18.45	Pheno95
+translational regulation	-15.7987181	18.45	Pheno95
+vldl assembly	 21.9317947	18.45	Pheno95
+adipogenesis	   5.9754809	20.67	Pheno96
+alternative splicing regulation	  26.2981198	20.67	Pheno96
+apoptosis	   6.5851232	20.67	Pheno96
+autophagy	  21.2815434	20.67	Pheno96
+cell cycle block	  28.7239906	20.67	Pheno96
+cell cycle exit	  37.8807217	20.67	Pheno96
+cell cycle progress 	 -28.7239906	20.67	Pheno96
+cell death	   2.6043633	20.67	Pheno96
+cell growth	  53.5578783	20.67	Pheno96
+dendritic spine morphogenesis	 -27.5918509	20.67	Pheno96
+differentiation	  11.0529858	20.67	Pheno96
+dna repair	   1.0624628	20.67	Pheno96
+epithelial-mesenchymal transition	  12.0361802	20.67	Pheno96
+fatty acid biosynthesis	  75.5965265	20.67	Pheno96
+fibrosis	  25.5009428	20.67	Pheno96
+food intake	 -39.8009777	20.67	Pheno96
+g1/s transition	-145.6100841	20.67	Pheno96
+glycogen synthesis	 -11.4689322	20.67	Pheno96
+glycolysis	 -13.7567265	20.67	Pheno96
+hexosamine biosynthesis	 136.2022071	20.67	Pheno96
+lipogenesis	  18.3392507	20.67	Pheno96
+m1 polarization	  16.7155424	20.67	Pheno96
+m2 polarization	  35.2924733	20.67	Pheno96
+mast-cell diff	  42.4927730	20.67	Pheno96
+megakaryocyte differentiation 	  42.4927730	20.67	Pheno96
+microtubule polimerization	  -3.5781334	20.67	Pheno96
+mitotic checkpoint	  19.8462262	20.67	Pheno96
+muscle atrophy	  31.4645579	20.67	Pheno96
+myoblast fusion	  -8.4464434	20.67	Pheno96
+myotube hypertrophy	 -39.9224270	20.67	Pheno96
+neurodegeneration	  -0.4417321	20.67	Pheno96
+neurogenesis	 -36.9120475	20.67	Pheno96
+nucleotide synthesis	  98.7521022	20.67	Pheno96
+proliferation	 -45.5509760	20.67	Pheno96
+protein glycosylation	 136.2022071	20.67	Pheno96
+protein synthesis	 -14.7531378	20.67	Pheno96
+pyrimidine biosynthesis	 -19.3106862	20.67	Pheno96
+rrna transcription	   2.5256813	20.67	Pheno96
+skeletal muscle differentiation	   2.5634889	20.67	Pheno96
+spindle assembly	  -2.7891641	20.67	Pheno96
+survival	 -28.2311619	20.67	Pheno96
+synaptic plasticity	   2.3218780	20.67	Pheno96
+synaptic vesicle exocytosis	   8.2613775	20.67	Pheno96
+t cell activation	  22.0474482	20.67	Pheno96
+translational regulation	 -16.0096437	20.67	Pheno96
+vldl assembly	  21.0252934	20.67	Pheno96

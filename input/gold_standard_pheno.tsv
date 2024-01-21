@@ -1,0 +1,11 @@
+phenotypes	gold_standard
+adipogenesis	-100
+fatty acid biosynthesis	-100
+glycogen synthesis	-100
+glycolysis	-100
+lipogenesis	-100
+proliferation	-100
+protein synthesis	-100
+apoptosis	100
+autophagy	100
+cell death	100

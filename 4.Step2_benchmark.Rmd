@@ -1,0 +1,955 @@
+---
+title: "*SignalingProfiler* 2.0 Step 2 benchmarking"
+author: "Veronica Venafra"
+output:
+  html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+## Introduction
+This workbook refers to the manuscript *SignalingProfiler 2.0: a network-based approach to bridge multi-omic data to phenotypic hallmarks*.
+
+## Import libraries and functions
+
+```{r message = FALSE}
+source('0.libraries.R')
+source('0.functions.R')
+source('0.heatmap_drawer.R') # Function to draw heatmaps for gold standard comparison
+```
+
+## Definition of all combinations of technical parameters
+
+```{r}
+# Define output directory 
+step_dir <- './results/4.network_generation/'
+
+# ================================= #
+# ** Naive network parameters **
+# ================================= #
+
+# whether including Ser/Thr Kinome Atlas
+atlas_parameters <- c(TRUE, FALSE) 
+
+# whether keeping only direct connection
+direct_parameters <- c(TRUE, FALSE) 
+
+# whether filtering for experimental data
+PKN_filt_parameters <- c(TRUE, FALSE) 
+
+# whether connecting to each other the proteins along the shortest path 
+connect_all_parameters <- c(TRUE, FALSE) 
+
+# number of layers in the naive network 
+layer_types <- c('one', 'two', 'three') 
+
+# for three-layered network whether keep only proteins connected to the upper layer
+keep_only_connected_parameters <- c(TRUE, FALSE) 
+
+# possible max shortest path length of one-layered network
+max_length <- c('1','2','3','4')
+
+# possible max shortest paths length and their combination of two-layered network
+combinations_two <- expand.grid(max_length1 = 1:4, max_length2 = 1:4) %>%
+  mutate(string = paste0(max_length1, ';', max_length2))
+
+# possible max shortest paths length and their combination of three-layered network 
+# + keep_only_connected = TRUE
+combinations_three <- expand.grid(max_length1 = 1:4, max_length3 = 1:4, keep_only_connected_parameters = c(TRUE, FALSE) ) %>%
+  mutate(string = paste0(max_length1, ';', max_length3, ';', keep_only_connected_parameters))
+
+# ================================= #
+# ** CARNIVAL parameters **
+# ================================= #
+
+# carnival flavors standardCARNIVAL (or vanilla) and inverseCARNIVAL
+carnival_types <- c('vanilla', 'inverse')
+
+# standardCARNIVAL (or vanilla) types, described in the manuscript as one-shot, 
+# two-shots and three-shots implementation
+steps_numbers <- c('one_step', 'two_step', 'three_step')
+
+# a kind of one-shot CARNIVAL excluded for the evaluation in this paper
+topdowns <- c(TRUE, FALSE)
+
+# Create a list of vectors containing all parameters
+list(atlas_parameters,
+     direct_parameters,
+     PKN_filt_parameters,
+     connect_all_parameters,
+     layer_types,
+     carnival_types,
+     steps_numbers,
+     topdowns,
+     max_length,
+     combinations_two$string,
+     combinations_three$string) -> vectors
+
+# ================================================ #
+# Determine the combination of all parameters
+# ================================================ #
+all_combinations <- expand.grid(vectors,stringsAsFactors = FALSE)
+
+colnames(all_combinations) <- c('Atlas', 'Direct', 'PKN_filtering', 'Connect_all',
+                                'Layer_types', 'Carnival_types',
+                                'Steps_numbers', 'TopDown', 'Max_length1', 'Max_length1-2', 'Max_length1-3')
+
+# Remove non-sense combinations
+all_combinations[all_combinations$Layer_types == 'one', c('Keep_only_connected',
+                                                          'Max_length1-2',
+                                                          'Max_length1-3')] <- NA
+
+all_combinations[all_combinations$Layer_types == 'two', c('Keep_only_connected',
+                                                          'Max_length1',
+                                                          'Max_length1-3')] <- NA
+
+all_combinations[all_combinations$Layer_types == 'three', c('Max_length1',
+                                                            'Max_length1-2')] <- NA
+
+all_combinations[all_combinations$Steps_numbers != 'one_step', c('TopDown')] <- NA
+
+all_combinations[all_combinations$Carnival_types != 'vanilla', c('TopDown',
+                                                                 'Steps_numbers')] <- NA
+
+all_combinations <- all_combinations %>% distinct()
+
+# Define a network ID for each combination
+annotation_df <- all_combinations %>%
+  dplyr::mutate(network_id = paste0('Network', 1:nrow(all_combinations)))
+
+#write_tsv(annotation_df, paste0(step_dir, 'annotation_new.tsv'))
+
+head(annotation_df)
+```
+
+## Generation of all possible models
+
+**WARNING**: it takes several days to run the all code!
+
+#### Read all necessary input for network generation
+```{r eval = FALSE}
+
+# Read inferred protein list
+inferred_proteins_df <- read_tsv('./results/3.protein_activity_inference/best_inferred_proteins.tsv')
+inferred_proteins_df$UNIPROT <- ''
+
+# Divide proteins according to the molecular function 
+# in order to perform the layering in the naive network construction
+# divide proteins according to the molecular function
+kin_phos <- inferred_proteins_df %>%
+  dplyr::filter(mf %in% c('kin', 'phos'))
+
+other <- inferred_proteins_df %>%
+  dplyr::filter(mf == 'other')
+
+kin_phos_other <- inferred_proteins_df %>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+tfs <- inferred_proteins_df %>%
+  dplyr::filter(mf == 'tf')
+
+# Read experimental data
+tr_df <- read_tsv('./input/transcriptomics.tsv')
+prot_df <- read_tsv('./input/proteomics.tsv')
+phospho_df <- read_tsv('./input/corrected_phosphoproteomics.tsv')
+
+# Read annotation df with each combination of parameter
+annotation_df <- read_tsv(paste0(step_dir, 'annotation_new.tsv'))
+```
+
+#### CARNIVAL parameter definition
+Here we set as external Integer Linear Programming (ILP) solver for CARNIVAL analysis, the IBM CPLEX solver.
+Moreover, as CARNIVAL stops after a user-defined time limit, we decided it to be 600 s to have the analysis in a acceptable duration. 
+
+```{r eval = FALSE}
+solver = 'cplex'
+carnival_options <- default_CARNIVAL_options(solver)
+carnival_options$solverPath = '/opt/ibm/ILOG/CPLEX_Studio2211/cplex/bin/x86-64_linux/cplex'
+carnival_options$timelimit <- 600
+receptor_list <- list('MTOR' = -1, 'AMPK' = 1)
+```
+
+#### Metrics table definition
+Here we define a tab-separated file to annotate metrics for networks evaluation, like computation time and topological measures.
+
+```{r eval = FALSE}
+
+output_file <- paste0(step_dir, 'metrics_table_new.tsv')
+file_conn <- file(output_file, "w")
+metric_table_header <- paste0(paste0(c('network_id', 'PKN_time', 'CARNIVAL_time', 
+                                       'nodes', 'edges', 'n_components', 'clust_coeff',
+                                       'diameter', 'power_law_fit', 'longest_path_AMPK',
+                                       'longest_path_MTOR', 'longest_path_Perturbation',
+                                       'quantified_edges', 'significant_edges'), collapse = '\t'), '\n')
+cat(metric_table_header, file = file_conn)
+```
+
+#### Run the analysis
+In this chunk, we loop on each row of the `annotation_df` table representing a technical condition to run the analysis and annotate metrics.
+
+```{r eval = FALSE}
+
+for(i_network in 1:nrow(annotation_df)){
+  parameter_set <- annotation_df[i_network,]
+
+  # Choose PKN
+  PKN_table <- choose_PKN(organism = 'human',
+                          with_atlas = parameter_set$Atlas,
+                          direct = parameter_set$Direct,
+                          custom = FALSE,
+                          custom_path = NULL)
+
+  # Filter according to the expression of proteins
+  if(parameter_set$PKN_filtering == TRUE){
+    PKN_expressed <- preprocess_PKN(omics_data = list(tr_df, prot_df, phospho_df),
+                                    PKN_table = PKN_table)
+  }else{
+    PKN_expressed <- PKN_table
+  }
+
+  # Choose the type of PKN
+  if( parameter_set$Layer_types == 'one' ){
+
+    tryCatch({
+      
+      start_time_one = Sys.time()
+
+      naive_result <- one_layer_naive_network(starts_gn = c('MTOR', 'AMPK'),
+                                              targets_gn = inferred_proteins_df$gene_name,
+                                              PKN_table = PKN_expressed,
+                                              max_length = as.numeric(parameter_set$Max_length1),
+                                              rds_path = paste0(step_dir, parameter_set$network_id, '.rds'),
+                                              sif_path = paste0(step_dir, parameter_set$network_id, '.sif'),
+                                              connect_all = parameter_set$Connect_all
+
+      )
+
+      end_time_one = Sys.time()
+      elapsed_time <- end_time_one - start_time_one
+
+    }, error = function(e) {
+
+      elapsed_time <<- NA
+      end_time_one <<- Sys.time()
+      # # Handle the error by adding an 'NA' row to the dataframe
+      # temp_df <- time_table_df %>% add_row(network_id = paste0('Network', i),
+      #                                            time = NA)
+    })
+
+
+  }else if( parameter_set$Layer_types == 'two' ){
+
+    tryCatch({
+
+      start_time_two = Sys.time()
+      naive_result <- two_layer_naive_network(starts_gn = c('MTOR', 'AMPK'),
+                                              intermediate_gn = kin_phos_other$gene_name,
+                                              targets_gn = tfs$gene_name,
+                                              PKN_table = PKN_expressed,
+                                              max_length_1 = as.numeric(unlist(str_split(parameter_set$`Max_length1-2`, ';'))[1]),
+                                              max_length_2 = as.numeric(unlist(str_split(parameter_set$`Max_length1-2`, ';'))[2]),
+                                              rds_path = paste0(step_dir, parameter_set$network_id, '.rds'),
+                                              sif_path = paste0(step_dir, parameter_set$network_id, '.sif'),
+                                              connect_all = parameter_set$Connect_all
+      )
+
+
+      end_time_two = Sys.time()
+      elapsed_time <- end_time_two - start_time_two
+    }, error = function(e) {
+
+      end_time_two <<- Sys.time()
+      elapsed_time <<- NA
+
+    })
+
+  }else if(  parameter_set$Layer_types == 'three' ){
+
+    tryCatch({
+
+      start_time_three = Sys.time()
+      naive_result <- three_layer_naive_network(starts_gn = c('MTOR', 'AMPK'),
+                                                intermediate1_gn = kin_phos$gene_name,
+                                                intermediate2_gn = unique(c(kin_phos$gene_name, other$gene_name)),
+                                                targets_gn = tfs$gene_name,
+                                                both_intermediates = TRUE,
+                                                PKN_table = PKN_expressed,
+                                                max_length_1 = as.numeric(unlist(str_split(parameter_set$`Max_length1-3`, ';'))[1]),
+                                                max_length_2 = 1,
+                                                max_length_3 = as.numeric(unlist(str_split(parameter_set$`Max_length1-3`, ';'))[2]),
+                                                rds_path = paste0(step_dir, parameter_set$network_id, '.rds'),
+                                                sif_path = paste0(step_dir, parameter_set$network_id, '.sif'),
+                                                keep_only_connected = as.logical(unlist(str_split(parameter_set$`Max_length1-3`, ';'))[3]),
+                                                connect_all = parameter_set$Connect_all
+      )
+      end_time_three = Sys.time()
+      elapsed_time <- end_time_three - start_time_three
+
+    }, error = function(e){
+
+      end_time_three <<- Sys.time()
+      elapsed_time <<- NA
+
+    })
+
+  }
+
+  # If naive network has been created
+  # Read naive network file
+
+  if(file.exists(paste0(step_dir, parameter_set$network_id, '.rds'))){
+
+    network_graph <- readRDS(paste0(step_dir, parameter_set$network_id, '.rds'))
+    network_sif <-  network <- read_tsv(paste0(step_dir, parameter_set$network_id, '.sif'),
+                                        col_names = c('source', 'interaction', 'target'))
+
+    # Prepare CARNIVAL input
+    carnival_input <- prepare_carnival_input(naive_network = network_graph,
+                                             prediction_output = inferred_proteins_df,
+                                             recept_list = receptor_list,
+                                             organism = 'human'
+    )
+
+  }else{
+    carnival_elapsed_time <- NA
+  }
+
+
+  if( parameter_set$Carnival_types == 'vanilla' ) {
+
+    if ( parameter_set$Steps_numbers == 'one_step' ) {
+
+      tryCatch({
+
+        start_time_carnival = Sys.time()
+
+        # Define source and target
+        source_df <- carnival_input %>% dplyr::filter(mf == 'rec')
+        target_df <- carnival_input %>% dplyr::filter(mf != 'rec')
+
+        carnival_output <- run_carnival_and_create_graph( source_df = source_df,
+                                                          target_df = target_df,
+                                                          naive_network = unique(network_sif),
+                                                          proteins_df = inferred_proteins_df,
+                                                          organism = 'human',
+                                                          carnival_options = carnival_options,
+                                                          files = TRUE,
+                                                          direct = parameter_set$Direct,
+                                                          topbottom = parameter_set$TopDown,
+                                                          with_atlas = parameter_set$Atlas, #To take from annotation table
+                                                          path_sif = paste0(step_dir, 'opt_', parameter_set$network_id , '.sif'),
+                                                          path_rds = paste0(step_dir, 'opt_', parameter_set$network_id , '.RDS')
+        )
+
+        validated_output <- expand_and_map_edges(optimized_object = readRDS(paste0(step_dir, 'opt_', parameter_set$network_id, '.RDS')),
+                                                 organism = 'human',
+                                                 phospho_df = phospho_df,
+                                                 files = TRUE,
+                                                 direct = parameter_set$Direct, #To take from annotation table
+                                                 with_atlas = parameter_set$Atlas, #To take from annotation table
+                                                 path_sif = paste0(step_dir, 'val_', parameter_set$network_id, '.sif'),
+                                                 path_rds = paste0(step_dir, 'val_', parameter_set$network_id, '.RDS')
+        )
+
+        end_time_carnival = Sys.time()
+        carnival_elapsed_time <- end_time_carnival - start_time_carnival
+
+      }, error = function(e){
+
+        end_time_carnival <<- Sys.time()
+        carnival_elapsed_time <<- NA
+
+      })
+
+    } else if ( parameter_set$Steps_numbers == 'two_step') {
+
+      tryCatch({
+
+        start_time_carnival = Sys.time()
+
+        # ** FIRST RUN ** #
+        # Define receptors and the first set of target nodes
+        receptors_df <- carnival_input %>% dplyr::filter(mf == 'rec')
+        target1_df <- carnival_input %>% dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+        start_time_carnival = Sys.time()
+
+        output1 <- run_carnival_and_create_graph( source_df = receptors_df,
+                                                  target_df = target1_df,
+                                                  naive_network = unique(network_sif),
+                                                  proteins_df = inferred_proteins_df,
+                                                  organism = 'human',
+                                                  carnival_options = carnival_options,
+                                                  files = FALSE,
+                                                  direct = parameter_set$Direct,
+                                                  with_atlas = parameter_set$Atlas
+
+        )
+
+        # ** SECOND RUN ** #
+
+        # Define as a starting point only the proteins resulting connected in the former step
+        run1_output_nodes <- convert_output_nodes_in_next_input(output1)
+
+        source_df <- run1_output_nodes %>%
+          dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+        # Define as an ending point the transcription factors
+        target2_df <- carnival_input %>%
+          dplyr::filter(mf == 'tf')
+
+        source_df$UNIPROT <- ''
+        output2 <- run_carnival_and_create_graph( source_df = source_df,
+                                                  target_df = target2_df,
+                                                  naive_network = unique(network_sif),
+                                                  proteins_df = inferred_proteins_df,
+                                                  organism = 'human',
+                                                  carnival_options = carnival_options,
+                                                  files = FALSE,
+                                                  direct = parameter_set$Direct,
+                                                  with_atlas = parameter_set$Atlas
+        )
+
+        # ** UNION OF RUN ** #
+        union <- union_of_graphs(graph_1 = output1$igraph_network,
+                                 graph_2 = output2$igraph_network,
+                                 proteins_df = carnival_input_toy,
+                                 files = TRUE,
+                                 path_sif = paste0(step_dir, 'opt_', parameter_set$network_id , '.sif'),
+                                 path_rds = paste0(step_dir, 'opt_', parameter_set$network_id , '.RDS')
+        )
+
+        # Validation
+        validated_output <- expand_and_map_edges(optimized_object = readRDS(paste0(step_dir, 'opt_', parameter_set$network_id, '.RDS')),
+                                                 organism = 'human',
+                                                 phospho_df = phospho_df,
+                                                 files = TRUE,
+                                                 direct = parameter_set$Direct,
+                                                 with_atlas = parameter_set$Atlas,
+                                                 path_sif = paste0(step_dir, 'val_', parameter_set$network_id, '.sif'),
+                                                 path_rds = paste0(step_dir, 'val_', parameter_set$network_id, '.RDS')
+        )
+
+        end_time_carnival = Sys.time()
+        carnival_elapsed_time <- end_time_carnival - start_time_carnival
+
+      }, error = function(e){
+
+        end_time_carnival <<- Sys.time()
+        carnival_elapsed_time <<- NA
+
+      })
+
+    } else if ( parameter_set$Steps_numbers  == 'three_step' ) {
+
+      tryCatch({
+
+        start_time_carnival = Sys.time()
+
+        # ** FIRST RUN ** #
+        # Define receptors and the first set of target nodes
+        receptors_df <- carnival_input %>% dplyr::filter(mf == 'rec')
+        target1_df <- carnival_input %>% dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+        output1 <- run_carnival_and_create_graph( source_df = receptors_df,
+                                                  target_df = target1_df,
+                                                  naive_network = unique(network_sif),
+                                                  proteins_df = inferred_proteins_df,
+                                                  organism = 'human',
+                                                  carnival_options = carnival_options,
+                                                  files = FALSE,
+                                                  direct = parameter_set$Direct,
+                                                  with_atlas = parameter_set$Atlas #To take from annotation table
+
+        )
+
+        # ** SECOND RUN: from KIN, PHOS to OTHER ** #
+
+        # Define as a starting point only the proteins resulting connected in the former step
+        run1_output_nodes <- convert_output_nodes_in_next_input(output1)
+
+        source_df <- run1_output_nodes %>%
+          dplyr::filter(mf %in% c('kin', 'phos'))
+
+        # Define as an ending point the transcription factors
+        target2_df <- run1_output_nodes %>%
+          dplyr::filter(mf == 'other')
+
+        source_df$UNIPROT <- ''
+        target2_df$UNIPROT <- ''
+
+        output2 <- run_carnival_and_create_graph( source_df = source_df,
+                                                  target_df = target2_df,
+                                                  naive_network = unique(network_sif),
+                                                  proteins_df = inferred_proteins_df,
+                                                  organism = 'human',
+                                                  carnival_options = carnival_options,
+                                                  files = FALSE,
+                                                  direct = parameter_set$Direct,
+                                                  with_atlas = parameter_set$Atlas #To take from annotation table
+        )
+
+        # ** THIRD RUN: from KIN, PHOS and OTHER to TFs ** #
+
+        run2_output_nodes <- convert_output_nodes_in_next_input(output2)
+        source2_df <- run2_output_nodes %>%
+          dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+        target3_df <- carnival_input %>%
+          dplyr::filter(mf == 'tf')
+
+        source2_df$UNIPROT <- ''
+
+        output3 <- run_carnival_and_create_graph( source_df = source2_df,
+                                                  target_df = target3_df,
+                                                  naive_network = unique(network_sif),
+                                                  proteins_df = inferred_proteins_df,
+                                                  organism = 'human',
+                                                  carnival_options = carnival_options,
+                                                  files = FALSE,
+                                                  direct = parameter_set$Direct,
+                                                  with_atlas = parameter_set$Atlas #To take from annotation table
+        )
+
+        # UNION OF RUN1, RUN2 AND RUN3 GRAPHS
+        union_run1_run2 <- union_of_graphs(graph_1 = output1$igraph_network,
+                                           graph_2 = output2$igraph_network,
+                                           proteins_df = inferred_proteins_df,
+                                           files = FALSE)$igraph_network
+
+        union_run1_run2_run3 <- union_of_graphs(graph_1 = union_run1_run2,
+                                                graph_2 = output3$igraph_network,
+                                                proteins_df = inferred_proteins_df,
+                                                files = TRUE,
+                                                path_sif = paste0(step_dir, 'opt_', parameter_set$network_id, '.sif'),
+                                                path_rds = paste0(step_dir, 'opt_', parameter_set$network_id, '.RDS')
+        )
+
+
+        # Validation
+        validated_output <- expand_and_map_edges(optimized_object = readRDS(paste0(step_dir, 'opt_', parameter_set$network_id, '.RDS')),
+                                                 organism = 'human',
+                                                 phospho_df = phospho_df,
+                                                 files = TRUE,
+                                                 direct = parameter_set$Direct, #To take from annotation table
+                                                 with_atlas = parameter_set$Atlas, #To take from annotation table
+                                                 path_sif = paste0(step_dir, 'val_', parameter_set$network_id, '.sif'),
+                                                 path_rds = paste0(step_dir, 'val_', parameter_set$network_id, '.RDS')
+        )
+
+        end_time_carnival = Sys.time()
+        carnival_elapsed_time <- end_time_carnival - start_time_carnival
+
+      }, error = function(e){
+
+        end_time_carnival <<- Sys.time()
+        carnival_elapsed_time <<- NA
+
+      })
+
+    }
+
+
+  } else if( parameter_set$Carnival_types == 'inverse' ) {
+
+    tryCatch({
+
+      start_time_carnival = Sys.time()
+
+      target_df <- carnival_input %>%
+        dplyr::filter(mf != 'rec')
+
+      outout <- run_carnival_and_create_graph( source_df = NULL,
+                                               target_df = target_df,
+                                               naive_network = unique(network_sif),
+                                               proteins_df = inferred_proteins_df,
+                                               organism = 'human',
+                                               carnival_options = carnival_options,
+                                               files = TRUE,
+                                               direct = parameter_set$Direct,
+                                               with_atlas = parameter_set$Atlas,
+                                               path_sif = paste0(step_dir, 'opt_', parameter_set$network_id, '.sif'),
+                                               path_rds = paste0(step_dir, 'opt_', parameter_set$network_id,  '.RDS')
+      )
+
+      # Validation
+      validated_output <- expand_and_map_edges(optimized_object = readRDS(paste0(step_dir, 'opt_', parameter_set$network_id,'.RDS')),
+                                               organism = 'human',
+                                               phospho_df = phospho_df,
+                                               files = TRUE,
+                                               direct = parameter_set$Direct,
+                                               with_atlas = parameter_set$Atlas,
+                                               path_sif = paste0(step_dir, 'val_', parameter_set$network_id, '.sif'),
+                                               path_rds = paste0(step_dir, 'val_', parameter_set$network_id, '.RDS')
+      )
+
+      end_time_carnival = Sys.time()
+      carnival_elapsed_time <- end_time_carnival - start_time_carnival
+
+    }, error = function(e){
+
+      end_time_carnival <<- Sys.time()
+      carnival_elapsed_time <<- NA
+
+    })
+
+  }
+
+  # =================================================================== #
+  # Annotation of information
+  # =================================================================== #
+
+  # If CARNIVAL computation was okay compute some metrics and add it to the table
+  if(!is.na(carnival_elapsed_time)){
+
+    nodes <- nrow(validated_output$nodes_df)
+    edges <- nrow(validated_output$edges_df)
+    n_components <- components(validated_output$igraph_network)$no
+    clust_coeff <- transitivity(validated_output$igraph_network)
+    diameter <- diameter(validated_output$igraph_network)
+    power.law.fit <- power.law.fit(degree(validated_output$igraph_network))$KS.stat
+
+    input <- names(degree(validated_output$igraph_network, mode = 'in')[degree(validated_output$igraph_network, mode = 'in') == 0])
+    output_nodes <-  names(degree(validated_output$igraph_network, mode = 'out')[degree(validated_output$igraph_network, mode = 'out') == 0])
+
+    # max length
+    max_shortest_path_AMPK <- max(unlist(lapply(shortest_paths(validated_output$igraph_network,
+                                                               from =  V(validated_output$igraph_network)$name[V(validated_output$igraph_network)$name == 'AMPK'],
+                                                               to = V(validated_output$igraph_network)$name[V(validated_output$igraph_network)$name %in% output_nodes], output = 'epath')$epath,
+                                                function(x){length(x)})))
+
+    max_shortest_path_MTOR <- max(unlist(lapply(shortest_paths(validated_output$igraph_network,
+                                                               from =  V(validated_output$igraph_network)$name[V(validated_output$igraph_network)$name == 'MTOR'],
+                                                               to = V(validated_output$igraph_network)$name[V(validated_output$igraph_network)$name %in% output_nodes], output = 'epath')$epath,
+                                                function(x){length(x)})))
+
+
+    max_shortest_path_Perturbation <- max(unlist(lapply(shortest_paths(validated_output$igraph_network,
+                                                               from =  V(validated_output$igraph_network)$name[V(validated_output$igraph_network)$name == 'Perturbation'],
+                                                               to = V(validated_output$igraph_network)$name[V(validated_output$igraph_network)$name %in% output_nodes], output = 'epath')$epath,
+                                                function(x){length(x)})))
+
+    quantified_edges <- sum(validated_output$edges_df$is_quantified == 'TRUE')
+    significant_edges <- sum(validated_output$edges_df$is_significant == 'TRUE')
+
+    elapsed_time <- round(as.numeric(elapsed_time, units = 'secs'), 2)
+    carnival_elapsed_time <- round(as.numeric(carnival_elapsed_time, units = 'secs'), 2)
+
+    metrics_table_row <- paste0(paste0(c(parameter_set$network_id,
+                                         elapsed_time,
+                                         carnival_elapsed_time,
+                                         nodes, edges, n_components, round(clust_coeff,3),
+                                         diameter, round(power.law.fit,3), max_shortest_path_AMPK, max_shortest_path_MTOR,
+                                         max_shortest_path_Perturbation, quantified_edges, significant_edges), collapse = '\t'), '\n')
+
+    cat(metrics_table_row, file = file_conn)
+
+  }else{
+
+    metrics_table_row <- paste0(paste0(c(parameter_set$network_id,
+                                         ifelse(is.na(elapsed_time), NA, round(as.numeric(elapsed_time, units = 'secs'), 2)),
+                                         rep('NA', 12)), collapse = '\t'), '\n')
+    cat(metrics_table_row, file = file_conn)
+    
+  }
+}
+
+close(file_conn)
+```
+
+After the family network generation, we remove the resulting models from TopDown parameter = TRUE,
+resulting in 3328 possible results and in 2989 actually obtained results (matching the number of the manuscript).
+Moreover, we merge the metric table with the annotation table reporting the technical parameter of each condition.
+```{r eval = FALSE}
+
+# Read metrics and annotation df
+metrics_df <- read_tsv('./results/4.network_generation/metrics_table_new.tsv')
+metrics_df$computation_time <- metrics_df$PKN_time + metrics_df$CARNIVAL_time
+
+annotation_df <- read_tsv('./results/4.network_generation/annotation_new.tsv')
+
+# Remove network derived from TopDown == TRUE
+annotation_df %>% filter(TopDown == TRUE) -> to_remove
+anti_join(annotation_df, to_remove) -> annotation_df_sub
+metrics_df <- metrics_df %>% filter(network_id %in% annotation_df_sub$network_id)
+
+# Remove the networks without CARNIVAL time, thus not optimized models!
+metrics_df %>% filter(!is.na(CARNIVAL_time)) -> metrics_df_final
+
+inner_join(metrics_df_final, 
+           annotation_df_sub, 
+           by = 'network_id') -> metrics_annotation_df
+
+write_tsv(metrics_annotation_df, './results/4.network_generation/metric_anno.tsv')
+```
+
+
+### Add also gold standard metrics 
+
+In this chunk of code, we compare the proteins of each model with the gold standard and measure Precision, Recall and RMSE that will be attached to the topological metrics. 
+**Warning**: you cannot execute it as the resulting models are not available on the GitHub repo for a matter of space. 
+
+```{r eval = FALSE}
+
+# Read gold standard table
+downstream <- read_excel('./input/Gold standard.xlsx', sheet = 1, skip = 1)
+regulators <- downstream %>%
+  mutate(Regulation = ifelse(grepl('MTOR*', Regulator), Regulation*-100, Regulation*100)) %>%
+  filter(is.na(Remove)) %>% # Remove not inferable proteins
+  distinct()
+
+# Read metrics table
+metrics_final_df <- read_tsv('./results/4.network_generation/metric_anno.tsv')
+
+network_ids <- metrics_final_df$network_id
+
+# Take from each model its proteins and their carnival_activity and evaluate 
+# the precision and recall respect to the gold standard 
+nodes_all <- tibble(name = character(0),
+                    carnival_activity = double(0))
+
+i = 1
+
+for ( i in c(1:length(network_ids))){
+
+  network <- network_ids[i]
+
+  sp_object <- read_rds(paste0(network_dir, 'val_', network, '.RDS'))
+
+  nodes_df <- sp_object$nodes_df %>% dplyr::select(gene_name, carnival_activity)
+
+  if(i == 1){
+    colnames(nodes_df) <- c('gene_name', network)
+    nodes_all <- nodes_df
+  }else{
+    nodes_all <- full_join(nodes_all, nodes_df)
+    colnames(nodes_all) <- c(colnames(nodes_all)[-(i+1)], network)
+  }
+}
+
+# Gold standard proteins in optimized models
+gold_standard_table <- inner_join(nodes_all,
+                                  regulators %>%
+                                    select(Target, Regulation),
+                                  by = c('gene_name' = 'Target')) %>%
+  relocate(gene_name, gold_standard = Regulation) %>% distinct()
+
+gold_standard_m <- gold_standard_table %>% distinct() %>% column_to_rownames('gene_name')
+
+# Compute Precision and Recall
+#NES_mat_gold <- NES_mat_gold %>% relocate(Gold_standard)
+results <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
+  compute_auprc(gold_standard_m$gold_standard, col)
+})
+
+precision = round(unlist(lapply(results, function(x){x[1]})),2)
+recall = round(unlist(lapply(results, function(x){x[2]})),2)
+
+rmse <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
+  compute_rmse(gold_standard_m$gold_standard, col)
+})
+
+rmse = unlist(rmse)
+
+# Define a tibble of measures of accuracy
+auprc_df <- tibble(conditions = names(precision),
+                   Precision = precision,
+                   Recall = recall,
+                   RMSE = rmse)
+
+
+metrics_df_auprc <- inner_join(metrics_final_df, auprc_df, by = c('network_id' = 'conditions'))
+
+write_tsv(metrics_df_auprc, './results/4.network_generation/metrics_table_auprc_new.tsv')
+```
+
+## Analysis of networks' family 
+
+### Overall analysis of networks' family characteristics
+
+```{r fig.width=6, fig.height=4, fig.align='center'}
+metrics_annotation_df <- read_tsv(paste0(step_dir, 'metrics_table_auprc_new.tsv'))
+
+parameters <- c('computation_time','clust_coeff', 'power_law_fit', 'Precision', 'Recall')
+
+plot_par_all <- list()
+
+for(i_plot in 1:(length(parameters))){
+
+    parameter <- parameters[i_plot]
+    
+    p <- ggdensity(data = metrics_annotation_df,
+                   x = parameter,
+                   y = 'density',
+                   add = ifelse(parameter %in% c('Precision', 'Recall'), 'median', 'mean'),
+                   xlab = str_replace_all(parameter, '_', ' ')) +
+      theme(text = element_text(size = 8),
+            legend.position = 'none')
+
+    plot_par_all[[i_plot]] <- p
+}
+
+plot_grid(plotlist = plot_par_all, ncol = 3, labels = LETTERS[1:length(plot_par_all)])
+
+
+```
+**Figure S5. Comparison of different network inference methods (Step2).** 
+Distribution of different metrics across the family of 2989 generated models (Step 2) (**A-F**): computation time (**A**), number of components (**B**), fit to the power law (**C**), Precision (**D**) and Recall (**E**) respect with the gold standard.
+
+
+### Analysis of networks characteristics dividing for specific parameters
+Then, we wanted to observe the impact of Ser/Thr Kinome Atlas integration, the number of layers and the CARNIVAL types and flavors on 6 specific evaluated metrics, namely computation time, number of nodes and edges, edges validated with phosphoproteomics, longest path from AMPK, or MTOR.
+
+```{r fig.height=12, fig.width=6, fig.align='center'}
+
+parameters <- c('computation_time','nodes', 'edges', 'quantified_edges', 
+                'longest_path_AMPK', 'longest_path_MTOR')
+
+variable_types <- c('Atlas', 'Layer_types', 'carnival')
+
+plot_par <- list()
+
+i_plot = 1
+
+for(i_par in 1:length(parameters)){
+    
+    for(i_type in 1:length(variable_types)){
+      
+      parameter <- parameters[i_par]
+      variable_type <- variable_types[i_type]
+      
+      p <- ggdensity(data = metrics_annotation_df,
+                   x = parameter,
+                   y = 'density',
+                   color = variable_type,
+                   palette = ifelse(variable_type == 'Layer_types', 'igv', ifelse(variable_type == 'carnival', 'nejm', 'uchicago')),
+                   add = 'mean',
+                   xlab = str_replace_all(parameter, '_', ' ')) +
+      theme(text = element_text(size = 8),
+            legend.position = ifelse( i_plot %in% c(16,17,18), 'right', 'none'), 
+            legend.text = element_text(size = 4), legend.title = element_text(size = 5),
+            legend.key.size = unit(.3, "cm")) +
+        guides(fill = guide_legend(override.aes = list(size = 2)))
+      
+      plot_par[[i_plot]] <- p
+       i_plot = i_plot + 1
+    }
+}
+      
+  
+plot_grid(plotlist = plot_par, ncol = 3, labels = LETTERS[1:length(plot_par)])
+
+
+```
+**Figure S6. Impact of Step2 technical parameters on the resulting model properties.**
+Impact of Ser/Thr Kinome Atlas integration, number of layers in the naïve network, and CARNIVAL flavors and types on: computation time (**A-C**), the number of nodes (**D-F**), edges (**G-I**), and of interactions validated by phosphoproteomics data (**J-L**), the maximum path length between end nodes (outdegree = 0) and AMPK (**M-O**) or mTOR (**P-R**), across 2989 generated models. 
+
+
+## Find the best model of family network
+To find the best novel we developed a **combined score** that weights Precision, Recall, the diameter and clustering coefficient, the number of edges validated with phosphoproteomics, the computation time and the fit to the power law.
+The computation time, the diameter and the number of significant phosphorylation events were normalized to be in the same scale as precision and recall. 
+
+
+```{r}
+
+metrics_annotation_df <- read_tsv(paste0(step_dir, 'metrics_table_auprc_new.tsv'))
+
+# Normalize diameter and computation time
+max_time <- max(metrics_annotation_df$computation_time)
+metrics_annotation_df$normalized_time <- metrics_annotation_df$computation_time / max_time
+
+max_diam <- max(metrics_annotation_df$diameter)
+metrics_annotation_df$norm_diam <- metrics_annotation_df$diameter / max_diam
+
+# Compute the proportion of significant edges over total edges
+metrics_annotation_df %>% mutate(sign_ratio = significant_edges/edges) -> metrics_annotation_df
+
+# Create a combined score
+metrics_annotation_df <- metrics_annotation_df %>%
+  mutate(combined_score_step2 = Precision*0.5 + Recall*0.5 + sign_ratio * 0.5 + norm_diam*0.5 + clust_coeff * 0.5 - (normalized_time * 0.2 + power_law_fit))
+
+# Sort the data by the combined score
+sorted_data <- metrics_annotation_df %>% 
+  arrange(desc(combined_score_step2)) %>% 
+  relocate(network_id, combined_score_step2)
+
+head(sorted_data)
+
+#write_tsv(sorted_data, './results/4.network_generation/sorted_data_network_family.tsv')
+```
+
+The **best model** is *Network1554*.
+
+## Establish a default set of parameter for network construction
+
+```{r fig.align='center', fig.width=4, fig.height=3}
+
+sorted_networks_step2 <- read_tsv('./results/4.network_generation/sorted_data_network_family.tsv')
+
+# Create a table of top100 and bottom100
+head(sorted_networks_step2, n = 100) -> top100
+top100$type = 'top100'
+
+tail(sorted_networks_step2, n = 100) -> bottom100
+bottom100$type <- 'bottom100'
+
+bind_rows(top100, bottom100) -> total_networks
+
+total_networks <- total_networks %>%
+  dplyr::select(network_id, Atlas, Direct, PKN_filtering, Layer_types,
+                `Max_length1-3`, Connect_all, Carnival_types,
+                Steps_numbers, type)
+
+# retrieve Keep_only_connected from the Max_length1-3 params and remove the others
+total_networks$Keep_only_connected <- lapply(str_split(total_networks$`Max_length1-3`, ';'), function(x){x[3]})
+total_networks$`Max_length1-3` <- unlist(lapply(str_split(total_networks$`Max_length1-3`, ';'), function(x){paste0(x[1], ';', x[2])}))
+total_networks$`Max_length1-3`[grepl('NA', total_networks$`Max_length1-3`)] <- NA
+total_networks$`Max_length1-3` <- NULL
+total_networks %>% mutate_all(as.character) -> total_networks_anno
+
+# Transform in long format
+params_total_networks_anno <- pivot_longer(data = total_networks_anno,
+                                           cols = c(colnames(total_networks_anno)[c(2:8, 10)]))
+
+params_total_networks_anno$value <- factor(params_total_networks_anno$value,
+                                           levels = c('TRUE', 'FALSE',  'one_step', 'two_step', 'three_step',
+                                                      'one', 'two', 'three', 'vanilla', 'inverse'))
+                                                      
+
+params_total_networks_anno$name <- factor(params_total_networks_anno$name,
+                                          levels = rev(c('Atlas', 'Direct', 'PKN_filtering',
+                                                     'Layer_types', 'Keep_only_connected', 'Connect_all',
+                                                     'Carnival_types', 'Steps_numbers')))
+
+params_total_networks_anno$type <- factor(params_total_networks_anno$type,
+                                          levels = c('top100', 'bottom100'))
+
+params_total_networks_anno %>% filter(!is.na(value)) -> params_total_networks_anno
+
+c('#006837', '#CCCCCC', ggsci::pal_jama()(7), 'pink4') -> color_jama
+
+ggplot(params_total_networks_anno, aes(x = name, fill = value)) +
+  geom_bar(stat = 'count', alpha = .7) +
+  facet_grid(type~.) +
+  #scale_fill_viridis(discrete = TRUE)
+  scale_fill_manual(values = color_jama) +
+  theme_classic() +
+  theme(text = element_text(size = 10),
+        axis.text.x = element_text(size = 8, angle = 0, vjust = 1, hjust = .5),
+        axis.text.y = element_text(size = 8),
+        legend.title = element_blank()) +
+  xlab('') +
+  ylab('N° of networks') +
+  coord_flip() 
+
+```
+**Figure S7A** Result of benchmarking of Step2. Distribution of each parameter in the top and bottom 100 models after ranking 2989 produced models based on the  combined score, taking into account adherence to the gold standard and topological features (see Methods). The most frequent parameters were chosen as default for Step2.
+

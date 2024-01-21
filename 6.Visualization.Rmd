@@ -1,0 +1,136 @@
+---
+title: "Visualization of the best results of *SignalingProfiler* 2.0 benchmarking"
+author: "Veronica Venafra"
+output:
+  html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+## Introduction
+This workbook refers to the manuscript *SignalingProfiler 2.0: a network-based approach to bridge multi-omic data to phenotypic hallmarks*.
+
+## Prerequisites
+To visualize the output of this chunks, open Cytoscape Desktop app. 
+
+## Import libraries and functions
+
+```{r message = FALSE}
+source('0.libraries.R')
+source('0.functions.R')
+
+network_dir <- './results/4.network_generation/'
+pheno_dir <- './results/5.phenoscore_benchmarking/'
+```
+
+## Import best results of Step2 and Step3
+
+```{r}
+# Read the best model object returned by SignalingProfiler
+best_model_id <- 'Network1554'
+best_object <- readRDS(paste0(network_dir, 'val_', best_model_id, '.RDS'))
+
+# Define nodes table
+nodes_df <- best_object$nodes_df
+
+# Extract igraph object of best model
+network_graph <- best_object$igraph_network
+```
+
+```{r}
+best_model_id <- 'pheno89'
+best_pheno_result <- readRDS(paste0(pheno_dir, 'best_', best_model_id, '.rds'))
+```
+
+## Visualize PhenoScore barplot
+
+```{r fig.align='center', fig.width=5, fig.height=5}
+best_pheno_result$barplot
+```
+**Figure 4B** Bar plot reporting the inferred modulation of phenotypes upon metformin treatment after Step3 of SignalingProfiler (activation in red, inhibition in blue).
+
+## Cytoscape visualization
+
+To visualize the model in Cytoscape using the different SignalingProfiler layout you have to properly format the attributes.
+Moreover, we want to add as additional node attribute, whether a protein is a member of gold standard list.
+```{r}
+final_sp_visualization <- format_for_visualization(best_pheno_result$sp_object_phenotypes) 
+
+regulators <- read_excel('./input/Gold standard.xlsx', sheet = 1, skip = 1) %>%
+  mutate(Regulation = ifelse(grepl('MTOR*', Regulator), Regulation*-100, Regulation*100))
+
+nodes_df_raw <- final_sp_visualization$nodes_df
+nodes_df_mapped <- nodes_df_raw %>%
+  mutate(gold_standard = ifelse(gene_name %in% regulators$Target, 'Y', 'N'))
+
+# override formatted network
+final_sp_visualization$igraph_network <- igraph::graph_from_data_frame(d = final_sp_visualization$edges_df, 
+                                                                       vertices =  nodes_df_mapped)
+
+
+#write_rds(final_sp_visualization, './results/5.phenoscore_benchmarking/formatted_output.rds')
+
+```
+
+### Visualize the whole network
+This is the code used for **Figure S11** of the manuscript.
+```{r eval = FALSE}
+RCy3::createNetworkFromIgraph(igraph=final_sp_visualization$igraph_network, name="Whole network")
+
+# Set in Cytoscape the SignalingProfiler style available in SignalingProfiler R package
+data_path <- system.file("extdata", "SP_pheno_layout.xml", package = "SignalingProfiler")
+RCy3::importVisualStyles(filename = data_path)
+RCy3::setVisualStyle('SP_pheno_layout')
+
+```
+
+### Visualize network focused on experimentally validated phosphorylation events
+This is the code used for **Figure 4A** of the manuscript.
+```{r eval = FALSE}
+
+RCy3::createNetworkFromIgraph(igraph=final_sp_visualization$igraph_network, name="PhosphoTest")
+
+# Set in Cytoscape the SignalingProfiler style to focused on phosphorylation events 
+# available in SignalingProfiler R package
+data_path <- system.file("extdata", "SP_phospho_layout.xml", package = "SignalingProfiler")
+RCy3::importVisualStyles(filename = data_path)
+RCy3::setVisualStyle('SP_phospho_layout')
+
+```
+
+### Visualize functional circuits
+This is the code used for **Figure 4B** and **Figure S9C** of the manuscript.
+
+```{r eval = FALSE}
+
+phenotypes <- c('APOPTOSIS', 'AUTOPHAGY', 'PROLIFERATION')
+k_vector <- c(3, 4, 4)
+start_nodes <- c('MTOR', 'AMPK')
+
+for(i_pheno in 1:length(phenotypes)){
+  
+  circuit <- retrieve_functional_circuit(SP_object = final_sp_visualization, 
+                                         start_nodes = start_nodes, 
+                                         phenotype = phenotypes[i_pheno],
+                                         k =  k_vector[i_pheno])
+  
+  RCy3::createNetworkFromIgraph(igraph=circuit, name= paste0(phenotypes[i_pheno], ' circuit'))
+  
+  # Apply on circuits the SignalingProfiler style
+  data_path <- system.file("extdata", "SP_pheno_layout.xml", package = "SignalingProfiler")
+  RCy3::importVisualStyles(filename = data_path)
+  RCy3::setVisualStyle('SP_pheno_layout')
+}
+```
+
+
+
+

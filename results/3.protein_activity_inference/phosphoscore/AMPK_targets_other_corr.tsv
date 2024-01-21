@@ -1,0 +1,6 @@
+conditions	Normalization	Residues on activity	Gold_corr	Gold_corr.1	Gold_corr_all
+phosphoscore_corr_phospho_act	TRUE	TRUE	(0.4, 0.5]	(0.4, 0.5]	0.5
+phosphoscore_corr_phospho_all	TRUE	FALSE	NA	NA	NA
+phosphoscore_no_corr_phospho_act	FALSE	TRUE	(0.8, 0.9]	(0.8, 0.9]	0.85
+phosphoscore_no_corr_phospho_all	FALSE	FALSE	NA	NA	NA
+Gold_standard	Gold_standard	Gold_standard	(0.9, 1.0]	(0.9, 1.0]	1
