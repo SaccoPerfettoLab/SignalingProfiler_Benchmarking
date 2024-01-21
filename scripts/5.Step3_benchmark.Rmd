@@ -1,0 +1,340 @@
+---
+title: "*SignalingProfiler* 2.0 Step 3 benchmarking"
+author: "Veronica Venafra"
+output:
+  html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+## Introduction
+This workbook refers to the manuscript *SignalingProfiler 2.0: a network-based approach to bridge multi-omic data to phenotypic hallmarks*.
+
+## Import libraries and functions
+
+```{r message = FALSE}
+source('0.libraries.R')
+source('0.functions.R')
+
+network_dir <- '../results/4.network_generation/'
+pheno_dir <- '../results/5.phenoscore_benchmarking/'
+```
+
+
+## Definition of all combinations of technical parameters
+
+```{r}
+# Chose wheter preprocess ProxPath paths over experimental data
+preprocess <- c(TRUE, FALSE)
+
+# Possible shortest paths length from phenotypic regulators to phenotypes 
+path_length <- c(2,3,4)
+
+# Choose Z-score metric
+stat <- c('mean', 'median')
+
+# In cases where multiple proteins influence a common phenotype and one protein 
+# in the SignalingProfiler optimized model is downstream another, 
+# choose whether considering only the most downstream protein as a phenotypic regulator 
+remove_cascade <- c(TRUE, FALSE)
+
+# To take into account that a protein with a higher count of paths
+# over a phenotype is more redundant and consequently a stronger regulator
+node_idx <- c(TRUE, FALSE)
+
+# The activity of each phenotype regulator can be based on the activity of nodes
+# computed by CARNIVAL or by algorithms of Step1 (final activity score) 
+use_carnival_activity = c(TRUE, FALSE)
+
+list('preprocess' = preprocess,
+     'path_length' = path_length,
+     'stat' = stat,
+     'remove_cascade' = remove_cascade,
+     'node_idx' = node_idx,
+     'use_carnival_activity' = use_carnival_activity) -> phenoscore_params
+
+expand.grid(phenoscore_params) -> phenoscore_params_df
+
+phenoscore_params_df$pheno_id <- paste0('Pheno', 1:nrow(phenoscore_params_df))
+#write_tsv(phenoscore_params_df, paste0(pheno_dir, 'pheno_annotation_df.tsv'))
+
+head(phenoscore_params_df)
+```
+
+## Generation of all possible phenotypic results
+
+#### Read all necessary input for network generation
+```{r eval = FALSE}
+
+# Read multi-omic data
+background_prot <- read_tsv('../input/proteomics.tsv')
+background_phos <- read_tsv('../input/corrected_phosphoproteomics.tsv')
+
+# Read the best model object returned by SignalingProfiler
+best_model_id <- 'Network1554'
+best_object <- readRDS(paste0(network_dir, 'val_', best_model_id, '.RDS'))
+
+# Define nodes table
+nodes_df <- best_object$nodes_df
+
+# Extract igraph object of best model
+network_graph <- best_object$igraph_network
+```
+
+#### Pre-process Proxpath paths over omic data
+```{r eval = FALSE}
+pheno_table_distances <- phenoscore_network_preprocessing(proteomics = background_prot,
+                                                          phospho = background_phos)
+```
+
+#### Metrics table definition
+Here we define a tab-separated file to annotate metrics for phenotypic results evaluation, like computation time and phenotypic levels
+
+```{r eval = FALSE}
+output_file <- paste0(pheno_dir, "phenoscore_bench.tsv")
+file_conn <- file(output_file, "w")
+
+pheno_table_header <- paste0(paste0(c('phenotype', 'phenoscore', 'phenoscore_time', 'pheno_id'), 
+                                    collapse = '\t'), '\n')
+cat(pheno_table_header, file = file_conn)
+```
+
+#### Run the analysis
+
+**Warning**: this analysis takes half an hour
+```{r eval = FALSE}
+
+phenoscore_params_df <- read_tsv(paste0(pheno_dir, 'pheno_annotation_df.tsv'))
+
+for(i_param in c(1:nrow(phenoscore_params_df))){
+  parameter_row <- phenoscore_params_df[i_param,]
+
+  if(parameter_row$preprocess){
+    processed_table <- pheno_table_distances
+  }else{
+    processed_table <- SignalingProfiler::phenoscore_distances_table
+  }
+
+  tryCatch({
+
+    start_time_pheno = Sys.time()
+
+    output_list <- phenoscore_computation(proteins_df = nodes_df,
+                                          desired_phenotypes = NULL,
+                                          pheno_distances_table = pheno_table_distances,
+                                          sp_graph = network_graph,
+                                          path_length = parameter_row$path_length,
+                                          stat = parameter_row$stat,
+                                          zscore_threshold = -1.96,
+                                          n_random = 1000,
+                                          pvalue_threshold = 0.05,
+                                          remove_cascade = parameter_row$remove_cascade,
+                                          node_idx = parameter_row$node_idx,
+                                          use_carnival_activity = parameter_row$use_carnival_activity,
+                                          create_pheno_network = FALSE)
+
+    end_time_pheno = Sys.time()
+    elapsed_time_pheno <- end_time_pheno - start_time_pheno
+
+  }, error = function(e) {
+
+    elapsed_time_pheno <<- NA
+    end_time_pheno <<- Sys.time()
+    
+  })
+
+  if(!is.na(elapsed_time_pheno)){
+
+    pheno_df <- output_list$table_phenotypes
+    pheno_df$phenoscore_time <- round(as.numeric(elapsed_time_pheno, units = 'secs'), 2)
+    pheno_df$pheno_id <- parameter_row$pheno_id
+
+    pheno_row <- paste0(paste0(apply(pheno_df, 1, paste, collapse = "\t"), collapse = "\n"), '\n')
+    cat(pheno_row, file = file_conn)
+
+  }else{
+
+    pheno_df <- tibble(phenotype = 'NO PHENOTYPE', phenoscore = NA, phenoscore_time = NA, pheno_id = parameter_row$pheno_id)
+    pheno_row <- paste0(paste0(apply(pheno_df, 1, paste, collapse = "\t"), collapse = "\n"), '\n')
+
+    cat(pheno_row, file = file_conn)
+  }
+
+}
+
+close(file_conn)
+```
+
+## Analysis of results 
+Here, we visualize metformin-relevant phenotypes distribution across the 96 possible results.
+
+```{r fig.align='center', fig.width = 6, fig.height=4}
+
+# Read phenotypic gold standard table
+read_tsv('../input/gold_standard_pheno.tsv') -> gold_stadard_pheno
+gold_stadard_pheno <- gold_stadard_pheno %>% mutate(color = ifelse(gold_standard == -100, '#4393C3', '#D6604D'))
+
+# Read benchmark analysis result
+pheno_table <- read_tsv(paste0(pheno_dir, "phenoscore_bench.tsv"))
+
+# Merge the two table
+inner_join(pheno_table, gold_stadard_pheno, by = c('phenotype' ='phenotypes')) -> pheno_table
+
+# Violin plot of the whole results
+violin_pheno_all <- pheno_table %>% filter(phenotype %in% gold_stadard_pheno$phenotypes) %>%
+  ggplot( aes(x=fct_reorder(phenotype, gold_standard), y=phenoscore, fill = phenotype)) +
+  #facet_grid( . ~ mf, scales = 'free') +
+  geom_violin(width=2, size=0.2, alpha = .8) +
+  scale_fill_manual(values = gold_stadard_pheno$color, labels = gold_stadard_pheno$phenotypes) +
+  stat_summary(fun = median, geom = "crossbar", width = 0.5, size = 0.1, color = "grey3") +
+  geom_point(color = 'grey3', alpha = .3, size = .3) +
+  geom_vline(xintercept = pheno_table$phenotype, size = .1, color = 'grey3', linetype = 'dashed') +
+  geom_hline(yintercept = 0, size = .3, color = 'grey3') +
+  theme_classic() +
+  theme(text = element_text(size=10),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 8),
+        legend.position="none") +
+  xlab("")
+
+violin_pheno_all
+
+```
+**Figure S9A** Violin plot illustrating the inferred activity distribution of 10 metformin-treatment associated phenotypes across the 96 technical conditions of the benchmarking of SignalingProfiler Step3. The color of each violin corresponds to the expected activity in the phenotypic gold standard (**Table S1**).
+
+
+## Find the best result of phenotypic inference
+```{r}
+# Read benchmark analysis result
+pheno_table <- read_tsv(paste0(pheno_dir, "phenoscore_bench.tsv"))
+
+# Transform in wide format
+pheno_table %>% pivot_wider(
+  id_cols = c(phenotype),
+  names_from = pheno_id,
+  values_from = c(phenoscore)
+) -> wide_table
+
+# Read gold standard
+read_tsv('../input/gold_standard_pheno.tsv') %>% filter(!is.na(gold_standard)) -> gold_stadard_pheno
+
+# Join wide table and gold standard table and transform it in matrix
+inner_join(gold_stadard_pheno, wide_table, by = c('phenotypes' = 'phenotype')) -> wide_table
+wide_table_m <- wide_table %>% column_to_rownames('phenotypes')
+
+# Precision, Recall and RMSE computation
+results <- lapply(wide_table_m[, -1, drop = FALSE], function(col) {
+  compute_auprc(wide_table$gold_standard, col)
+})
+
+precision = round(unlist(lapply(results, function(x){x[1]})),2)
+recall = round(unlist(lapply(results, function(x){x[2]})),2)
+
+rmse <- lapply(wide_table_m[, -1, drop = TRUE], function(col) {
+  compute_rmse(wide_table$gold_standard, col)
+})
+
+rmse = unlist(rmse)
+
+# Create a table with type of analyses and precision, recall and RMSE
+auprc_df <- tibble(conditions = names(precision),
+                   Precision = precision,
+                   Recall = recall,
+                   RMSE = rmse)
+
+# Add to the metrics table the computation time
+inner_join(auprc_df,
+           pheno_table %>% select(pheno_id, phenoscore_time) %>% distinct(), by = c('conditions' = 'pheno_id')) -> auprc_df
+
+# Overall metrics table
+head(auprc_df)
+```
+Here, we define a **combined score for Step3** that weights Precision, Recall, the Root Mean Squared Error (RMSE) RMSE and the computation time.
+The computation time and RMSE were normalized to be in the same scale as precision and recall. 
+
+```{r}
+# Normalize time and RMSE
+auprc_df$norm_RMSE <- auprc_df$RMSE / max(auprc_df$RMSE)
+auprc_df$norm_time <- auprc_df$phenoscore_time / (max(auprc_df$phenoscore_time))
+
+# Define a score for parameters ranking
+auprc_df %>% mutate(score = (Precision + Recall) - (norm_RMSE + norm_time*0.5) ) %>%
+  arrange(desc(score)) -> sorted_pheno
+
+#write_tsv(sorted_pheno, file = paste0(pheno_dir, 'phenoscore_metrics_sorted.tsv'))
+
+head(sorted_pheno)
+```
+The **best result** is Pheno89.
+
+## Establish a default set of parameter for phenotypic inference (Step 3)
+
+```{r fig.align='center', fig.width=4, fig.height=3}
+
+# Read sorted phenotypic results and technical parameters 
+# associated to each technical condition and merge the tables
+sorted_pheno <- read_tsv(paste0(pheno_dir, 'phenoscore_metrics_sorted.tsv'))
+phenoscore_params_df <- read_tsv(paste0(pheno_dir, 'pheno_annotation_df.tsv'))
+
+inner_join(sorted_pheno %>%
+             select(conditions, score),
+           phenoscore_params_df,
+           by = c('conditions' = 'pheno_id')) %>%
+  arrange(desc(score)) -> sorted_pheno_anno
+
+# Create a table of top10 and bottom10
+head(sorted_pheno_anno, n = 10) -> top20
+top20$type = 'top10'
+tail(sorted_pheno_anno, n = 10) -> bottom20
+bottom20$type <- 'bottom10'
+
+bind_rows(top20, bottom20) -> total_phenotypes
+total_phenotypes$score <- NULL
+
+total_phenotypes %>% mutate_all(as.character) -> total_phenotypes_anno
+
+# Transform in long format
+params_total_phenotypes_anno <- pivot_longer(data = total_phenotypes_anno,
+                                           cols = colnames(total_phenotypes_anno)[2:7])
+
+params_total_phenotypes_anno$value <- factor(params_total_phenotypes_anno$value,
+                                           levels = c('TRUE', 'FALSE',  'mean', 
+                                                      'median', '2', '3', '4'))
+
+params_total_phenotypes_anno$name <- factor(params_total_phenotypes_anno$name,
+                                          levels = c('preprocess', 'path_length', 'stat',
+                                                     'remove_cascade', 'node_idx', 'use_carnival_activity'))
+
+params_total_phenotypes_anno$type <- factor(params_total_phenotypes_anno$type,
+                                          levels = c('top10', 'bottom10'))
+
+params_total_phenotypes_anno %>% filter(!is.na(value)) -> params_total_phenotypes_anno
+
+
+
+list('#006837', '#CCCCCC', "#00A087", "#3C5488", "#F39B7F", "#8491B4", "#91D1C2") -> color_custom
+
+ggplot(params_total_phenotypes_anno, aes(x = name, fill = value)) +
+  geom_bar(stat = 'count', alpha = .7) +
+  facet_grid(type~.) +
+  scale_fill_manual( values = color_custom) +
+  theme_classic() +
+  coord_flip()+
+
+  theme(text = element_text(size = 8),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5, size = 6), 
+        axis.text.y = element_text(angle = 0, size = 8)) +
+  xlab('') 
+
+
+
+```
+**Figure S7B** Result of benchmarking of Step3. Distribution of each parameter in the top and bottom 10 phenotypes inference results after ranking 96 produced results based on the combined score that considers coherence with the phenotypic gold standard and computation time (see Methods). 
+
