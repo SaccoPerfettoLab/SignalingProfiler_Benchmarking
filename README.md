@@ -8,16 +8,22 @@ Read the full paper on [bioxRiv]().
 
 ## Repository
 
-The repository showcases the code used for the benchmarking of \*SignalingProfiler\*\* in the paper. We propose five key notebooks reporting the code and some plots of the analyses:
+The repository showcases the code used for the benchmarking of *SignalingProfiler* in the paper. We present five key notebooks reporting the code and some plots of the analyses:
 
-1.  [Data cleaning and preparation for *SignaligProfiler*](<https://raw.githack.com/SaccoPerfettoLab/>)
+1.  [Data cleaning and preparation for *SignaligProfiler*](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/1.Data_preparation_for_SP.html)
 
-2.  [Gold standard creation for the benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/>)
+2.  [Gold standard creation for the benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/2.Gold_standard_creation.html)
 
-3.  [Step 1 benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/>)
+3.  [Step 1 benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/3.Step1_benchmark.html)
 
-4.  [Step 2 benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/>)
+4.  [Step 2 benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/4.Step2_benchmark.html)
 
-5.  [Step 3 benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/>)
+5.  [Step 3 benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/5.Step3_benchmark.html)
 
-6.  [Visualization of best networks of the benchmarking process](<https://raw.githack.com/SaccoPerfettoLab/>)
+6.  [Visualization of best networks of the benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/6.Visualization.html)
+
+7.  [EGF analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/8.HeLa_EGF_SP_analysis.html)
+
+8.  [AML analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/9.JMD_quizartinib_analysis.html)
+
+9.  [Metformin analysis with custom regulons](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/7.Custom_PKN_analysis.html)

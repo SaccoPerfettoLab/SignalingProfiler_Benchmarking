@@ -1,0 +1,426 @@
+---
+title: "Data cleaning for *SignalingProfiler* 2.0"
+author: "Veronica Venafra"
+output: 
+ html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+## Introduction
+This workbook refers to the manuscript *SignalingProfiler 2.0: a network-based approach to bridge multi-omic data to phenotypic hallmarks*.
+
+## Import libraries and functions
+
+```{r message = FALSE}
+source('0.libraries.R')
+source('0.functions.R')
+```
+
+## Prepare transcriptomics for SignalingProfiler
+
+This chunk of code returns a transcriptomic table formatted for SignalingProfiler with: **Gene Name (Primary)** as key for the rows, **difference** (fold-change between metformin and ctrl), **logpval**, **significant** ('+' if the modulation is significant). 
+
+```{r eval = FALSE}
+
+# Read data without significance information
+tr_df <- read_excel('../raw input/transcriptomics.xlsx')
+tr_df_all <- tr_df %>%
+  rowwise() %>%
+  mutate(gene_mean = mean(c_across(c(`mRNA Fold Change (log2)_replicate1...1`,
+                                     `mRNA Fold Change (log2)_replicate1...2`,
+                                     `mRNA Fold Change (log2)_replicate1...3`)),
+                          na.rm = TRUE)) %>%
+  select(gene_name = Genes, gene_mean)
+
+# Read data with significance information
+significant_tr_prot <- read_excel('../raw input/significant_prot_trans.xlsx')
+sum(significant_tr_prot$`t-test Significant mRNA` == '+', na.rm = T)
+sum(significant_tr_prot$`t-test Significant proteome` == '+', na.rm = T)
+colnames(significant_tr_prot)
+
+# Reprocess the significant data
+tr_sign_df <- significant_tr_prot %>% select(gene_name = `Gene names`,
+                                             difference = `t-test Difference  mRNA`,
+                                             logpval = `-Log t-test p-value mRNA`,
+                                             significant = `t-test Significant mRNA`)
+
+# Add the not significant
+left_join(tr_df_all,
+          tr_sign_df, c('gene_name')) -> tr_df_sp
+
+# Keep the values of t-test difference and take the manually computed mean only if there isn't
+tr_df_sp %>% mutate(difference = coalesce(difference, gene_mean)) -> tr_df_sp
+tr_df_sp$gene_mean <- NULL
+tr_df_sp %>% filter(significant == '+')
+
+# Keep unique rows (duplicated only METTL1)
+tr_df_sp <- tr_df_sp %>% distinct(gene_name, .keep_all = TRUE)
+
+write_tsv(tr_df_sp, '../input/transcriptomics.tsv')
+```
+
+The **normalized transcriptomic data set** formatted for SignalingProfiler analysis:
+```{r}
+tr_df_sp <- read_tsv('../input/transcriptomics.tsv', show_col_types = FALSE)
+head(tr_df_sp)
+```
+
+## Prepare proteomics for SignalingProfiler
+
+This chunk of code returns a proteomics table formatted for SignalingProfiler with: **Gene Name (Primary)** as key for the rows, **UNIPROT IDs** in a single string, **difference** (fold-change between metformin and ctrl), **logpval**, **significant** ('+' if the modulation is significant). 
+
+```{r eval = FALSE}
+# Read data without significance information
+prot_df_all <- read_excel('../raw input/proteomics.xlsx') %>%
+  mutate_at(c("Proteome Fold Change (log2)_replicate1",
+              "Proteome Fold Change (log2)_replicate2",
+              "Proteome Fold Change (log2)_replicate3"), as.numeric) %>%
+  mutate_all(~ifelse(is.nan(.), NA, .))
+
+# Compute the mean of the fold change
+prot_df <- prot_df_all %>%
+  select('gene_name' = 'Gene names', 'UNIPROT' = 'Majority protein IDs',
+         "Proteome Fold Change (log2)_replicate1",
+         "Proteome Fold Change (log2)_replicate2",
+         "Proteome Fold Change (log2)_replicate3") %>%
+  rowwise() %>%
+  mutate(prot_mean = mean(c_across(c(`Proteome Fold Change (log2)_replicate1`,
+                                     `Proteome Fold Change (log2)_replicate2`,
+                                     `Proteome Fold Change (log2)_replicate3`)),
+                          na.rm = TRUE)) %>%
+  select(gene_name, UNIPROT, prot_mean)
+
+# Remove proteins with a mean that is NaN
+prot_df_all_filtered <- prot_df %>% filter(!is.nan(prot_mean)) %>% arrange(gene_name)
+
+# Read data with significance information
+significant_tr_prot <- read_excel('../raw input/significant_prot_trans.xlsx')
+
+prot_sign_df <- significant_tr_prot %>% select(gene_name = `Gene names`,
+                                             UNIPROT = `Majority protein IDs`,
+                                             difference = `t-test Difference proteome`,
+                                             logpval = `-Log t-test p-value proteome`,
+                                             significant = `t-test Significant proteome`)
+
+# Union of significant and unsignificant proteins
+left_join(prot_df_all_filtered,
+          prot_sign_df, c('gene_name', 'UNIPROT')) -> prot_df_sp
+
+# Keep the values of t-test difference and take the mean only if there isn't
+prot_df_sp %>% mutate(difference = coalesce(difference, prot_mean)) -> prot_df_sp
+prot_df_sp$prot_mean <- NULL
+
+# Retrieve update UNIPROT ID and primary gene_name
+prot_df_sp_sep <- prot_df_sp %>% separate_rows(UNIPROT, sep = ';')
+
+res <- get_df_uni2info_2_isoforms(id_input = unique(prot_df_sp_sep$UNIPROT), batch_size = 400)
+
+res_sub <-  res %>% select(UNIPROT = Entry, gene_name = `Gene Names (primary)`)
+
+# Use UNIPROT IDs to map old and new proteomics data
+left_join(prot_df_sp_sep, res_sub, by = 'UNIPROT') -> joined_pr
+
+# Remove proteins without an updated gene_name
+joined_pr %>% filter(!is.na(gene_name.y)) -> joined_pr
+
+# Use gene_name as a key, if there are duplicates sample at random
+# NB: it isn't very precise but only 3 proteins were significant and unsignificant
+# in the duplicates
+prot_df_up <- joined_pr %>% group_by(gene_name.y) %>%
+  reframe(UNIPROT = paste0(UNIPROT, collapse = ';'),
+          difference,
+          logpval,
+          significant) %>%
+  distinct(gene_name.y, .keep_all = TRUE)
+
+prot_df_up <- prot_df_up %>% rename(gene_name = gene_name.y)
+
+write_tsv(prot_df_up, '../input/proteomics.tsv')
+```
+
+```{r}
+prot_df_sp <- read_tsv('../input/proteomics.tsv', show_col_types = FALSE)
+head(prot_df_sp)
+```
+
+
+## Prepare phosphoproteomics for SignalingProfiler
+
+This chunk of code returns a phosphoproteomic table formatted for SignalingProfiler with: **Gene Name (Primary)**, **UNIPROT IDs**, **aminoacid**, **position**, **sequence_window** a 15-mer centered on the modified residue, **difference** (fold-change between metformin and ctrl), **logpval**, **significant** ('+' if the modulation is significant). 
+
+```{r eval = FALSE}
+# Read data without significance information
+phos_df <- read_excel('../raw input/phosphoproteomics.xlsx') %>%
+  select('gene_name' = 'Gene names',
+         'UNIPROT' = "Leading proteins",
+         'sequence_window' = "Sequence window",
+         'aminoacid' = 'Amino acid',
+         'position' = 'Position',
+         "Phosphoproteome Fold Change (log2)_replicate1",
+         "Phosphoproteome Fold Change (log2)_replicate2",
+         "Phosphoproteome Fold Change (log2)_replicate3",
+         'Multiplicity')
+
+# Compute mean of phosphorylation of sites
+phos_df_diff <- phos_df %>%
+  mutate_at(c("Phosphoproteome Fold Change (log2)_replicate1",
+              "Phosphoproteome Fold Change (log2)_replicate2",
+              "Phosphoproteome Fold Change (log2)_replicate3"), as.numeric) %>%
+  mutate_all(~ifelse(is.nan(.), NA, .)) %>%
+  rowwise() %>%
+  mutate(phos_mean = mean(c_across(c(`Phosphoproteome Fold Change (log2)_replicate1`,
+                                     `Phosphoproteome Fold Change (log2)_replicate2`,
+                                     `Phosphoproteome Fold Change (log2)_replicate3`)),
+                          na.rm = TRUE))
+
+phos_df_diff <- phos_df_diff %>%
+  select(-c("Phosphoproteome Fold Change (log2)_replicate1",
+            "Phosphoproteome Fold Change (log2)_replicate2",
+            "Phosphoproteome Fold Change (log2)_replicate3"))
+
+# Remove NaN values in replicates
+phos_df_diff <- phos_df_diff %>% filter(!is.nan(phos_mean))
+
+# Read data with significance information
+phos_sign_df <- read_excel('../raw input/significant_phospho.xlsx')
+sum(phos_sign_df$`t-test Significant` == '+', na.rm = T)
+phos_sign_df_proc <- phos_sign_df %>% select(UNIPROT = `Leading proteins`,
+                                             gene_name = `Gene names`,
+                                             aminoacid = `Amino acid`,
+                                             position = Position,
+                                             sequence_window = `Sequence window`,
+                                             Multiplicity,
+                                             difference = `t-test Difference`,
+                                             logpval = `-Log t-test p-value`,
+                                             significant = `t-test Significant`)
+
+# Union of significant and unsignificant proteins
+# some phosphopeptides with different multiplicity aren't in the previous dataset
+# example: C1orf226
+phos_df_sp <- full_join(phos_df_diff,
+                        phos_sign_df_proc, c('gene_name', 'UNIPROT', 
+                                             'sequence_window', 'aminoacid', 
+                                             'position', 'Multiplicity')) 
+
+sum(phos_df_sp$significant == '+', na.rm = T)
+
+# Keep the values of t-test difference and take the mean only if there isn't
+phos_df_sp %>% mutate(difference = coalesce(difference, phos_mean)) -> phos_df_sp
+phos_df_sp$phos_mean <- NULL
+
+# Retrieve update UNIPROT ID, primary gene_name, and updated phosphopeptide
+phos_df_sp_sep <- phos_df_sp %>% separate_rows(UNIPROT, sep = ';')
+
+res <- get_df_uni2info_2_isoforms(id_input = unique(phos_df_sp_sep$UNIPROT), batch_size = 400)
+res_sub <-  res %>%
+  select('UNIPROT' = 'Entry', 'gene_name' = `Gene Names (primary)`,
+         Sequence, `Date of last sequence modification`) %>%
+  filter(!(gene_name == 'TMPO' & UNIPROT == 'P42167')) %>%
+  distinct()
+
+# Use UNIPROT IDs to map old and new proteomics data
+left_join(phos_df_sp_sep, res_sub, by = 'UNIPROT') -> joined_phos
+
+# Remove proteins without an updated gene_name
+joined_phos %>% filter(!is.na(gene_name.y)) -> joined_phos
+joined_phos$gene_name.x <- NULL
+
+phos_df_up <- joined_phos %>% group_by(gene_name.y) %>%
+  reframe(UNIPROT = paste0(unique(UNIPROT), collapse = ';'),
+          aminoacid,
+          position,
+          Multiplicity,
+          difference,
+          logpval,
+          significant,
+          sequence_window) %>%
+  distinct(gene_name.y, aminoacid, position, Multiplicity, .keep_all = TRUE)
+
+# Remove Multiplicity step
+phos_df_up_clean <- RemoveMultiplicity(phos_df_up, idx_sw = 9, idx_multiplicity = 5)
+phos_df_up_clean <- phos_df_up_clean %>% rename('gene_name' = 'gene_name.y')
+
+# A phosphosite is still duplicated because it has
+# different sequence windows on the same peptide (SPAG9 S 251), we sample at random
+phos_df_up_clean <- phos_df_up_clean %>%
+  distinct(gene_name, aminoacid, position, .keep_all = TRUE)
+
+# ============================================ #
+# Update sequence window
+# ============================================ #
+
+phos_df_up_clean_seq <- inner_join(phos_df_up_clean %>%
+                                     separate_rows(UNIPROT, sep = ';'),
+                                   res_sub %>% select(-gene_name), by = 'UNIPROT')
+
+# Add the Length columns and extract Phosphopeptide
+phospho_df_sd_update <- phos_df_up_clean_seq %>%
+  mutate(Length = nchar(Sequence)) %>%
+  relocate(gene_name, UNIPROT, Sequence, position, aminoacid, Length)
+
+# Remove phosphopeptides with a position longer than sequence
+phospho_df_clean2 <- phospho_df_sd_update %>% filter(position < Length)
+
+# Extract phosphopeptides according to the residue position
+phospho_df_clean2 <- phospho_df_clean2 %>% mutate(phosphopeptide = str_sub(Sequence,
+                                                                           ifelse(position - 7 < 0, 1, 
+                                                                                  position - 7),
+                                                                           ifelse(position + 7 > Length, 
+                                                                                  Length, position + 7))) %>%
+  relocate(gene_name, UNIPROT, Sequence, position, aminoacid, Length, phosphopeptide)
+
+# keep the successfully extracted phosphosites (length == 15)
+phospho_df_complete <- phospho_df_clean2[unlist(lapply(phospho_df_clean2$phosphopeptide, function(x){nchar(x)}) == 15),]
+
+# fix the peptides shorter than 15
+# _____XXXX for the modified residues at the beginning
+# XXXX_____ for the modifies residues at the end
+phospho_df_clean2[unlist(lapply(phospho_df_clean2$phosphopeptide, 
+                                function(x){nchar(x)}) < 15),] -> short_pepetides
+
+short_pepetides %>% relocate(phosphopeptide) -> short_pepetides
+
+# create a column reporting the number of _ to add
+# if it is at the beginning the number is 7 - position + 1
+# if its at the end: 7 - (length - position)
+# this step is necessary for rep function! but we don't want to annotate
+# this number in the official table, as such create a new table 'aaa'
+
+short_pepetides %>% mutate(number = ifelse(position > Length - 7,
+                                           7 - (Length - position),
+                                           7 - position + 1)) -> aaa
+
+short_pepetides <- aaa %>% mutate(phosphopeptide = ifelse(position > Length - 7,
+                                                          paste0(phosphopeptide, strrep('_', number)),
+                                                          paste0(strrep('_', number), phosphopeptide)))
+
+# link the old correct table with this one!
+phospho_df_complete <- bind_rows(phospho_df_complete, short_pepetides)
+
+# remove columns regarding the protein
+phospho_df_complete$Sequence <- NULL
+phospho_df_complete$Length <- NULL
+phospho_df_complete$number <- NULL
+
+phospho_df_complete_final <- phospho_df_complete %>% relocate(UNIPROT, gene_name, position, aminoacid, phosphopeptide)
+nrow(phospho_df_complete_final) #19244
+
+# check if 8 position is the aminoacid and remove not correct positions
+phospho_df_complete_final <- phospho_df_complete_final %>%
+  mutate(central = str_sub(phosphopeptide, 8,8)) %>%
+  relocate(central)
+
+phospho_df_complete_final %>% filter(central == aminoacid) -> phospho_df_complete_final_clean
+
+phospho_df_complete_final_clean$central <- NULL
+
+phospho_df_complete_final_clean
+nrow(phospho_df_complete_final_clean) #8968
+
+# There can be multiple sequences matching the same gene name
+# using the most update date
+phospho_df_complete_final_clean$`Date of last sequence modification` <- as.Date(phospho_df_complete_final_clean$`Date of last sequence modification`)
+
+phospho_df_complete_final_clean %>%
+  group_by(gene_name, position, aminoacid, Multiplicity, difference, logpval, significant) %>%
+  filter(`Date of last sequence modification` == max(`Date of last sequence modification`)) -> temp_df
+
+# If there are multiple sequences, remove the isoforms!
+df_filtered <- temp_df %>%
+  group_by(gene_name, position, aminoacid, Multiplicity, difference, logpval, significant) %>%
+  filter(!any(grepl("-", UNIPROT)) | n() == 1) %>%
+  ungroup()
+
+# Create a clean dataset with multiple UNIPROT IDs associated to one Primary Gene Name
+df_filtered %>%
+  group_by(gene_name, position, aminoacid, Multiplicity, difference, logpval, significant) %>%
+  reframe(UNIPROT = paste0(unique(UNIPROT), collapse = ';'),
+          phosphopeptide = paste0(unique(phosphopeptide), collapse = ';'),
+          sequence_window = paste0(unique(sequence_window), collapse = ';')) -> clean_phospho
+
+clean_phospho$sequence_window <- NULL
+clean_phospho$Multiplicity <- NULL
+
+clean_phospho_final <- clean_phospho %>%
+  relocate(UNIPROT, gene_name, aminoacid, position, sequence_window = phosphopeptide, difference, logpval, significant)
+
+write_tsv(clean_phospho_final, '../input/phosphoproteomics.tsv')
+```
+
+The **not normalized phosphoproteomic data set** formatted for SignalingProfiler analysis:
+```{r}
+phospho_sp <- read_tsv('../input/phosphoproteomics.tsv', show_col_types = FALSE)
+head(phospho_sp)
+```
+
+### Normalize phosphoproteomics over proteomics
+
+This passage allowed us to give more importance to phosphosites with a phosphorylation level opposed to proteomics and minimize the one with the same fold-change sign as proteomics. 
+```{r eval = FALSE}
+prot_df <- read_tsv('../input/proteomics.tsv')
+phospho_df <- read_tsv('../input/phosphoproteomics.tsv')
+
+# Merge according to the Primary GN phosphoproteomics and proteomics
+phospho_prot_df <- left_join(phospho_df,
+                             prot_df, by = 'gene_name', suffix = c('.phospho', '.prot'))
+phospho_prot_df$UNIPROT.prot <- NULL
+
+# If proteomics is not NA
+# compute the difference between phosphoproteomic and proteomic data
+phospho_prot_df <- phospho_prot_df %>%
+  mutate(difference.phospho.corr = ifelse(is.na(difference.prot),
+                                          difference.phospho,
+                                          difference.phospho - difference.prot))
+
+```
+
+The corrected phosphorylationl level need a new associated p-value. As such, we compute the z-score of the distribution of the corrected score and assign as significant only the phosphosite with an absolute zscore higher than 1.96.
+
+```{r eval = FALSE}
+# Compute the zscore
+phospho_prot_df <- phospho_prot_df %>%
+  mutate(zscore = (difference.phospho.corr - mean(difference.phospho.corr))/sd(difference.phospho.corr))
+
+phospho_prot_df <- phospho_prot_df %>% mutate(significant.zscore = ifelse(zscore < -1.96 | zscore > 1.96, '+', NA),
+                                              logpval.zscore = -log(2 * (1 - pnorm(abs(zscore)))))
+
+# Separate the corrected ones from the phosphosite not mapped in proteomics
+
+# If there is no proteomics just keep original phosphorylation level 
+phospho_prot_df %>% filter(is.na(difference.prot)) -> not_mapped
+not_mapped <- not_mapped %>% select(UNIPROT = UNIPROT.phospho,
+                                    gene_name, aminoacid, position, sequence_window,
+                                    difference = difference.phospho.corr,
+                                    logpval = logpval.phospho,
+                                    significant = significant.phospho)
+
+# If there is proteomics, we consider the corrected phosphorylation level as difference
+# and as p-value the one derived from the z-score
+mapped <- phospho_prot_df %>%
+  filter(!is.na(difference.prot)) %>%
+  select(UNIPROT = UNIPROT.phospho,
+         gene_name, aminoacid, position, sequence_window,
+         difference = difference.phospho.corr,
+         logpval = logpval.zscore,
+         significant = significant.zscore)
+
+# Bind the two datasets
+phospho_prot_df_final <- bind_rows(not_mapped, mapped)
+write_tsv(phospho_prot_df_final, '../input/corrected_phosphoproteomics.tsv')
+```
+
+The **normalized phosphoproteomic data set** formatted for SignalingProfiler analysis:
+```{r}
+normalized_phospho_df <- read_tsv('../input/corrected_phosphoproteomics.tsv', show_col_types = FALSE)
+head(normalized_phospho_df)
+```
+

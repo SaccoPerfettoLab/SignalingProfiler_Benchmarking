@@ -1,0 +1,359 @@
+---
+title: "FLT3-ITD driven AML cell lines treated with FLT3 inhibitor (AC220)"
+author: "Veronica Venafra"
+output:
+  html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#"
+)
+
+```
+
+## Import libraries
+
+```{r}
+library(tidyverse)
+library(SignalingProfiler)
+library(igraph)
+```
+## Step 1) Proteins' activity inference
+
+```{r eval = FALSE}
+
+tr_df <- read_tsv(paste0('../input/AML_transcriptomics.tsv'))
+prot_df <- read_tsv(paste0('../input/AML_proteomics.tsv'))
+phos_df <- read_tsv(paste0('../input/AML_corr_phosphoproteomics.tsv')) %>%
+  distinct(UNIPROT, aminoacid, position, .keep_all = TRUE)
+
+# Infer transcription factors
+tf_activity_foot <- run_footprint_based_analysis(omic_data = tr_df,
+                                                 analysis = 'tfea',
+                                                 organism = 'mouse',
+                                                 reg_minsize = 1,
+                                                 exp_sign = FALSE,
+                                                 collectri = FALSE,
+                                                 hypergeom_corr = TRUE,
+                                                 GO_annotation = TRUE,
+                                                 correct_proteomics = FALSE,
+                                                 prot_df = prot_df)
+
+# Infer kinases and phosphatases
+kin_phos_activity_foot <- run_footprint_based_analysis(omic_data = phos_df,
+                                                       analysis = 'ksea',
+                                                       organism = 'mouse',
+                                                       reg_minsize = 1,
+                                                       exp_sign = FALSE,
+                                                       integrated_regulons = TRUE, # without the Atlas if FALSE
+                                                       hypergeom_corr = TRUE,
+                                                       GO_annotation = TRUE,
+                                                       correct_proteomics = TRUE,
+                                                       prot_df = prot_df)
+# Use PhosphoScore activity
+phosphoscore_df <- phosphoscore_computation(phosphoproteomic_data = phos_df,
+                                            organism = 'hybrid',
+                                            activatory = TRUE ,
+                                            GO_annotation = TRUE)
+
+# Combine Footprint and PhosphoScore
+combined_tf <- combine_footprint_and_phosphoscore(footprint_output = tf_activity_foot,
+                                                  phosphoscore_df =  phosphoscore_df,
+                                                  analysis =  'tfea')
+
+combined_kin_phos <- combine_footprint_and_phosphoscore(footprint_output = kin_phos_activity_foot,
+                                                        phosphoscore_df =  phosphoscore_df,
+                                                        analysis =  'ksea')
+
+toy_tf <- combined_tf
+toy_kin <- combined_kin_phos
+toy_other <- phosphoscore_df %>%
+  dplyr::filter(mf == 'other') %>%
+  dplyr::rename(final_score = phosphoscore) %>%
+  dplyr::mutate(method = 'PhosphoScore')
+
+# create a unified 'activity modulation' table for the next steps
+toy_activity_df <- dplyr::bind_rows(toy_tf, toy_kin, toy_other) %>%
+  select(UNIPROT, gene_name, mf, final_score, method)
+
+write_tsv(toy_activity_df, paste0('../results/6.independent_datasets/quizartinib/AML_activities.tsv'))
+```
+
+Visualization of inferred proteins
+
+```{r fig.width=12, fig.height=6, fig.align='center'}
+
+inferred_proteins_df <- read_tsv('../results/6.independent_datasets/quizartinib/AML_activities.tsv')
+
+inferred_proteins_df$mf <- factor(inferred_proteins_df$mf, levels = c('tf', 'kin', 'phos', 'other'))
+
+inferred_proteins_df %>% filter(abs(final_score) > 2) -> plot_df
+
+ggplot(plot_df,
+       aes(x = fct_reorder(gene_name, final_score), y = final_score)) +
+  geom_bar(stat = "identity", aes(fill = final_score), alpha = 1) +
+  facet_grid(. ~ mf, space ='free_x', scales = 'free') +
+  theme_classic() +
+  scale_fill_gradient2(low = "#89ABD6", high = "#FF6A72",
+                       mid = "whitesmoke", midpoint = 0) +
+  theme(text = element_text(size= 10),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 5),
+        legend.position="bottom",
+        legend.title = element_blank()) +
+  xlab('') +
+  #coord_flip()+
+  ylab('Final score') 
+
+```
+
+
+
+## Step 2) Causal network generation 
+
+```{r eval = FALSE}
+
+toy_prot_activity_df <- read_tsv(paste0('../results/6.independent_datasets/quizartinib/AML_activities.tsv'))
+
+# Naive network generation
+PKN_table <- choose_PKN(organism = 'mouse',
+                        with_atlas = FALSE,
+                        custom = FALSE,
+                        custom_path = NULL)
+
+PKN_expressed <- preprocess_PKN(omics_data = list(tr_df, prot_df, phos_df),
+                                PKN_table = PKN_table)
+
+# divide proteins according to the molecular function
+kin_phos_other <- toy_prot_activity_df %>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+tfs <- toy_prot_activity_df %>%
+  dplyr::filter(mf == 'tf')
+
+# create the naïve network
+two_layers_toy <- two_layer_naive_network(starts_gn = c('Flt3'),
+                                          intermediate_gn = kin_phos_other$gene_name,
+                                          targets_gn = tfs$gene_name,
+                                          PKN_table = PKN_expressed, #or PKN_mouse
+                                          max_length_1 = 3,
+                                          max_length_2 = 4,
+                                          rds_path = paste0('../results/6.independent_datasets/quizartinib/AML_two_naive.rds'),
+                                          sif_path = paste0('../results/6.independent_datasets/quizartinib/AML_two_naive.sif'),
+                                          connect_all = TRUE)
+
+# CARNIVAL RUN
+receptor_list <- list('Flt3' = -1)
+
+carnival_input <- prepare_carnival_input(two_layers_toy,
+                                         toy_prot_activity_df,
+                                         receptor_list,
+                                         organism = 'mouse')
+
+solver = 'cplex'
+carnival_options = default_CARNIVAL_options(solver)
+
+# Two layered CARNIVAL
+
+# FIRST RUN: RECEPTOR to KIN, PHOS, OTHERS
+receptors_df <- carnival_input %>%
+  dplyr::filter(mf == 'rec')
+
+target1_df <- carnival_input%>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+naive_network <- readr::read_tsv(paste0('../results/6.independent_datasets/quizartinib/AML_two_naive.sif'),
+                                 col_names = c('source', 'interaction', 'target'))
+
+output1 <- run_carnival_and_create_graph(source_df = receptors_df,
+                                         target_df = target1_df,
+                                         naive_network = unique(naive_network),
+                                         proteins_df = carnival_input,
+                                         organism = 'mouse',
+                                         carnival_options = carnival_options,
+                                         files = FALSE,
+                                         with_atlas = FALSE)
+
+# SECOND RUN: from KIN, PHOS, OTHERS to TFs
+run1_output_nodes <- convert_output_nodes_in_next_input(output1)
+
+run1_output_nodes2 <- molecular_function_annotation(inferred_proteins_dataset = run1_output_nodes,
+                                                    organism = 'mouse')
+
+source_df <- run1_output_nodes %>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+source_df$UNIPROT <- ''
+
+target2_df <- carnival_input %>%
+  dplyr::filter(mf == 'tf')
+
+output2 <- run_carnival_and_create_graph(source_df = source_df,
+                                         target_df = target2_df,
+                                         naive_network = unique(naive_network),
+                                         proteins_df = carnival_input,
+                                         organism = 'mouse',
+                                         carnival_options = carnival_options,
+                                         files = FALSE,
+                                         with_atlas = FALSE)
+# UNION OF RUN1 and RUN2 graphs
+union <- union_of_graphs(graph_1 = output1$igraph_network,
+                         graph_2 = output2$igraph_network,
+                         proteins_df = carnival_input,
+                         files = TRUE,
+                         path_sif = paste0('../results/6.independent_datasets/quizartinib/AML_union_optimized.sif'),
+                         path_rds = paste0('../results/6.independent_datasets/quizartinib/AML_union_optimized.rds'))
+
+# EXPANSION and MAPPING of PHOSPHOPROTEOMICS DATA ON EDGES
+union_graph_rds <- readRDS(paste0('../results/6.independent_datasets/quizartinib/AML_union_optimized.rds'))
+union_graph_sif <- readr::read_tsv(paste0('../results/6.independent_datasets/quizartinib/AML_union_optimized.sif'),
+                                   col_names = c('source', 'interaction', 'target'))
+
+
+union_output_final <- expand_and_map_edges(optimized_object = union_graph_rds,
+                                           organism = 'mouse',
+                                           phospho_df = phos_df,
+                                           files = TRUE,
+                                           with_atlas = FALSE,
+                                           path_sif = paste0('../results/6.independent_datasets/quizartinib/AML_union_validated.sif'),
+                                           path_rds = paste0('../results/6.independent_datasets/quizartinib/AML_union_validated.rds'))
+
+```
+
+## Step 3) Hallmark phenotypes inference
+
+```{r eval = FALSE}
+
+# PhenoScore computation new
+pheno_table_distances <- phenoscore_network_preprocessing(proteomics = prot_df %>% mutate(gene_name = str_to_upper(gene_name)),
+                                                          phospho = phos_df %>% mutate(gene_name = str_to_upper(gene_name)))
+
+sp_output <- readRDS(paste0('../results/6.independent_datasets/quizartinib/AML_union_validated.rds'))
+
+desired_phenotypes <- c('APOPTOSIS',
+                        'CELL_DEATH',  'CELL_GROWTH', 'CELL_CYCLE_BLOCK',
+                        'DNA_REPAIR',
+                        'PROLIFERATION', 'IMMORTALITY', 'SURVIVAL')
+
+as_data_frame(sp_output$igraph_network, what = 'edges')
+sp_output$igraph_network <- graph_from_data_frame(d = as_data_frame(sp_output$igraph_network, what = 'edges') %>%
+                                                    mutate_at(c('from', 'to'), str_to_upper),
+                                                  vertices = as_data_frame(sp_output$igraph_network, what = 'vertices') %>%
+                                                    mutate_at('name', str_to_upper))
+
+toy_phenoscore_output<- phenoscore_computation(proteins_df = sp_output$nodes_df %>% mutate(gene_name = str_to_upper(gene_name)),
+                                               desired_phenotypes = desired_phenotypes,
+                                               pheno_distances_table = pheno_table_distances,
+                                               sp_graph = sp_output$igraph_network,
+                                               # closeness of proteins to phenotypes
+                                               path_length = 4,
+                                               stat = 'mean',
+                                               zscore_threshold = -1.96,
+                                               # exclude random phenotypes
+                                               n_random = 1000,
+                                               pvalue_threshold = 0.05,
+                                               # optimized network  specificity
+                                               remove_cascade = TRUE,
+                                               node_idx = TRUE,
+                                               use_carnival_activity = TRUE,
+                                               create_pheno_network = TRUE)
+
+write_rds(toy_phenoscore_output, paste0('../results/6.independent_datasets/quizartinib/AML_pheno_network.RDS'))
+```
+
+```{fig.width=6, fig.height=6, fig.align='center'}
+toy_phenoscore_output <- readRDS('../results/6.independent_datasets/quizartinib/AML_pheno_network.RDS')
+toy_phenoscore_output$barplot
+```
+
+
+## Step 4) Generate functional circuits for higher interpretability 
+
+
+#### Step 4a) Optimization of the final network over phenotypic activity 
+
+```{r eval = FALSE}
+
+
+output_list <- read_rds('../results/6.independent_datasets/quizartinib/AML_pheno_network.RDS')
+background_phos <-  read_tsv(paste0('../input/AML_corr_phosphoproteomics.tsv')) %>%
+  distinct(UNIPROT, aminoacid, position, .keep_all = TRUE)
+
+solver = 'cplex'
+carnival_options <- default_CARNIVAL_options(solver)
+
+output_list$sp_object_phenotypes$nodes_df <- output_list$sp_object_phenotypes$nodes_df %>%
+  mutate(gene_name = ifelse(mf != 'phenotype', str_to_title(gene_name), gene_name))
+
+phenotypes <- output_list$sp_object_phenotypes$nodes_df  %>% filter(mf == 'phenotype')
+
+output_list$sp_object_phenotypes$edges_df -> uuuuuu
+
+output_list$sp_object_phenotypes$edges_df <- output_list$sp_object_phenotypes$edges_df %>%
+  mutate(source = ifelse(!source %in% phenotypes$gene_name, str_to_title(source), source),
+         target = ifelse(!target %in% phenotypes$gene_name, str_to_title(target), target))
+
+
+output_list$sp_object_phenotypes$igraph_network  <- graph_from_data_frame(d = output_list$sp_object_phenotypes$edges_df,
+                                                                          vertices = output_list$sp_object_phenotypes$nodes_df)
+
+opt1 <- optimize_pheno_network(sp_object = output_list,
+                               organism = 'mouse',
+                               phospho_df = background_phos,
+                               carnival_options = carnival_options,
+                               files = TRUE,
+                               direct = TRUE,
+                               with_atlas = FALSE,
+                               path_sif = paste0('../results/6.independent_datasets/quizartinib/pheno_opt1.sif'),
+                               path_rds = paste0('../results/6.independent_datasets/quizartinib/pheno_opt1.rds'))
+
+# Manually add phenotype label because gomf_mouse not working... check SP
+opt1$sp_object_phenotypes$nodes_df <- opt1$sp_object_phenotypes$nodes_df %>%
+  mutate(mf = ifelse(gene_name == str_to_upper(gene_name), 'phenotype', mf))
+
+write_rds(opt1, paste0('../results/6.independent_datasets/quizartinib/AML_pheno_opt1.rds'))
+
+# Cytoscape visualization
+# opt1$sp_object_phenotypes <- format_for_visualization(opt1$sp_object_phenotypes)
+# RCy3::createNetworkFromIgraph(igraph=opt1$sp_object_phenotypes$igraph_network,
+#                               title = 'Optimized model',
+#                               collection = 'JMD quizartinib')
+# RCy3::setVisualStyle('SP_pheno_layout')
+```
+
+#### Step 4b) Functional circuits visualization
+
+```{r eval = FALSE}
+
+opt1 <- readRDS(paste0('../results/6.independent_datasets/quizartinib/AML_pheno_opt1.rds'))
+
+opt1$sp_object_phenotypes <- format_for_visualization(opt1$sp_object_phenotypes)
+
+start_nodes <- c('Flt3')
+phenotypes_df <- opt1$sp_object_phenotypes$nodes_df %>% filter(mf == 'phenotype')
+
+opt1$sp_object_phenotypes$edges_df -> uuuuu
+# Circuit autophagy, ribosome
+circuit <- pheno_to_start_circuit(SP_object = opt1$sp_object_phenotypes,
+                                  start_nodes = start_nodes,
+                                  phenotypes = phenotypes_df$gene_name,
+                                  k = 7,
+                                  start_to_top = TRUE)
+
+# Cytoscape visualization
+RCy3::createNetworkFromIgraph(igraph=circuit,
+                              title = 'Circuit',
+                              collection = 'JMD quizartinib')
+RCy3::setVisualStyle('SP_pheno_layout')
+
+```
+

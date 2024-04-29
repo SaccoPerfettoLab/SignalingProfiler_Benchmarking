@@ -1,0 +1,332 @@
+---
+title: "SignalingProfiler analysis with custom PKN"
+author: "Veronica Venafra"
+output:
+  html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#"
+)
+```
+
+## Introduction
+
+This workbook refers to the manuscript *SignalingProfiler 2.0: a network-based approach to bridge multi-omic data to phenotypic hallmarks*.
+
+## Import SignalingProfiler 2.0 and other libraries
+
+```{r}
+library(SignalingProfiler)
+library(tidyverse)
+```
+
+## Read input omic data
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+tr_df <- read_tsv('../input/transcriptomics.tsv')
+prot_df <- read_tsv('../input/proteomics.tsv')
+phospho_df <- read_tsv('../input/corrected_phosphoproteomics.tsv')
+```
+
+## Perform SignalingProfiler analysis with custom regulons
+
+### Step 1) Infer the protein activity using custom regulons
+
+We suggest to create all the regulons and then run the analysis, since the download of regulons requires some minutes. As an alternative, built-in regulons can be used (see SignalingProfiler tutorial).
+
+#### TFEA analysis
+
+```{r eval = FALSE}
+tfea_regulons <- create_tfea_regulons(resources = c('SIGNOR', 'Dorothea'),
+                                      organism = 'human')
+write_tsv(tfea_regulons, '../custom_regulons/tfea_custom_regulons.tsv')
+```
+
+Run the analysis
+
+```{r}
+tfea_result <- run_footprint_based_analysis(omic_data = tr_df,
+                                   analysis = 'tfea',
+                                   organism = 'human',
+                                   reg_minsize = 10,
+                                   exp_sign = FALSE,
+                                   integrated_regulons = FALSE,
+                                   collectri = FALSE,
+                                   hypergeom_corr = TRUE,
+                                   correct_proteomics = TRUE,
+                                   prot_df = prot_df,
+                                   GO_annotation = TRUE,
+                                   custom = TRUE,
+                                   custom_path = '../custom_regulons/tfea_custom_regulons.tsv' )
+```
+
+#### KSEA analysis
+
+```{r eval = FALSE}
+ksea_regulons <- create_ksea_regulons(resources = c('SIGNOR', 'Omnipath'), 
+                                      organism = 'human')
+write_tsv(ksea_regulons, '../custom_regulons/ksea_custom_regulons.tsv')
+```
+
+Run the analysis
+
+```{r}
+ksea_result <- run_footprint_based_analysis(omic_data = phospho_df,
+                                   analysis = 'ksea',
+                                   organism = 'human',
+                                   reg_minsize = 5,
+                                   exp_sign = FALSE,
+                                   integrated_regulons = FALSE,
+                                   collectri = FALSE,
+                                   hypergeom_corr = TRUE,
+                                   correct_proteomics = TRUE,
+                                   prot_df = prot_df,
+                                   GO_annotation = TRUE,
+                                   custom = TRUE,
+                                   custom_path = '../custom_regulons/ksea_custom_regulons.tsv' )
+```
+
+#### PhosphoScore analysis
+
+```{r eval = FALSE}
+reg_phosphosites <- get_phosphoscore_info(resources = c('SIGNOR', 'PsP'), 
+                      organism = 'human', 
+                      psp_reg_site_path = '../../revisions/input/Regulatory_sites_2023-08-24',
+                      only_activatory = TRUE)
+write_tsv(reg_phosphosites, '../custom_regulons/act_phosphosites.tsv')
+```
+
+Run the PhosphoScore analysis
+
+```{r}
+phosphoscore_df <- phosphoscore_computation(phosphoproteomic_data = phospho_df,
+                                            organism = 'human',
+                                            activatory = TRUE ,
+                                            GO_annotation= TRUE,
+                                            custom = TRUE,
+                                            custom_path = '../custom_regulons/act_phosphosites.tsv')
+```
+
+#### Final activity score computation
+
+```{r}
+
+combined_tfs <- combine_footprint_and_phosphoscore(footprint_output = tfea_result,
+                                                   phosphoscore_df =  phosphoscore_df,
+                                                   analysis =  'tfea')
+
+combined_kin_phos <- combine_footprint_and_phosphoscore(footprint_output = ksea_result,
+                                                        phosphoscore_df =  phosphoscore_df,
+                                                        analysis =  'ksea')
+
+toy_other <- phosphoscore_df %>%
+  dplyr::filter(mf == 'other') %>%
+  dplyr::rename(final_score = phosphoscore) %>%
+  dplyr::mutate(method = 'PhosphoScore')
+
+prot_activity_df <- dplyr::bind_rows(combined_tfs, 
+                                    combined_kin_phos, 
+                                    toy_other) %>%
+  select(UNIPROT, gene_name, mf, final_score, method)
+
+prot_activity_df
+```
+
+### Step 2) Context-specific network generation using custom PKN
+
+#### Custom PKN generation
+Generate a custom PKN choosing among 3 databases (4 if we consider Ser/Thr Kinome Atlas):
+
+-   SIGNOR
+
+-   PhosphoSitePlus: to use it you have to manually download 'Regulatory_sites.gz' and 'Kinase_Substrate_Dataset.gz' from [here](staticDownloads), after registration.
+
+    -   You can also insert the information of [Ser/Thr Kinome Atlas work](https://www.nature.com/articles/s41586-022-05575-3).
+
+-   OmniPath
+
+You can also specify whether the interactions should be only direct with the direct argument.
+
+```{r eval = FALSE}
+
+create_PKN(database = c('SIGNOR', 'PsP'), #add also 'Omnipath' or 'Ser/Thr_Kinome_Atlas'
+           direct = TRUE,
+           organism = 'human', 
+           psp_reg_site_path = '../../revisions/input/Regulatory_sites_2023-08-24',
+           psp_kin_sub_path = '../../revisions/input/Kinase_Substrate_Dataset_2023-08-24', 
+           file_path =  '../custom_regulons/custom_PKN.RDS') 
+    
+```
+
+The function returns:
+
+-   a list of an igraph object of the PKN;
+
+-   a table of the entities included in the PKN;
+
+-   a table of the interactions composing the PKN;
+
+#### Naive network generation
+
+```{r eval = FALSE}
+
+# Extract the interactions object and apply SignalingProfiler commands
+PKN_object <- readRDS('../custom_regulons/custom_PKN.RDS')
+PKN_table <- PKN_object$interactions
+
+PKN_expressed <- preprocess_PKN(omics_data = list(tr_df, prot_df, phospho_df),
+                                PKN_table = PKN_table)
+
+# divide proteins according to the molecular function
+kin_phos_other <- prot_activity_df %>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+tfs <- prot_activity_df %>%
+  dplyr::filter(mf == 'tf')
+
+# create the naïve network
+two_layers_toy <- two_layer_naive_network(starts_gn = c('AMPK', 'MTOR'),
+                                          intermediate_gn = kin_phos_other$gene_name,
+                                          targets_gn = tfs$gene_name,
+                                          PKN_table = PKN_expressed, #or PKN_mouse
+                                          max_length_1 = 3,
+                                          max_length_2 = 4,
+                                          rds_path = paste0('../custom_regulons/two_naive.rds'),
+                                          sif_path = paste0('../custom_regulons/two_naive.sif'),
+                                          connect_all = TRUE)
+
+two_layers_toy
+```
+#### Optimization of the naive network over the protein activity
+
+```{r eval = FALSE}
+two_layers_toy <- readRDS('../custom_regulons/two_naive.rds')
+receptor_list <- list('MTOR' = -1, 'AMPK' = 1)
+
+carnival_input <- prepare_carnival_input(two_layers_toy,
+                                         prot_activity_df,
+                                         receptor_list,
+                                         organism = 'human')
+
+# Set ILP Solver options
+solver = 'cplex'
+carnival_options = default_CARNIVAL_options(solver)
+carnival_options$timelimit <- 600
+
+# FIRST RUN: RECEPTOR to KIN, PHOS, OTHERS
+receptors_df <- carnival_input %>%
+  dplyr::filter(mf == 'rec')
+
+target1_df <- carnival_input%>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+
+naive_network <- readr::read_tsv(paste0('../custom_regulons/two_naive.sif'),
+                                 col_names = c('source', 'interaction', 'target'))
+
+output1 <- run_carnival_and_create_graph(source_df = receptors_df,
+                                         target_df = target1_df,
+                                         naive_network = unique(naive_network),
+                                         proteins_df = carnival_input,
+                                         organism = 'human',
+                                         carnival_options = carnival_options,
+                                         files = FALSE,
+                                         with_atlas = FALSE)
+
+# SECOND RUN: from KIN, PHOS, OTHERS to TFs
+run1_output_nodes <- convert_output_nodes_in_next_input(output1)
+
+source_df <- run1_output_nodes %>%
+  dplyr::filter(mf %in% c('kin', 'phos', 'other'))
+source_df$UNIPROT <- ''
+
+target2_df <- carnival_input %>%
+  dplyr::filter(mf == 'tf')
+
+output2 <- run_carnival_and_create_graph(source_df = source_df,
+                                         target_df = target2_df,
+                                         naive_network = unique(naive_network),
+                                         proteins_df = carnival_input,
+                                         organism = 'human',
+                                         carnival_options = carnival_options,
+                                         files = FALSE,
+                                         with_atlas = FALSE)
+
+# UNION OF RUN1 and RUN2 graphs
+union <- union_of_graphs(graph_1 = output1$igraph_network,
+                         graph_2 = output2$igraph_network,
+                         proteins_df = carnival_input,
+                         files = TRUE,
+                         path_sif = paste0('../custom_regulons/union_optimized.sif'),
+                         path_rds = paste0('../custom_regulons/union_optimized.rds'))
+
+# EXPANSION and MAPPING of PHOSPHOPROTEOMICS DATA ON EDGES
+union_graph_rds <- readRDS(paste0('../custom_regulons/union_optimized.rds'))
+union_output_final <- expand_and_map_edges(optimized_object = union_graph_rds,
+                                           organism = 'human',
+                                           phospho_df = phospho_df,
+                                           files = TRUE,
+                                           with_atlas = FALSE,
+                                           path_sif = paste0('../custom_regulons/union_validated.sif'),
+                                           path_rds = paste0('../custom_regulons/union_validated.rds'))
+
+```
+
+### Step 3) Phenotypic activity inference
+
+```{r eval=FALSE}
+pheno_table_distances <- phenoscore_network_preprocessing(proteomics = prot_df,
+                                                          phospho = phospho_df)
+write_rds(pheno_table_distances, '../custom_regulons/pheno_table_distances.rds')
+```
+
+```{r eval = FALSE}
+pheno_table_distances <- readRDS('../custom_regulons/pheno_table_distances.rds')
+sp_output <- readRDS('../custom_regulons/union_validated.rds')
+
+toy_phenoscore_output<- phenoscore_computation(proteins_df = sp_output$nodes_df,
+                                               desired_phenotypes = NULL,
+                                               pheno_distances_table = pheno_table_distances,
+                                               sp_graph = sp_output$igraph_network,
+                                               # closeness of proteins to phenotypes
+                                               path_length = 4,
+                                               stat = 'mean',
+                                               zscore_threshold = -1.96,
+                                               # exclude random phenotypes
+                                               n_random = 1000,
+                                               pvalue_threshold = 0.05,
+                                               # optimized network  specificity
+                                               remove_cascade = TRUE,
+                                               node_idx = TRUE,
+                                               use_carnival_activity = TRUE,
+                                               create_pheno_network = TRUE)
+
+write_rds(toy_phenoscore_output, '../custom_regulons/phenoscore.rds')
+```
+
+```{r}
+
+toy_phenoscore_output <- readRDS( '../custom_regulons/phenoscore.rds')
+
+toy_phenoscore_output$table_phenotypes %>% 
+  filter(EndPathways %in% c('fatty acid biosynthesis', 
+                            'lipogenesis', 'autophagy', 
+                            'apoptosis', 'cell death', 'adipogenesis', 
+                            'glycogen synthesis', 
+                            'protein synthesis', 
+                            'glycolysis', 'proliferation')) %>% 
+  arrange(desc(phenoscore))
+```
+
