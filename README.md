@@ -26,4 +26,4 @@ The repository showcases the code used for the benchmarking of *SignalingProfile
 
 8.  [AML analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/9.JMD_quizartinib_analysis.html)
 
-9.  [Metformin analysis with custom regulons](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/7.Custom_PKN_analysis.html)
+9.  [Metformin analysis with custom regulons](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/7.Custom_PKN_analysis.html) 
