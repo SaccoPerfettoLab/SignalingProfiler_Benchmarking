@@ -12,18 +12,20 @@ The repository showcases the code used for the benchmarking of *SignalingProfile
 
 1.  [Data cleaning and preparation for *SignaligProfiler*](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/1.Data_preparation_for_SP.html)
 
-2.  [Gold standard creation for the benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/2.Gold_standard_creation.html)
+2.  [Training dataset gold standard creation for the parameters tuning process (Sacco et al., 2016)](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/2.Gold_standard_creation.html)
 
-3.  [Step 1 benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/3.Step1_benchmark.html)
+3.  [Step 1 parameters tuning process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/3.Step1_benchmark.html)
 
-4.  [Step 2 benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/4.Step2_benchmark.html)
+4.  [Step 2 parameters tuning process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/4.Step2_benchmark.html)
 
-5.  [Step 3 benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/5.Step3_benchmark.html)
+5.  [Step 3 parameters tuning process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/5.Step3_benchmark.html)
 
-6.  [Visualization of best networks of the benchmarking process](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/6.Visualization.html)
+6.  [Visualization of best network of the parameters tuning process on training dataset](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/6.Visualization.html)
 
-7.  [EGF analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/8.HeLa_EGF_SP_analysis.html)
+7.  [Validation of optimal parameters on two independent datasets](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/10.Benchmarking_validation.html)
 
-8.  [AML analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/9.JMD_quizartinib_analysis.html)
+8.  [EGF analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/8.HeLa_EGF_SP_analysis.html)
 
-9.  [Metformin analysis with custom regulons](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/7.Custom_PKN_analysis.html) 
+9.  [AML analysis](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/9.JMD_quizartinib_analysis.html)
+
+10. [Metformin analysis with custom regulons](https://raw.githack.com/SaccoPerfettoLab/SignalingProfiler_Benchmarking/main/scripts/7.Custom_PKN_analysis.html)
