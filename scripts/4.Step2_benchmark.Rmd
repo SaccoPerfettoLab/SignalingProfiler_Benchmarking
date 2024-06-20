@@ -1,5 +1,5 @@
 ---
-title: "*SignalingProfiler* 2.0 Step 2 benchmarking"
+title: "*SignalingProfiler* 2.0 Step 2 parameters tuning"
 author: "Veronica Venafra"
 output:
   html_document:
@@ -671,10 +671,10 @@ Moreover, we merge the metric table with the annotation table reporting the tech
 ```{r eval = FALSE}
 
 # Read metrics and annotation df
-metrics_df <- read_tsv('../results/4.network_generation/metrics_table_new.tsv')
+metrics_df <- read_tsv(paste0(step_dir, '/metrics_table_new.tsv')
 metrics_df$computation_time <- metrics_df$PKN_time + metrics_df$CARNIVAL_time
 
-annotation_df <- read_tsv('../results/4.network_generation/annotation_new.tsv')
+annotation_df <- read_tsv(paste0(step_dir, '/annotation_new.tsv'))
 
 # Remove network derived from TopDown == TRUE
 annotation_df %>% filter(TopDown == TRUE) -> to_remove
@@ -688,7 +688,7 @@ inner_join(metrics_df_final,
            annotation_df_sub, 
            by = 'network_id') -> metrics_annotation_df
 
-write_tsv(metrics_annotation_df, '../results/4.network_generation/metric_anno.tsv')
+write_tsv(metrics_annotation_df, paste0(step_dir, '/metric_anno.tsv'))
 ```
 
 
@@ -699,6 +699,7 @@ In this chunk of code, we compare the proteins of each model with the gold stand
 
 ```{r eval = FALSE}
 
+#network_dir <- path to network storage on server
 # Read gold standard table
 downstream <- read_excel('../input/Gold standard.xlsx', sheet = 1, skip = 1)
 regulators <- downstream %>%
@@ -707,7 +708,7 @@ regulators <- downstream %>%
   distinct()
 
 # Read metrics table
-metrics_final_df <- read_tsv('../results/4.network_generation/metric_anno.tsv')
+metrics_final_df <- read_tsv(paste0(step_dir, '/metric_anno.tsv'))
 
 network_ids <- metrics_final_df$network_id
 
@@ -752,6 +753,10 @@ results <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
 
 precision = round(unlist(lapply(results, function(x){x[1]})),2)
 recall = round(unlist(lapply(results, function(x){x[2]})),2)
+tp <- round(unlist(lapply(results, function(x){x[3]})),2)
+fp <- round(unlist(lapply(results, function(x){x[4]})),2)
+fn  <- round(unlist(lapply(results, function(x){x[5]})),2)
+tn  <- round(unlist(lapply(results, function(x){x[6]})),2)
 
 rmse <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
   compute_rmse(gold_standard_m$gold_standard, col)
@@ -760,15 +765,42 @@ rmse <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
 rmse = unlist(rmse)
 
 # Define a tibble of measures of accuracy
-auprc_df <- tibble(conditions = names(precision),
+auprc_df <- tibble(conditions = str_remove(names(precision), "\\.precision"),
                    Precision = precision,
                    Recall = recall,
-                   RMSE = rmse)
+                   RMSE = rmse,
+                   tp = tp, 
+                   fp = fp,
+                   fn = fn,
+                   tn = tn)
 
 
 metrics_df_auprc <- inner_join(metrics_final_df, auprc_df, by = c('network_id' = 'conditions'))
 
-write_tsv(metrics_df_auprc, '../results/4.network_generation/metrics_table_auprc_new.tsv')
+metrics_df_auprc <- metrics_df_auprc %>% mutate(computation_time = PKN_time + CARNIVAL_time)
+
+# Normalize the computation time to be on the same scale as precision and recall
+max_time <- max(metrics_df_auprc$computation_time)
+metrics_df_auprc$normalized_time <- metrics_df_auprc$computation_time / max_time
+
+# Normalize diameter
+max_diam <- max(metrics_df_auprc$diameter)
+metrics_df_auprc$norm_diam <- metrics_df_auprc$diameter / max_diam
+
+# Normalize nodes and edges number
+
+max_nodes <- max(metrics_df_auprc$nodes)
+metrics_df_auprc$nodes_norm <- metrics_df_auprc$nodes / max_nodes
+
+max_edges <- max(metrics_df_auprc$edges)
+metrics_df_auprc$edges_norm <- metrics_df_auprc$edges / max_edges
+
+# Create a metric that is the proportion of significant edges over edges
+metrics_df_auprc %>% mutate(quant_ratio = significant_edges/edges) -> metrics_df_auprc
+
+metrics_df_auprc %>% mutate(nod_edg = nodes/edges) -> metrics_df_auprc
+
+write_tsv(metrics_df_auprc, paste0(step_dir, 'metrics_table_auprc.tsv'))
 ```
 
 ## Analysis of networks' family 
@@ -776,9 +808,8 @@ write_tsv(metrics_df_auprc, '../results/4.network_generation/metrics_table_auprc
 ### Overall analysis of networks' family characteristics
 
 ```{r fig.width=6, fig.height=4, fig.align='center'}
-metrics_annotation_df <- read_tsv(paste0(step_dir, 'metrics_table_auprc_new_rev.tsv'))
-
-parameters <- c('computation_time','clust_coeff', 'power_law_fit', 'Precision', 'Recall', 'TP', 'FP', 'TN')
+metrics_annotation_df <- read_tsv(paste0(step_dir, 'metrics_table_auprc.tsv'))
+parameters <- c('computation_time','tp', 'fp', 'fn', 'tn')
 
 plot_par_all <- list()
 
@@ -789,7 +820,7 @@ for(i_plot in 1:(length(parameters))){
     p <- ggdensity(data = metrics_annotation_df,
                    x = parameter,
                    y = 'density',
-                   add = ifelse(parameter %in% c('Precision', 'Recall'), 'median', 'mean'),
+                   add = 'mean',
                    xlab = str_replace_all(parameter, '_', ' ')) +
       theme(text = element_text(size = 8),
             legend.position = 'none')
@@ -797,62 +828,102 @@ for(i_plot in 1:(length(parameters))){
     plot_par_all[[i_plot]] <- p
 }
 
-plot_grid(plotlist = plot_par_all, ncol = 3, labels = LETTERS[1:length(plot_par_all)])
+plot_grid(plotlist = plot_par_all, ncol = 3, labels = LETTERS[1:length(plot_par_all)]) -> grid2
 
-#ggsave('../../revisions/graphs/grid_performance.pdf', grid2, device = 'pdf', dpi = 300, width = 8, height = 8)
-
+grid2
 
 ```
-**Figure S5. Comparison of different network inference methods (Step2).** 
-Distribution of different metrics across the family of 2989 generated models (Step 2) (**A-F**): computation time (**A**), number of components (**B**), fit to the power law (**C**), Precision (**D**) and Recall (**E**) respect with the gold standard.
-
+**Figure S8. SignalingProfiler 2.0 network generation (Step 2) tuning metrics** 
+Distribution of different metrics across the family of 2989 generated models (Step 2) (**A-F**): computation time (A), number of components (B), True Positives (C), False Positives (D), False Negatives (E), True Negatives (F) with respect to the gold standard. 
 
 ### Analysis of networks characteristics dividing for specific parameters
 Then, we wanted to observe the impact of Ser/Thr Kinome Atlas integration, the number of layers and the CARNIVAL types and flavors on 6 specific evaluated metrics, namely computation time, number of nodes and edges, edges validated with phosphoproteomics, longest path from AMPK, or MTOR.
 
-```{r fig.height=12, fig.width=6, fig.align='center'}
+```{r fig.height=12, fig.width=6, fig.align='center', warning=FALSE}
 
-parameters <- c('computation_time','nodes', 'edges', 'quantified_edges', 
-                'longest_path_AMPK', 'longest_path_MTOR')
+metrics_annotation_df <- read_tsv('../results/4.network_generation/metrics_table_auprc.tsv')
+
+parameters <- c('computation_time','nodes', 
+                'edges', 'quantified_edges', 
+                'Precision', 'Recall')
 
 variable_types <- c('Atlas', 'Layer_types', 'carnival')
 
-plot_par <- list()
+pivot_longer(data = metrics_annotation_df, cols = c('computation_time','nodes', 'edges', 'quantified_edges',
+                                                    'Precision', 'Recall')) -> long_format
 
-i_plot = 1
-
-for(i_par in 1:length(parameters)){
-    
-    for(i_type in 1:length(variable_types)){
-      
-      parameter <- parameters[i_par]
-      variable_type <- variable_types[i_type]
-      
-      p <- ggdensity(data = metrics_annotation_df,
-                   x = parameter,
-                   y = 'density',
-                   color = variable_type,
-                   palette = ifelse(variable_type == 'Layer_types', 'igv', ifelse(variable_type == 'carnival', 'nejm', 'uchicago')),
-                   add = 'mean',
-                   xlab = str_replace_all(parameter, '_', ' ')) +
-      theme(text = element_text(size = 8),
-            legend.position = ifelse( i_plot %in% c(16,17,18), 'right', 'none'), 
-            legend.text = element_text(size = 4), legend.title = element_text(size = 5),
-            legend.key.size = unit(.3, "cm")) +
-        guides(fill = guide_legend(override.aes = list(size = 2)))
-      
-      plot_par[[i_plot]] <- p
-       i_plot = i_plot + 1
-    }
-}
-      
-  
-plot_grid(plotlist = plot_par, ncol = 3, labels = LETTERS[1:length(plot_par)])
+pivot_longer(long_format %>% mutate_at('Atlas', as.character),
+             cols = c('Atlas', 'Layer_types', 'carnival'), names_to = 'variable_types', values_to = 'values2') -> long_format2
 
 
+long_format2$variable_types <- factor(long_format2$variable_types , levels = c('Atlas', 'Layer_types', 'carnival'))
+
+long_format2$name <- factor(long_format2$name , levels = c('computation_time', 'nodes', 'edges',   'Precision', 'Recall',
+                                                                   'quantified_edges'))
+
+#long_format2$name <- factor(long_format2$name , levels = c( 'Precision', 'Recall'))
+
+
+long_format2$values2 <- factor(long_format2$values2, levels = c('FALSE', 'TRUE',
+                                                                'one', 'two', 'three',
+                                                                'inverse', 'vanilla_one_step',
+                                                                'vanilla_two_step', 'vanilla_three_step'))
+
+
+library(rstatix)
+
+stat_test <- long_format2 %>%
+  group_by(name, variable_types) %>%
+  t_test(value ~ values2, p.adjust.method = "bonferroni") %>%
+  mutate(y.position = max(long_format2$value) + 1) %>%
+  add_xy_position(x = 'values2', scales = "free", fun = "max")
+
+
+colors_violin<- list('FALSE' = '#800000',
+     'TRUE' = '#767676',
+     'one' = '#5050FF',
+     'two' = '#CE3D32',
+     'three' = '#749B58',
+
+
+     'inverse' = "#B24745FF",
+     'vanilla_one_step' = "#00A1D5FF",
+     'vanilla_two_step' = "#79AF97FF",
+     'vanilla_three_step' = "#DF8F44FF" )
+
+
+
+long_format2 %>%
+  ggplot(aes(y=value, x=values2)) +
+  geom_violin(aes(fill = values2), width=2, size=0.2, alpha = .5) +
+  facet_grid( name ~ variable_types, scales = 'free') +
+  scale_fill_manual(values = colors_violin, labels = names(colors_violin)) +
+  stat_summary(fun = mean, geom = "crossbar", width = 0.5, size = 0.1, color = "grey3") +
+  #geom_point(color = 'grey3', alpha = .3, size = .3) +
+  theme_classic() +
+  theme(text = element_text(size=10),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 8, vjust = .5),
+        legend.position= 'none',
+        legend.title = element_blank()) +
+  xlab("") +
+  ylab('') -> violin_performance
+
+stat_test %>% relocate(variable_types, xmin, xmax) -> stat_test
+
+stat_test$xmin[stat_test$variable_types == 'Layer_types'] <- stat_test$xmin[stat_test$variable_types == 'Layer_types'] - 2
+stat_test$xmax[stat_test$variable_types == 'Layer_types'] <- stat_test$xmax[stat_test$variable_types == 'Layer_types'] - 2
+
+stat_test$xmin[stat_test$variable_types == 'carnival'] <- stat_test$xmin[stat_test$variable_types == 'carnival'] - 5
+stat_test$xmax[stat_test$variable_types == 'carnival'] <- stat_test$xmax[stat_test$variable_types == 'carnival'] - 5
+
+
+violin_performance +
+  stat_pvalue_manual(stat_test, label = "p.adj.signif",tip.length = .01, hide.ns = TRUE) -> violin_plot_significance
+
+violin_plot_significance
 ```
-**Figure S6. Impact of Step2 technical parameters on the resulting model properties.**
-Impact of Ser/Thr Kinome Atlas integration, number of layers in the naïve network, and CARNIVAL flavors and types on: computation time (**A-C**), the number of nodes (**D-F**), edges (**G-I**), and of interactions validated by phosphoproteomics data (**J-L**), the maximum path length between end nodes (outdegree = 0) and AMPK (**M-O**) or mTOR (**P-R**), across 2989 generated models. 
+**Figure 4 and S7. SignalingProfiler 2.0 network generation (Step2) parameters tuning**
+Impact of Ser/Thr Kinome Atlas integration, number of layers in the naïve network, and CARNIVAL flavors and types on computation time, the number of nodes, edges, Precision, Recall and on the interactions number validated by phosphoproteomics data, across 2989 generated models. The black line indicates the average y value. Statistical significance was computed with T-test statistical analysis (p-value < 0.05 *, < 0.01 **, < 0.001 ***, < 0.0001 ****). 
 
 
 ## Find the best model of family network
@@ -862,7 +933,7 @@ The computation time, the diameter and the number of significant phosphorylation
 
 ```{r}
 
-metrics_annotation_df <- read_tsv(paste0(step_dir, 'metrics_table_auprc_new.tsv'))
+metrics_annotation_df <- read_tsv(paste0(step_dir, 'metrics_table_auprc.tsv'))
 
 # Normalize diameter and computation time
 max_time <- max(metrics_annotation_df$computation_time)
@@ -889,69 +960,3 @@ head(sorted_data)
 ```
 
 The **best model** is *Network1554*.
-
-## Establish a default set of parameter for network construction
-
-```{r fig.align='center', fig.width=4, fig.height=3}
-
-sorted_networks_step2 <- read_tsv('../results/4.network_generation/sorted_data_network_family.tsv')
-
-# Create a table of top100 and bottom100
-head(sorted_networks_step2, n = 100) -> top100
-top100$type = 'top100'
-
-tail(sorted_networks_step2, n = 100) -> bottom100
-bottom100$type <- 'bottom100'
-
-bind_rows(top100, bottom100) -> total_networks
-
-total_networks <- total_networks %>%
-  dplyr::select(network_id, Atlas, Direct, PKN_filtering, Layer_types,
-                `Max_length1-3`, Connect_all, Carnival_types,
-                Steps_numbers, type)
-
-# retrieve Keep_only_connected from the Max_length1-3 params and remove the others
-total_networks$Keep_only_connected <- lapply(str_split(total_networks$`Max_length1-3`, ';'), function(x){x[3]})
-total_networks$`Max_length1-3` <- unlist(lapply(str_split(total_networks$`Max_length1-3`, ';'), function(x){paste0(x[1], ';', x[2])}))
-total_networks$`Max_length1-3`[grepl('NA', total_networks$`Max_length1-3`)] <- NA
-total_networks$`Max_length1-3` <- NULL
-total_networks %>% mutate_all(as.character) -> total_networks_anno
-
-# Transform in long format
-params_total_networks_anno <- pivot_longer(data = total_networks_anno,
-                                           cols = c(colnames(total_networks_anno)[c(2:8, 10)]))
-
-params_total_networks_anno$value <- factor(params_total_networks_anno$value,
-                                           levels = c('TRUE', 'FALSE',  'one_step', 'two_step', 'three_step',
-                                                      'one', 'two', 'three', 'vanilla', 'inverse'))
-                                                      
-
-params_total_networks_anno$name <- factor(params_total_networks_anno$name,
-                                          levels = rev(c('Atlas', 'Direct', 'PKN_filtering',
-                                                     'Layer_types', 'Keep_only_connected', 'Connect_all',
-                                                     'Carnival_types', 'Steps_numbers')))
-
-params_total_networks_anno$type <- factor(params_total_networks_anno$type,
-                                          levels = c('top100', 'bottom100'))
-
-params_total_networks_anno %>% filter(!is.na(value)) -> params_total_networks_anno
-
-c('#006837', '#CCCCCC', ggsci::pal_jama()(7), 'pink4') -> color_jama
-
-ggplot(params_total_networks_anno, aes(x = name, fill = value)) +
-  geom_bar(stat = 'count', alpha = .7) +
-  facet_grid(type~.) +
-  #scale_fill_viridis(discrete = TRUE)
-  scale_fill_manual(values = color_jama) +
-  theme_classic() +
-  theme(text = element_text(size = 10),
-        axis.text.x = element_text(size = 8, angle = 0, vjust = 1, hjust = .5),
-        axis.text.y = element_text(size = 8),
-        legend.title = element_blank()) +
-  xlab('') +
-  ylab('N° of networks') +
-  coord_flip() 
-
-```
-**Figure S7A** Result of benchmarking of Step2. Distribution of each parameter in the top and bottom 100 models after ranking 2989 produced models based on the  combined score, taking into account adherence to the gold standard and topological features (see Methods). The most frequent parameters were chosen as default for Step2.
-

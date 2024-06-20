@@ -1,0 +1,173 @@
+---
+title: "*SignalingProfiler* 2.0 Parameters tuning validation"
+author: "Veronica Venafra"
+output:
+  html_document:
+    theme: flat
+    highlight: zenburn
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+## Introduction
+This workbook refers to the manuscript *SignalingProfiler 2.0: a network-based approach to bridge multi-omic data to phenotypic hallmarks*.
+
+## Import libraries and functions
+
+```{r message = FALSE}
+source('0.libraries.R')
+source('0.functions.R')
+source('0.heatmap_drawer.R') # Function to draw heatmaps for gold standard comparison
+```
+## Parameters tuning validation on two independent datasets
+With the dual aim of confirming that the optimal parameters selected were not suffering from an ‘overfitting’ effect and could find applicability on a broader set of input data, we cross-validated SignalingProfiler 2.0 on two independent and heterogeneous datasets-
+The first dataset was from (Olsen et al, 2006), where HeLa cell line phosphoproteomic profile was characterized after the stimulation with EGF for 15 minutes (Figure 6C). The second consisted of multi-omics data from a murine acute myeloid leukemia (AML) cell line treated with ac220, a tyrosine kinase inhibitor (TKIs) targeting the FMS‐like tyrosine kinase 3 (Flt3), as described in our previous work (Massacci et al, 2023).
+For both datasets we manually compiled a list of expected protein and phenotypic activities (gold standard). As shown in Figure 6A and B, SignalingProfiler 2.0 (default options) displayed comparable performance in terms of accuracy and phosphorylations coverage for both datasets, confirming the broad applicability of the approach. 
+
+
+```{r}
+
+models_dir <- '../results/6.independent_datasets/'
+gold_dir <- '../input/'
+
+for(analysis in c('metformin', 'hela', 'quizartinib')){
+
+  sp_object <- read_rds(paste0(models_dir, analysis, '/best_network.RDS'))
+  gold_standard_df <- read_tsv(paste0(gold_dir, analysis, '_gold_standard.tsv'))
+
+  if(analysis == 'metformin'){
+    nodes_df <- sp_object$sp_object_phenotypes$nodes_df %>% dplyr::select(gene_name, carnival_activity)
+    nedges <- nrow(sp_object$sp_object_phenotypes$edges_df)
+    quant_edges <- sum(sp_object$sp_object_phenotypes$edges_df$is_quantified == 'TRUE')
+  }else{
+    nodes_df <- sp_object$nodes_df  %>% dplyr::select(gene_name, carnival_activity)
+    nedges <- nrow(sp_object$edges_df)
+    quant_edges <- sum(sp_object$edges_df$is_quantified == 'TRUE')
+
+    if(analysis == 'quizartinib'){
+      gold_standard_df <- gold_standard_df %>% mutate(gene_name = ifelse(!is.na(phenotypes),
+                                                                   gene_name, str_to_title(gene_name))) %>%
+        mutate(gold_standard = gold_standard * -1) %>%
+        select(-phenotypes)
+    }
+  }
+
+  gold_standard_table <- inner_join(nodes_df,
+                                    gold_standard_df,
+                                    by = c('gene_name')) %>%
+    relocate(gene_name, gold_standard) %>% distinct()
+
+  gold_standard_m <- gold_standard_table %>% distinct() %>% column_to_rownames('gene_name')
+
+  results <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
+    compute_auprc(gold_standard_m$gold_standard, col)
+  })
+
+  precision = round(unlist(lapply(results, function(x){x[1]})),2)
+  recall = round(unlist(lapply(results, function(x){x[2]})),2)
+  tp = round(unlist(lapply(results, function(x){x[3]})),2)
+  fp = round(unlist(lapply(results, function(x){x[4]})),2)
+  fn = round(unlist(lapply(results, function(x){x[5]})),2)
+  tn <- round(unlist(lapply(results, function(x){x[6]})),2)
+
+  rmse <- lapply(gold_standard_m[, -1, drop = FALSE], function(col) {
+    compute_rmse(gold_standard_m$gold_standard, col)
+  })
+
+  rmse = unlist(rmse)
+  names(precision) <- str_remove_all(names(precision), '.precision')
+
+  # Define a tibble of measures of accuracy
+  if(analysis == 'metformin'){
+    auprc_df_all <- tibble(conditions = analysis,
+                           Precision = precision,
+                           Recall = recall,
+                           TP = tp,
+                           FP = fp,
+                           FN = fn,
+                           TN = tn,
+                           RMSE = rmse,
+                           quantified_edges = quant_edges,
+                           edges = nedges)
+  }else{
+    if(analysis == 'hela'){
+      auprc_df <- tibble(conditions = analysis,
+                         Precision = precision,
+                         Recall = recall,
+                         TP = tp,
+                         FP = fp,
+                         FN = fn,
+                         TN = tn,
+                         RMSE = rmse,
+                         quantified_edges = quant_edges,
+                         edges = nedges)
+    }else{
+      auprc_df <- tibble(conditions = analysis,
+                         Precision = precision,
+                         Recall = recall,
+                         TP = tp,
+                         FP = fp,
+                         FN = fn,
+                         TN = tn,
+                         RMSE = rmse,
+                         quantified_edges = quant_edges,
+                         edges = nedges)
+
+    }
+
+    auprc_df_all <- bind_rows(auprc_df_all, auprc_df)
+  }
+}
+
+auprc_df_all %>%
+  mutate(quant_ratio = quantified_edges/edges * 100) ->  auprc_df_all
+
+#write_tsv(auprc_df_all, '../results/6.independent_datasets/validation_performance.tsv')
+
+pivot_longer(data = auprc_df_all, cols = c('Precision', 'Recall')) -> long_format
+
+long_format$conditions <- factor(long_format$conditions, levels = c('metformin', 'hela', 'quizartinib'))
+
+ggplot(long_format, aes(x = conditions, y = value)) +
+  facet_wrap(~ name) +
+  geom_bar(alpha =.5, stat = 'identity', aes(fill = conditions)) +
+  ylim(0,1) +
+  theme_classic() +
+  theme(text = element_text(size=10),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 8, vjust = .5),
+        legend.position="bottom",
+        legend.title = element_blank()) +
+  xlab("") +
+  ylab('') -> plot1
+
+
+pivot_longer(data = auprc_df_all, cols = c('quant_ratio')) -> long_format2
+
+ggplot(long_format2,aes(x = conditions, y = value)) +
+  facet_wrap(~ name) +
+  geom_bar(alpha =.5, stat = 'identity', aes(fill = conditions)) +
+  #geom_bar(stat = 'identity', alpha =.5, fill = '#CCCBEA') +
+  ylim(0,100) +
+  theme_classic() +
+  theme(text = element_text(size=10),
+        axis.text.x = element_text(angle = 90, hjust = 1, size = 8, vjust = .5),
+        legend.position="bottom",
+        legend.title = element_blank()) +
+  xlab("") +
+  ylab('') -> plot2
+
+cowplot::plot_grid(plotlist = list(plot1, plot2), rel_widths = c(1,.5)) -> grid_performance
+
+grid_performance
+
+```
+
+**Figure 6. SignalingProfiler 2.0 parameters tuning validation and EGF use case.** 
+For training and validation datasets, barplot reporting the Precision and Recall with respect to the proteic and phenotypic gold standard, and the percentage of edges representing experimentally quantified phosphorylations. 
+
